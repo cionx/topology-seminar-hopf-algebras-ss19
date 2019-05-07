@@ -2,21 +2,1598 @@
 
 \usepackage{style}
 
-\titlehead{Jendrik Stelzner \hfill \today}
+\titlehead{\hfill \today}
 \subject{Graduate Seminar on Topology}
-\title{Differential Graded Hopf Algebras}
-\author{}
+\title{Differential Graded Hopf Algebras I%
+\footnote{Available online at \texttt{jendrikstelzner.de/dg\_hopf\_extended.pdf}.}}
+\subtitle{Introducing Signs}
+\author{Jendrik Stelzner}
 \date{}
+
+
+
+
 
 \begin{document}
 
 \maketitle
 
-\vspace{-4em}
+% \vspace{-4em}
+
+In the following~$k$ denotes a field.
+All vector spaces, all kinds of algebras, all tensor products, etc.\ are over~$k$, unless otherwise stated.
+All occuring maps are linear unless otherwise stated.
+We will sometime assume additional constraints on the characteristic of~$k$, but will make this explicit when it occurs.
+
+
+
+
+
+\section{Notations}%
+\todo{Combine the subsections into a shorter one.}
+
+
+\subsection{Graded Vector Spaces}
+
+A \defemph{grading} on a vector space~$V$ is a decomposition~$V = \bigoplus_{n \in \Integer} V_n$.
+A \defemph{graded vector space}~$V$ is a vector space together with a grading.
+An element~$v \in V_n$ is \defemph{homogeneous} of \defemph{degree}~$\hdeg{v} = n$.
+\begin{center}
+  Whenever we write~$\hdeg{v}$ the element~$v$ is assumed to be homogeneous.
+\end{center}
+
+
+A linear subspace~$U$ of~$V$ is a \defemph{graded subspace} if~$U = \bigoplus_{n \in \Integer} U_n$ for some linear subspaces~$U_n \subseteq V_n$.
+The quotient~$V/U = \bigoplus_{n \in \Integer} V_n/U_n$ is then again a graded vector space. 
+If~$(V^\alpha)_\alpha$ is a collection of graded vector spaces then their \defemph{(direct) sum} is the graded vector space~$\bigoplus_\alpha V^\alpha$ with~$(\bigoplus_\alpha V^\alpha)_n = \bigoplus_\alpha V^\alpha_n$.
+If~$V$ and~$W$ are graded vector space then~$\gHom(V,W)$ is the graded vector space with
+\[
+  \gHom(V,W)_n
+  \defined
+  \{\text{maps~$f \colon V \to W$ of degree~$n$}\}  \,.%
+  \footnote{The spaces~$\gHom(V,W)_n$ are linearly independent in~$\Hom_k(V,W)$, i.e.\ the sum~$\sum_n \gHom(V,W)_n$ is direct.
+  We can thus regard~$\gHom(V,W)$ as a subspace of~$\Hom_k(V,W)$.}
+\]
+A map~$f \colon V \to W$ between graded vector spaces is \defemph{graded} of \defemph{degree}~$\hdeg{f} = d$ if~$f(V_n) \subseteq W_{n+d}$ for all~$n$.
+A \defemph{morphism of graded vector spaces} is a graded map of degree~$0$.
+
+The \defemph{tensor product}~$V \tensor W$ of two graded vector spaces~$V$,~$W$ is the vector space~$V \tensor W$ together with the grading~$(V \tensor W)_n = \bigoplus_{i+j=n} V_i \tensor W_j$.
+The grading on the higher tensor products~$V^1 \tensor \dotsb \tensor V^t$ are defined inductively as
+\[
+  (V^1 \tensor \dotsb V^t)_n
+  =
+  \bigoplus_{n_1 + \dotsb + n_t = n}
+  V^1_{n_1} \tensor \dotsb \tensor V^t_{n_t} \,.
+\]
+The \defemph{twist map}~$\tau \colon V \tensor W \to W \tensor V$ is the isomorphism of graded vector spaces
+\[
+  \tau(v \tensor w)
+  =
+  (-1)^{\hdeg{v} \hdeg{w}} w \tensor v  \,.
+\]
+We hence adhere to the Koszul-Quillen \defemph{sign convention}:
+\begin{center}
+  Whenever two homegeneous elements~$x$,~$y$ are swapped,\\
+  the sign~$(-1)^{\hdeg{x} \hdeg{y}}$ is introduced.
+\end{center}
+If~$f \colon V \to W$ and~$g \colon V' \to W'$ are graded maps then the map~$f \tensor g \colon V \tensor W \to V \tensor W$ is the graded map
+\[
+  (f \tensor g)(v \tensor w)
+  =
+  (-1)^{\hdeg{g} \hdeg{v}} f(v) \tensor g(w)  \,.
+\]
+
+
+
+
+
+\subsection{Differential Graded Vector Spaces}
+
+A \defemph{differential} on a graded vector space~$V$ is a linear map~$d \colon V \to V$ of degree~$-1$ with~$d^2 = 0$.
+A \defemph{differential graded vector space} or \defemph{\dgv} is a graded vector space~$V$ together with a differential.%
+\footnote{A {\dgv} is hence the same as a chain complex.}
+A \defemph{morphism} of {\dgv}~$f \colon V \to W$ is a morphism of graded vector spaces with~$d \circ f = f \circ d$.
+
+A graded subspace~$U$ of a {\dgv}~$V$ is a \defemph{\dgsub} if~$d(U) \subseteq U$.
+The graded vector space~$V/U$ then inherits a differential from~$V$, that is given on representatives by~$d$.
+If~$(V^\alpha)_\alpha$ is a collection of {\dgv} then~$\bigoplus_{\alpha} V^\alpha$ is a {\dgv} with differential~$d_{(\bigoplus_\alpha V^\alpha)} = \bigoplus_\alpha d_{V^\alpha}$.
+If~$V$ and~$W$ are {\dgv} then~$\dgHom(V,W)$ is the graded vector space~$\gHom(V,W)$ together with the differential
+\[
+  d_{\dgHom(V,W)}(f)
+  =
+  d \circ f - (-1)^{\hdeg{f}} f \circ d \,.
+\]
+If~$V$ and~$W$ are {\dgv} then~$V \tensor W$ inherits the differential
+\begin{gather*}
+  d_{(V \tensor W)}
+  =
+  d \tensor {\id} + {\id} \tensor d
+\shortintertext{more explicitely}
+  d(v \tensor w)
+  =
+  d(v) \tensor w + (-1)^{\hdeg{v}} v \tensor d(w) \,.
+\end{gather*}
+The twist map~$\tau \colon V \tensor W \to W \tensor V$ is an isomorphism of {\dgv}.%
+\footnote{The naive twist map~$v \tensor w \mapsto w \tensor v$ is not a morphism of {\dgv}.}
+
+If~$V$ is a dg-vector space then~$\cycles(V) \defined \ker d$ and~$\boundaries(V) \defined \im d$ are graded subspaces with~$\cycles(V) \subseteq \boundaries(V)$.
+The graded vector space~$\homology(V) \defined \cycles(V)/{\boundaries(V)}$ is the \defemph{homology} of~$V$.
+There exists a natural isomorphism of graded vector spaces
+\[
+  \homology(V \tensor W)
+  \cong
+  \homology(V) \tensor \homology(W)
+\]
+that is on representatives given by~$[v \tensor w] \mapsfrom [v] \tensor [w]$, called the \defemph{algebraic Künneth isomorphism}.
+
+\begin{remark}
+  Every graded vector space can be regarded as a {\dgv} with zero differential.
+  We will therefore state most of the following definitions and propositions only for the differential graded case, which then always entails a graded version of the statement.
+\end{remark}
+
+We regard the ground field~$k$ as a~{\dgv} concentrated in degree~$0$.
+Then the natural isomorphism~$k \tensor V \cong V$ and~$V \tensor k \cong V$ are isomorphism of~{\dgv}.
+
+
+
+
+
+\section{Differential Graded Algebra}
+
+\begin{definition}
+  A \defemph{differential graded algebra} or \defemph{\dga} is a {\dgv}~$A$ together with morphisms of {\dgv}~$m \colon A \tensor A \to A$ and~$u \colon k \to A$ that make the diagrams
+  \[
+    \begin{tikzcd}[column sep = large]
+      A \tensor A \tensor A
+      \arrow{r}[above]{m \tensor {\id}}
+      \arrow{d}[left]{{\id} \tensor m}
+      &
+      A \tensor A
+      \arrow{d}[right]{m}
+      \\
+      A \tensor A
+      \arrow{r}[below]{m}
+      &
+      A
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}
+      k \tensor A
+      \arrow{d}[left]{u \tensor {\id}}
+      &
+      A
+      \arrow{l}[above]{\sim}
+      \arrow[equal]{d}
+      \arrow{r}[above]{\sim}
+      &
+      A \tensor k
+      \arrow{d}[right]{{\id} \tensor u}
+      \\
+      A \tensor A
+      \arrow{r}[below]{m}
+      &
+      A
+      &
+      A \tensor A
+      \arrow{l}[below]{m}
+    \end{tikzcd}
+  \]
+  commute.
+  The {\dga}~$A$ is \defemph{graded commutative} if the diagram
+  \[
+    \begin{tikzcd}[column sep = small]
+      A \tensor A
+      \arrow{rr}[above]{\tau}
+      \arrow{dr}[below left]{m}
+      &
+      {}
+      &
+      A \tensor A
+      \arrow{dl}[below right]{m}
+      \\
+      {}
+      &
+      A
+      &
+      {}
+    \end{tikzcd}
+  \]
+  commutes.
+  A \defemph{morphism} of {\dgas}~$f \colon A \to B$ is a morphism of {\dgvs} such that the following diagrams commute:
+  \[
+    \begin{tikzcd}[column sep = large]
+      A \tensor A
+      \arrow{r}[above]{f \tensor f}
+      \arrow{d}[left]{m}
+      &
+      B \tensor B
+      \arrow{d}[right]{m}
+      \\
+      A
+      \arrow{r}[above]{f}
+      &
+      B
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}[column sep = small]
+      {}
+      &
+      k
+      \arrow{dl}[above left]{u}
+      \arrow{dr}[above right]{u}
+      &
+      {}
+      \\
+      A
+      \arrow{rr}[above]{f}
+      &
+      {}
+      &
+      B
+    \end{tikzcd}
+  \]
+\end{definition}
+
+\begin{definition}
+  If~$A$ is a {\dga} then a graded map~$\delta \colon A \to A$ is a \defemph{derivation} if
+  \begin{gather*}
+    \delta \circ m
+    =
+    m \circ (\delta \tensor {\id} + {\id} \tensor \delta) \,;
+  \shortintertext{more explicitely,}
+    \delta(ab)
+    =
+    \delta(a) b + (-1)^{\hdeg{\delta} \hdeg{a}} a \delta(b) \,.
+  \end{gather*}
+\end{definition}
+
+\begin{remark}
+  \leavevmode
+  \begin{enumerate}
+    \item
+      A {\dga} is the same as a graded algebra~$A$ together with a differential~$d$ such that~$d(1) = 0$ and
+      \[
+        d(a \cdot b)
+        =
+        d(a) \cdot b + (-1)^{\hdeg{a}} a \cdot d(b) \,,
+      \]
+      i.e.\ such that~$d$ is a graded derivation (of degree~$-1$).
+    \item
+      The commutativity of~$A$ means that~$ab = (-1)^{\hdeg{a} \hdeg{b}} ba$.
+      If~$\hdeg{a}$ is odd and~$\ringchar(k) \neq 2$ then~$a^2 = 0$.
+    \item
+      A morphism~$f$ of~{\dgas} is the same as a morphism of the underlying graded algebras that commutes with the differentials.
+      (No additional signs occur since~$\hdeg{f} = 0$.)
+  \end{enumerate}
+\end{remark}
+
+\begin{examples}
+  \leavevmode
+  \begin{enumerate}
+    \item
+      Every algebra~$A$ is a {\dga} concentrated in degree~$0$.
+      This holds in particular for~$A = k$.
+    \item
+      If~$V$ is any~{\dgv} then the algebra structure of~$\End_k(V)$ restricts to a {\dga} structure on~$\dgEnd(V)$.
+    \item
+      If~$V$ is a~{\dgv} then~$\Tensor(V) = \bigoplus_{d \geq 0} V^{\tensor d}$ is again a {\dgv}, with
+      \begin{gather*}
+        \hdeg{v_1 \dotsm v_n}
+        =
+        \hdeg{v_1} + \dotsb + \hdeg{v_n}
+      \shortintertext{and}
+        d(v_1 \dotsm v_n)
+        =
+        \sum_{i=1}^n
+        (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_i}}
+        v_1 \dotsm d(v_i) \dotsm v_n \,.
+      \end{gather*}
+      This makes the tensor~$\Tensor(V)$ into a {\dga} that is denoted by~$\dgTensor(V)$
+      The inclusion~$V \to \dgTensor(V)$ is a morphism of {\dgv} and if~$A$ is any other {\dga} and~$f \colon V \to A$ any morphism of {\dgvs} then~$f$ extends uniquely to a morphism of {\dgas}~$F \colon \dgTensor(V) \to A$:
+      \[
+        \begin{tikzcd}
+          \dgTensor(V)
+          \arrow[dashed]{r}[above]{F}
+          &
+          A
+          \\
+          V
+          \arrow{u}
+          \arrow{ur}[below right]{f}
+          &
+          {}
+        \end{tikzcd}
+      \]%
+    \todo{Add the shuffle dg algebra.}
+    \item
+      If~$V$ is any vector space then the symmetric algebra~$\Symm(V)$ is a graded algebra and a commutative algebra, but not a graded commutative algebra.
+      The exterior algebra~$\Exterior(V)$ is a graded algebra, it is in general not a commutative algebra (unless~$\dim V \leq 1$), but it is a graded commutative algebra.  
+  \end{enumerate}
+\end{examples}
+
+\begin{lemma}
+  Let~$A$,~$B$ be {\dga}.
+  \begin{enumerate}
+    \item
+      The tensor product $A \tensor B$ becomes a {\dga} with
+      \begin{gather*}
+        m_{A \tensor B}
+        \colon
+        A \tensor B \tensor A \tensor B
+        \xlongto{{\id} \tensor \tau \tensor {\id}}
+        A \tensor A \tensor B \tensor B
+        \xlongto{m \tensor m}
+        A \tensor B
+      \\
+        u_{A \tensor B}
+        \colon
+        k
+        \xlongto{\sim}
+        k \tensor k
+        \xlongto{u \tensor u}
+        A \tensor B \,.
+      \end{gather*}
+      More explicitely,~$1_{A \tensor B} = 1_A \tensor 1_B$ and~$(a \tensor b) (a' \tensor b') = (-1)^{\hdeg{a'} \hdeg{b}} a a' \tensor b b'$.
+    \item
+      If~$f$ and~$g$ are morphism of {\dgas} then so is~$f \tensor g$.
+    \item
+      The twist map~$\tau \colon A \tensor B \to B \tensor A$ is a morphism of {\dgas}.
+    \item
+      If~$A = (A, m, u)$ then~$A^{\op} = (A, m^{\op}, u)$ with~$m^{\op} = m \circ \tau$ is again a {\dga}.
+    \qed
+  \end{enumerate}
+\end{lemma}
+
+\begin{warning}
+  If~$A$,~$B$ are {\dgas} then the underlying algebra of~$A \tensor B$ is not the tensor product of the underlying algebras of~$A$ and~$B$.
+  The underlying algebra of~$A^{\op}$ is not the opposite of the underlying algebra of~$A$.
+  (Both thanks to signs.)
+\end{warning}
+
+\begin{definition}
+  A \defemph{\dgi} in a {\dga}~$A$ is a {\dgsub} that is also an ideal.
+\end{definition}
+
+\begin{lemma}
+  For an ideal~$I$ is a {\dga}~$A$ the following conditions are equivalent:
+  \begin{enumerate}
+    \item
+      $I$ is a~{\dgi}.
+    \item
+      $I$ is generated by homogeneous elements~$x_\alpha$ with~$d(x_\alpha) \in I$ for every~$\alpha$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  That~$I$ is a graded ideal if and only if it is generated by homogeneous elements is  well-known, see \cite[IX, 2.5]{lang} or \cite[II.{\S}11.3]{bourbaki}.
+  It remains to show that~$d(I) \subseteq I$ if~$d(x_\alpha) \in I$ for every~$\alpha$:
+  The ideal~$I$ is spanned by~$a x_\alpha b$ with~$a, b \in A$ homogeneous, and
+  \[
+    d(a x_\alpha b)
+    =
+      d(a) x_\alpha b
+    + (-1)^{\hdeg{a}} a d(x_\alpha) b
+    + (-1)^{\hdeg{a} + \hdeg{x_\alpha}} a x_\alpha d(b)
+    \in
+    I
+  \]
+  since~$x_\alpha, d(x_\alpha) \in I$.
+\end{proof}
+
+\begin{lemma}
+  If~$I$ is a~{\dgi} in a {\dga} then~$A/I$ inherits the structure of a {\dga} such that the projection~$A \to A/I$ is a morphism of {\dgas}.
+  \qed
+\end{lemma}
+
+\begin{definition}
+  If~$A$ is a {\dga} then the \defemph{{\dgcom}} of~$a, b \in A$ is
+  \[
+    [a,b]
+    \defined
+    ab - (-1)^{\hdeg{a}\hdeg{b}} ba \,.
+  \]
+\end{definition}
+
+\begin{example}
+  \label{dg symmetric algebra}
+  Let~$V$ be a {\dgv}.
+  The ideal
+  \[
+    I
+    \defined
+    \bigl(
+      [v,w]
+    \suchthat[\big]
+      \text{$v,w \in V$ are homogeneous}
+    \bigr)
+  \]
+  is a {\dgi} in~$\dgTensor(V)$ since the generators~$[v,w]$ are homogeneous with
+  \[
+    d([v,w])
+    =
+    [d(v), w] + (-1)^{\hdeg{v}} [v, d(w)]
+    \in
+    I \,.
+  \]
+  The {\dga}~$\dgSymm(V) \defined \dgTensor(V)/I$ is the \defemph{differential graded symmetric algebra} on~$V$.
+\end{example}
+
+\begin{proposition}
+  If~$A$ is a {\dga} then~$\cycles(A)$ is a graded subalgebra of~$A$,~$\boundaries(A)$  is a graded ideal in~$\cycles(A)$ and~$\homology(A)$ is hence a graded algebra.
+\end{proposition}
+
+
+
+
+\section{Different Graded Coalgebras}
+
+\begin{definition}
+  A \defemph{differential graded coalgebra} or \defemph{\dgc} is a {\dgv}~$C$ together with morphisms of~{\dgv}~$\Delta \colon C \to C \tensor C$ and~$\varepsilon \colon C \to k$ that make the diagrams
+  \[
+    \begin{tikzcd}[column sep = large]
+      C
+      \arrow{r}[above]{\Delta}
+      \arrow{d}[left]{\Delta}
+      &
+      C \tensor C
+      \arrow{d}[right]{{\id} \tensor \Delta}
+      \\
+      C \tensor C
+      \arrow{r}[below]{\Delta \tensor {\id}}
+      &
+      C \tensor C \tensor C
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}
+      C \tensor C
+      \arrow{d}[left]{\varepsilon \tensor {\id}}
+      &
+      C
+      \arrow{l}[above]{\Delta}
+      \arrow[equal]{d}
+      \arrow{r}[above]{\Delta}
+      &
+      C \tensor C
+      \arrow{d}[right]{\varepsilon \tensor {\id}}
+      \\
+      k \tensor C
+      \arrow{r}[above]{\sim}
+      &
+      C
+      &
+      C \tensor k
+      \arrow{l}[above]{\sim}
+    \end{tikzcd}
+  \]
+  commute.
+  The {\dgc}~$C$ is \defemph{graded cocommutative} if the following diagram commutes:
+  \[
+    \begin{tikzcd}[column sep = small]
+      {}
+      &
+      C
+      \arrow{dl}[above left]{\Delta}
+      \arrow{dr}[above right]{\Delta}
+      &
+      {}
+      \\
+      C \tensor C
+      \arrow{rr}[above]{\tau}
+      &
+      {}
+      &
+      C \tensor C
+    \end{tikzcd}
+  \]
+  A \defemph{morphism} of {\dgc}~$f \colon C \to D$ is a morphism of {\dgvs} such that the following diagrams commute:
+  \[
+    \begin{tikzcd}[column sep = large]
+      C
+      \arrow{r}[above]{f}
+      \arrow{d}[left]{\Delta}
+      &
+      D
+      \arrow{d}[right]{\Delta}
+      \\
+      C \tensor C
+      \arrow{r}[above]{f \tensor f}
+      &
+      D \tensor D
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}[column sep = small]
+      C
+      \arrow{rr}[above]{f}
+      \arrow{dr}[below left]{\varepsilon}
+      &
+      {}
+      &
+      D
+      \arrow{dl}[below right]{\varepsilon}
+      \\
+      {}
+      &
+      k
+      &
+      {}
+    \end{tikzcd}
+  \]
+\end{definition}
+
+\begin{definition}
+  If~$C$ is a {\dgc} then a graded map~$\omega \colon C \to C$ is a \defemph{coderivation} if
+  \begin{gather*}
+    \Delta \circ \omega
+    =
+    (\omega \tensor {\id} + {\id} \tensor \omega) \circ \Delta \,;
+  \shortintertext{more explicitely,}
+    \Delta(\omega(c))
+    =
+    \sum_{(c)}
+    \omega(c_{(1)}) \tensor c_{(2)}
+    + (-1)^{\hdeg{\omega} \hdeg{c_{(1)}}} c_{(1)} \tensor \omega(c_{(2)})  \,.
+  \end{gather*}
+\end{definition}
+
+\begin{remark}
+  \leavevmode
+  \begin{enumerate}
+    \item
+      A {\dgc} is the same as a graded coalgebra~$C$ together with a differential~$d$ such that
+      \[
+        \Delta(d(c))
+        =
+        \sum_{(c)}
+        d(c_{(1)}) \tensor c_{(2)}
+        + (-1)^{\hdeg{c_{(1)}}} c_{(1)} \tensor d(c_{(2)}) \,,
+      \]
+      i.e.\ such that~$d$ is a graded coderivation of degree~$-1$.
+    \item
+      The cocommutativity of~$C$ means that
+      \[
+        \sum_{(c)} c_{(1)} \tensor c_{(2)}
+        =
+        \sum_{(c)} (-1)^{\hdeg{c_{(1)}} \hdeg{c_{(2)}}} c_{(2)} \tensor c_{(1)} \,.
+      \]
+    \item
+      A morphism of {\dgcs} is the same as a morphism of the underlying graded coalgebras that commutes with the differentials.
+    \item
+      Every coalgebra~$C$ is a {\dgc} centered in degree~$0$.
+      This holds in particular for~$C = k$.
+  \end{enumerate}
+\end{remark}
+
+\begin{example}
+  Let~$V$ be a {\dgv}.
+  Then~$\dgTensor(V)$ becomes a {\dgc} with the deconcatination
+  \begin{align*}
+    \Delta
+    \colon
+    \dgTensor(V)
+    \to
+    \dgTensor(V) \tensor \dgTensor(V) \,,
+    \quad
+    &v_1 \dotsm v_n
+    \mapsto
+    \sum_{i=0}^n
+    v_1 \dotsm v_i \tensor v_{i+1} \dotsm v_n \,,
+  \\
+    \varepsilon
+    \colon
+    \dgTensor(V)
+    \to
+    k \,,
+    \quad
+    &v_1 \dotsm v_n
+    \mapsto
+    \delta_{n0} \,.
+  \end{align*}
+%   This {\dgc} is in general not graded cocommutative because
+%   \begin{align*}
+%     \Delta(vw)
+%     &=
+%     vw \tensor 1 + v \tensor w + 1 \tensor vw \,,
+%   \\
+%     \tau \circ \Delta(vw)
+%     &=
+%     1 \tensor vw + (-1)^{\hdeg{v}\hdeg{w}} w \tensor v + vw \tensor 1 \,.
+%   \end{align*}
+\end{example}
+
+\begin{lemma}
+  Let~$C$,~$D$ be {\dgcs}.
+  \begin{enumerate}
+    \item
+      The tensor product~$C \tensor D$ becomes a {\dgc} with
+      \begin{gather*}
+        \Delta_{C \tensor D}
+        \colon
+        C \tensor D
+        \xlongto{\Delta \tensor \Delta}
+        C \tensor C \tensor D \tensor D
+        \xlongto{{\id} \tensor \tau \tensor {\id}}
+        C \tensor D \tensor C \tensor D
+        \\
+        \varepsilon_{C \tensor D}
+        \colon
+        C \tensor D
+        \xlongto{\varepsilon \tensor \varepsilon}
+        k \tensor k
+        \xlongto{\sim}
+        k
+      \end{gather*}
+    \item
+      If~$f$ and~$g$ are morphism of {\dgcs} then so is~$f \tensor g$.
+    \item
+      The twist map~$\tau \colon C \tensor D \to D \tensor C$ is a morphism of {\dgcs}.
+    \item
+      If~$C = (C, \Delta, \varepsilon)$ then~$C^{\cop} = (C, \Delta^{\cop}, \varepsilon)$ with~$\Delta^{\op} = \tau \circ \Delta$ is again a {\dgc}.
+  \end{enumerate}
+\end{lemma}
+
+\begin{warning}
+  If~$C$,~$D$ are {\dgcs} then the underlying coalgebra of~$C \tensor D$ is not the tensor product of the underlying coalgebras of~$C$ and~$D$.
+  The underlying coalgebra of~$C^{\op}$ is not the coopposite of the underlying coalgebra of~$C$.
+  (Again both thanks to signs.)
+\end{warning}
+
+\begin{definition}
+  A \defemph{\dgci} in a {\dgc}~$C$ is a {\dgsub} that is a coideal.
+\end{definition}
+
+\begin{lemma}
+  If~$I$ is a {\dgci} in a {\dgc}~$C$ then~$C/I$ inherits the structure of a~{\dgc} such that the projection~$C \to C/I$ is a morphism of~{\dgc}.
+  \qed
+\end{lemma}
+
+\begin{proposition}
+  If~$C$ is a {\dgc} then~$\cycles(C)$ is a graded subcoalgebra of~$A$,~$\boundaries(C)$ is a graded coideal in~$\cycles(C)$ and~$\homology(C)$ is hence a graded coalgebra.
+  \qed
+\end{proposition}
 
 
 
 
 
 
+\section{Differential Graded Bialgebras}
+
+\begin{lemma}
+  \label{characterization of bialgebras}
+  Let~$B$ be a {\dgv}, let~$(B, m, u)$ be a {\dga} and let~$(B, \Delta, \varepsilon)$ be a {\dgc}.
+  Then the following conditions are equivalent:
+  \begin{enumerate}
+    \item
+      $\Delta$ and~$\varepsilon$ are morphisms of {\dgas}.
+    \item
+      $m$ and~$u$ are morphisms of {\dgcs}.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  The same diagramatic proof as in the ungraded case.
+\end{proof}
+
+\begin{definition}
+  A \defemph{\dgb} is a quintuple~$(B, \mu, u, \Delta, \varepsilon)$ such that the equivalent conditions of \cref{characterization of bialgebras} are satisfied.
+  A map~$f \colon B \to C$ is a \defemph{morphism} of {\dgbs} if it is both a morphism of {\dgas} and of {\dgcs}.
+  A \defemph{\dgbi} is a {\dgsub} that is both a {\dgi} and a {\dgci}.
+\end{definition}
+
+\begin{remark}
+  The compatibility of the multiplication and comultiplication of~$B$ means
+  \begin{gather*}
+    \Delta(bc)
+%     =
+%     \Delta(b)\Delta(c)
+%     =
+%     \left( \sum_{(b)} b_{(1)} \tensor b_{(2)} \right)
+%     \left( \sum_{(c)} c_{(1)} \tensor c_{(2)} \right)
+    =
+    \sum_{(b), (c)}
+    (-1)^{\hdeg{b_{(2)}} \hdeg{c_{(1)}}}
+    b_{(1)} c_{(1)} \tensor b_{(2)} c_{(2)}
+  \end{gather*}
+
+\end{remark}
+
+
+\begin{warning}
+  A {\dgb} does in general \emph{not} have an underlying bialgebra structure because~$\Delta \colon B \to B \tensor B$ is a morphism of~{\dgas}, but not necessarily one of algebras.
+  \[
+    \begin{tikzcd}[column sep = small]
+      \text{algebras}
+      &
+      {}
+      &
+      \text{\dgas}
+      \arrow[dashed]{ll}
+      &
+      {}
+      \\
+      {}
+      &
+      \text{bialgebras}
+      \arrow{ul}
+      \arrow{dl}
+      &
+      {}
+      &
+      \text{\dgbs}
+      \arrow{ul}
+      \arrow[dashed]{ll}[{anchor=center,sloped}]{\bigg/}
+      \arrow{dl}
+      \\
+      \text{coalgebras}
+      &
+      {}
+      &
+      \text{\dgcs}
+      \arrow[dashed]{ll}
+      &
+      {}
+    \end{tikzcd}
+  \]
+\end{warning}
+
+\begin{lemma}
+  If~$B$ is a {\dgb} then~$B^{\op}$,~$B^{\cop}$ and~$B^{\op,\cop}$ are again {\dgbs}.
+  \qed
+\end{lemma}
+
+\begin{lemma}
+  If~$I$ is a {\dgbi} in a {\dgb}~$B$ then~$B/I$ inherits from~$B$ the structure of a {\dgb} such that the projection~$B \to B/I$ is a morphism of {\dgb}.
+  \qed
+\end{lemma}
+
+\begin{proposition}
+  If~$B$ is a {\dgb} then~$\cycles(B)$ is a graded sub-bialgebra of~$B$,~$\boundaries(B)$ is a graded biideal in~$\cycles(A)$ and~$\homology(B)$ is hence a graded bialgebra.
+  \qed
+\end{proposition}
+
+\begin{definition}
+  If~$B$ is a {\dgb} then~$x \in B$ is primitive if~$\Delta(x) = x \tensor 1 + 1 \tensor x$.
+\end{definition}
+
+\begin{lemma}
+  If~$B$ is a~{\dgb} and~$x, y \in B$ are primitive then~$[x,y]$ is again primitive.
+  \qed
+\end{lemma}
+
+
+
+
+
+
+\section{Differential Graded Hopf Algebras}
+
+\begin{lemma}
+  If~$C$ is a {\dgc} and~$A$ is a {\dga} then the convolution product on~$\Hom_k(C,A)$ makes~$\dgHom(C,A)$ into a {\dga}.
+  \qed
+\end{lemma}
+
+\todo{Dual of dg-coalgebra is a dg-algebra.}
+
+\begin{definition}
+  An \defemph{antipode} for a~{\dgb}~$H$ is an inverse~$S$ to~$\id_H$ with respect to the convolution product of~$\dgHom(H,H)$.
+  If~$H$ admits an antipode then it is a \defemph{\dgh}.
+  A \defemph{morphism} of {\dgh} is a morphism of {\dgbs}.
+  A \defemph{\dghi} in~$H$ is a {\dgbi}~$I$ with~$S(I) \subseteq I$.
+\end{definition}
+
+\begin{warning}
+  A {\dgh} does not in general have an underlying Hopf algebra structure.
+\end{warning}
+
+\begin{remark}
+  Let~$H$ be a {\dgh}.
+  \begin{enumerate}
+    \item
+      The antipode of~$H$ is unique.
+    \item
+      The antipode~$S$ of~$H$ is the the unique morphism of {\dgvs} that makes the following diagram commute:
+      \begin{equation}
+        \label{antipode diagram}
+        \begin{tikzcd}[column sep = small]
+          {}
+          &
+          H \tensor H
+          \arrow{rr}[above]{S \tensor {\id}}
+          &
+          {}
+          &
+          H \tensor H
+          \arrow{dr}[above right]{m}
+          &
+          {}
+          \\
+          H
+          \arrow{ur}[above left]{\Delta}
+          \arrow{rr}[above]{\varepsilon}
+          \arrow{dr}[below left]{\Delta}
+          &
+          {}
+          &
+          k
+          \arrow{rr}[above]{u}
+          &
+          {}
+          &
+          H
+          \\
+          {}
+          &
+          H \tensor H
+          \arrow{rr}[below]{{\id} \tensor S}
+          &
+          {}
+          &
+          H \tensor H
+          \arrow{ur}[below right]{m}
+          &
+          {}
+        \end{tikzcd}
+      \end{equation}
+      This means more explicitely that
+      \[
+        \sum_{(c)} S(c_{(1)}) c_{(2)}
+        =
+        \varepsilon(c) 1_H
+        \qquad\text{and}\qquad
+        \sum_{(c)} c_{(1)} S(c_{(2)})
+        =
+        \varepsilon(c) 1_H  \,.
+      \]
+      (No additional signs occur because~$\hdeg{S} = 0$.)
+%     \item
+%       The antipode is a morphism of bialgebras~$H \to H^{\op,\cop}$.
+  \end{enumerate}
+\end{remark}%
+\todo{Check that the antipode is an antimorphism.}
+
+\begin{lemma}
+  If~$I$ is a {\dghi} in a {\dgh}~$H$ then~$H/I$ inherits from~$H$ the structure of a {\dgh} such that the projection~$H \to H/I$ is a morphism of~{\dghs}.
+\end{lemma}
+
+% \begin{lemma}
+%   Let~$H$ be a~{\dgb} and let~$S \colon H \to H^\op$ be a morphism of~{\dgas}.
+%   If the diagram~\eqref{antipode diagram} commutes on an algebra generating set of~$H$ then~$S$ is an antipode for~$H$.
+% \end{lemma}
+% 
+% \begin{proof}
+%   The sets
+%   \[
+%     \{
+%       x \in H
+%     \suchthat
+%       m \circ (S \tensor {\id}) \circ \Delta (x)
+%       =
+%       \varepsilon(x) 1_H
+%     \}
+%   \]
+%   and
+%   \[
+%     \{
+%      x \in H
+%     \suchthat
+%       m \circ ({\id} \tensor S) \circ \Delta (x)
+%       =
+%       \varepsilon(x) 1_H
+%     \}
+%   \]
+%   subalgebras of~$H$ that contain all algebra generators.
+% \end{proof}
+
+
+\begin{example}
+  Let~$V$ be a {\dgv}.
+  \begin{enumerate}
+    \item
+      The map
+      \[
+        V
+        \to
+        \dgTensor(V) \tensor \dgTensor(V) \,,
+        \quad
+        v
+        \mapsto
+        v \tensor 1 + 1 \tensor v
+      \]
+      is a morphism of {\dgv} and hence induces a morphism of~{\dgas}
+      \[
+        \Delta
+        \colon
+        \dgTensor(V)
+        \to
+        \dgTensor(V) \tensor \dgTensor(V) \,.
+      \]
+      The zero map~$V \to 0$ induces a morphism of~{\dgas}~$\varepsilon \colon \dgTensor(V) \to \dgTensor(0) = k$.
+      These make~$\dgTensor(V)$ into a {\dgb};
+      the necessary diagrams can be checked on the algebra generators~$V$ of~$\dgTensor(V)$.
+      The comultiplication~$\Delta$ and~$\varepsilon$ are explicitely given by
+      \begin{align*}
+        \Delta(v_1 \dotsm v_n)
+        &=
+        \Delta(v_1) \dotsm \Delta(v_n)
+        \\
+        &=
+        (v_1 \tensor 1 + 1 \tensor v_1)
+        \dotsm
+        (v_n \tensor 1 + 1 \tensor v_n)
+        \\
+        &=
+        \sum_{p=0}^n
+        \;
+        \sum_{\sigma \in \Sh(p,n-p)}
+        (-1)^{n_p(\sigma)}
+        v_{\sigma(1)} \dotsm v_{\sigma(p)}
+        \tensor
+        v_{\sigma(p+1)} \dotsm v_{\sigma(n)}
+      \end{align*}
+      where
+      \[
+        n_p(\sigma)
+        =
+        \sum
+        \Bigl\{
+          \hdeg{v_i} \hdeg{v_j}
+        \suchthat[\Big]
+          1 \leq i \leq p, \,
+          p+1 \leq j \leq n, \,
+          \sigma(i) > \sigma(j)
+        \Bigr\} \,,
+      \]
+      and the counit is given by
+      \[
+        \varepsilon( v_1 \dotsm v_n )
+        =
+        \begin{cases}
+          1 & \text{if~$n = 0$}, \\
+          0 & \text{otherwise}.
+        \end{cases}
+      \]
+      The map
+      \[
+        V
+        \to
+        \dgTensor(V) \,,
+        \quad
+        v
+        \mapsto
+        -v
+      \]
+      is a morphism of~{\dgvs} and hence induces a morphism of {\dgvs}
+      \[
+        S
+        \colon
+        \dgTensor(V)
+        \to
+        \dgTensor(V)^{\op} \,.
+      \]
+      As a map~$S \colon \dgTensor(V) \to \dgTensor(V)$ this is given by
+      \[
+        S(v_1 \dotsm v_n)
+        =
+        (-1)^{n + \sum_{1 \leq i < j \leq n} \hdeg{v_i} \hdeg{v_j}}
+        v_n \dotsm v_1  \,.
+      \]%
+      \todo{Find an argument to check this only on algebra generators.}
+      It can now be checked on monomials that~$S$ is an antipode for~$\dgTensor(V)$, making it a {\dgh}.%
+      \footnote{In the resulting expressions the terms for~$v_1 \dotsm v_p \tensor v_{p+1} \dotsm v_n$ and~$v_2 \dotsm v_p \tensor v_1 v_{p+1} \dotsm v_n$ because of signs.}
+      This is the \defemph{differential graded tensor algebra} on~$V$.
+    \item
+      The {\dga}~$\dgSymm(V) = \dgTensor(V)/I$ from \cref{dg symmetric algebra} inherits from~$\dgTensor(V)$ the structure of a {\dgh} because the~{\dgi}
+      \[
+        I
+        =
+        \bigl(
+          [v,w]
+        \suchthat[\big]
+          \text{$v,w \in V$ are homogeneous}
+        \bigr)
+      \]
+      is a {\dghi} in~$\dgTensor(V)$ since
+      \begin{align*}
+        \varepsilon([v,w])
+        &=
+        0 \,,
+      \\
+        \Delta([v,w])
+        &=
+        [v,w] \tensor 1 + 1 \tensor [v,w]
+        \in
+        I \tensor \dgTensor(V) + \dgTensor(V) \tensor I
+      \\
+        S([v,w])
+        &=
+        -[v,w]
+        \in
+        I \,.
+      \end{align*}
+  \end{enumerate}
+\end{example}
+
+\begin{remark}
+  Let~$V, W$ be a {\dgv}.
+  \begin{enumerate}
+    \item
+      The inclusions~$V, W \to V \oplus W$ induce morphisms of {\dghs}
+      \[
+        \dgSymm(V), \dgSymm(W)
+        \to
+        \dgSymm(V \oplus W)
+      \]
+      which give an isomorphism of {\dghs}~$\dgSymm(V) \tensor \dgSymm(W) \to \dgSymm(V \oplus W)$.
+  \end{enumerate}
+  Let now~$\ringchar(k) \neq 2$.
+  \begin{enumerate}[resume]
+    \item
+      If~$V$ is concentrated in even degrees then~$\dgSymm(V) = \Symm(V)$ and if~$V$ is concentrated in odd degrees then~$\dgSymm(V) = \Exterior(V)$, both with the gradings induced by~$V$.
+    \item
+      If~$V_{\text{even}} = \bigoplus_{n \in \Integer} V_{2n}$ and~$V_{\text{odd}} = \bigoplus_{n \in \Integer} V_{2n+1}$ then
+      \[
+        \dgSymm(V)
+        =
+        \dgSymm(V_{\text{even}} \oplus V_{\text{odd}})
+        \cong
+        \dgSymm(V_{\text{even}}) \tensor \dgSymm(V_{\text{odd}})
+        \cong
+        \Symm(V_{\text{even}}) \tensor \Exterior(V_{\text{odd}}) \,.
+      \]
+      Moreover, the tensor factors~$\Symm(V_{\text{even}})$ and~$\Exterior(V_{\text{odd}})$ strictly commute in~$\dgSymm(V)$ (i.e.~$xy = yx$) so that
+      \[
+        \dgSymm(V)
+        \cong
+        \Symm(V_{\text{even}}) \tensor_k \Exterior(V_{\text{odd}})
+      \]
+      as algebras, where~$\tensor_k$ denotes \enquote{tensor product without signs}.
+  \end{enumerate}
+\end{remark}
+
+\begin{example}[Exterior Algebra]
+  \label{exterior hopf algebra}
+  Let~$V$ be a vector space.
+  We may regard~$V$ as a {\dgv} centered in degree~$1$.
+  Then~$\dgSymm(V) = \Exterior(V)$ as graded algebras whence~$\Exterior(V)$ is a {\dgh}.
+  But for~$\ringchar k \neq 2$ there exists no bialgebra structure on~$\Lambda \defined \Exterior(V)$.
+  Suppose otherwise.
+  
+  Then~$\varepsilon(v)^2 = \varepsilon(v^2) = 0$ and thus~$\varepsilon(v) = 0$ for all~$v \in V$, so~$\ker \varepsilon = \bigoplus_{d \geq 1} \Exterior^n(V) \defines I$.
+  Let~$v \in V$.
+  Then by the counital axiom,
+  \[
+    \Delta(v)
+    \equiv
+    v \tensor 1
+    \pmod{\Lambda \tensor I}
+    \qquad\text{and}\qquad
+    \Delta(v)
+    \equiv
+    1 \tensor v
+    \pmod{I \tensor \Lambda}
+  \]
+  and thus
+  \[
+    \Delta(v)
+    \equiv
+    v \tensor 1 + 1 \tensor v
+    \pmod{I \tensor I}  \,.
+  \]
+  It follows that
+  \begin{gather*}
+    \Delta(v^2)
+    \equiv
+    (v \tensor 1 + 1 \tensor v)^2
+    \pmod{ (v \tensor 1)(I \tensor I) + (1 \tensor v)(I \tensor I) + (I \tensor I)^2 } \,,
+  \shortintertext{and therefore}
+    \Delta(v^2)
+    \equiv
+    v^2 \tensor 1 + 2 v \tensor v + 1 \tensor v^2
+    \pmod{I \tensor I^2 + I^2 \tensor I} \,.
+  \end{gather*}
+  But~$v^2 = 0$, hence
+  \[
+    2 v \tensor v
+    \equiv
+    0
+    \pmod{I \tensor I^2 + I^2 \tensor I}  \,.
+  \]
+  But~$2 \neq 0$ and~$v \neq 0$ hence~$2 v \tensor v \neq 0$ while~$v \tensor v \notin I \tensor I^2 + I^2 \tensor I$, a contradiction.
+  (This proof is taken from \cite{exterior_bialgebra_mo} and partially from \cite[III.{\S}11.3]{bourbaki}).
+\end{example}
+
+\begin{proposition}
+  If~$H$ is a {\dgh} with antipode~$S$ then the graded bialgebra~$\homology(H)$ is a graded Hopf algebra with antipode induced by~$S$.
+  \qed
+\end{proposition}
+
+\begin{example}
+  \leavevmode
+  \begin{enumerate}
+    \item
+      If~$V$ is a {\dgv} then
+      \[
+        \homology(\dgTensor(V))
+        =
+        \homology\Biggl( \bigoplus_{d \geq 0} V^{\tensor d} \Biggr)
+        \cong
+        \bigoplus_{d \geq 0} \homology\bigl( V^{\tensor d} \bigr)
+        \cong
+        \bigoplus_{d \geq 0} \homology(V)^{\tensor d}
+        =
+        \dgTensor(\homology(V))
+      \]
+      as graded vector spaces by the algebraic Künneth isomorphism.
+      We see on representatives that this is already an isomorphism of graded Hopf algebras.
+    \item
+      \todo{For~$\ringchar(k) = 0$ for the graded commutative algebra using the symmetrization operator.}
+  \end{enumerate}
+\end{example}
+
+
+
+
+
+
+\section{Chevalley--Eilenberg}
+
+For this section we fix a Lie~algebra~$\glie$.
+The algebra morphism~$\varepsilon \colon \Univ(\glie) \to k = \End_k(k)$ makes the ground field~$k$ into a symmetric~{\bimodule{$\Univ(\glie)$}}.
+
+
+
+
+
+\subsection{The Chevalley--Eilenberg Complex}
+
+\begin{definition}
+  The \defemph{{\CE} complex} of~$\glie$ is in degree~$n$ given by~$\Univ(\glie) \tensor \Exterior^n(\glie)$ and the differential~$\dce$ is given by
+  \begin{align*}
+    {}&
+    \dce(u \tensor x_1 \wedge \dotsb \wedge x_n)
+    \\
+    ={}&
+    \sum_{i=1}^n (-1)^i u x_i \tensor x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge x_n
+    \\
+    {}&
+    +
+    \sum_{1 \leq i < j \leq n}
+    (-1)^{i+j-1}
+    u \tensor [x_i, x_j] \wedge x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge \widehat{x_j} \wedge \dotsb \wedge x_n \,.
+  \end{align*}
+\end{definition}
+
+\begin{remark}
+  If we set~$[u, x] \defined u x$ and~$(x_0, x_1, \dotsc, x_n) \defined x_0 \tensor x_1 \wedge \dotsb \wedge x_n$ then
+  \[
+    \dce(x_0, x_1, \dotsc, x_n)
+    =
+    \sum_{0 \leq i < j \leq n}
+    (-1)^{j+1}
+    (x_0, x_1, \dotsc, [x_i, x_j], \dotsc, \widehat{x_j}, \dotsc, x_n)
+  \]
+  where~$[x_i, x_j]$ appears in the~{\howmanyth{$i$}} position.
+\end{remark}
+
+% A representation of~$\glie$ is a vector space~$V$ together with homomorphism of Lie~algebras~$\rho \colon \glie \to \End_k(V)$, or equivalently a bilinear action~$\glie \times V \to V$,~$(x,v) \mapsto x v$ with
+% \[
+%   x (y v) - y (x v)
+%   =
+%   [x,y] v \,.
+% \]
+% It follows from the correspondence
+% \begin{align*}
+%   {}&
+%   \{
+%     \text{Lie algebra homomorphisms~$\glie \to \End_k(V)$}
+%   \}
+%   \\
+%   \longonetoone{}& 
+%   \{
+%     \text{algebra homomorphism~$\Univ(\glie) \to \End_k(V)$}
+%   \}
+% \end{align*}
+% that a representation of~$\glie$ is the same as a~{$\Univ(\glie)$}{module}.
+% The action of~$\Univ(\glie)$ extends the corresponding action of~$\glie$.
+
+\begin{theorem}
+  The {\CE} complex together with the counit~$\varepsilon \colon \Univ(\glie) \to k$ is a projective resolutions of~$k$ as a left~{\module{$\Univ(\glie)$}}.
+\end{theorem}
+
+\begin{proof}
+  A proof due to Koszul using spectrac sequences can be found in \cite[Theorem~7.7.2]{weibel}.
+  A more elementary proof can be found in \cite[VII.4]{hilton_stammbach}.
+\end{proof}
+
+
+\begin{remark}
+  The Lie~algebra cohomology of~$\glie$ with values in a left~{\module{$\Univ(\glie)$}}~$V$ is given by
+  \begin{align*}
+    \liecohom(\glie, V)
+    &\defined
+    \Ext_{\Univ(\glie)}(k, V)
+  \intertext{and the Lie~algebra homology of~$\glie$ with values in a a right~{\module{$\Univ(\glie)$}}~$V$ is given by}
+    \liehom(\glie, V)
+    &\defined
+    \Tor^{\Univ(\glie)}(V,k) \,.
+  \end{align*}
+  The {\CE} complex can be used to compute these:
+  The Lie~algebra cohomology of~$\glie$ is the cohomology of the cochain complex
+  \[
+    \Hom_{\Univ(\glie)}\biggl( \Univ(\glie) \tensor \Exterior(\glie), V \biggr)
+    \cong
+    \Hom_k\biggl( \Exterior(\glie), V \biggr)
+  \]
+  that is in degree~$n$ given by
+  \[
+    \Hom_k\biggl( \Exterior^n(\glie), V \biggr)
+    \cong
+    \{
+      \text{alternating multilinear maps~$\glie^{\times n} \to V$}
+    \}
+  \]
+  and has the differential
+  \begin{align*}
+    d(\omega)(x_1, \dotsc, x_n)
+    ={}&
+    \sum_{i=1}^n
+    (-1)^i x_i \omega(x_1, \dotsc, \widehat{x_i}, \dotsc, x_n)
+    \\
+    {}&
+    + \sum_{1 \leq i < j \leq n}
+      (-1)^{i+j-1} \omega([x_i, x_j], x_1, \dotsc, \widehat{x_i}, \dotsc, \widehat{x_j}, \dotsc, x_n) \,.
+  \end{align*}
+  The Lie~algebra homology of~$\glie$ is the homology of the chain complex
+  \[
+    V \tensor_{\Univ(\glie)} \Univ(\glie) \tensor_k \Exterior(\glie)
+    \cong
+    V \tensor_k \Exterior(\glie)
+  \]
+  that has the differential
+  \begin{align*}
+    {}&
+    d(v \tensor x_1 \wedge \dotsb \wedge x_n)
+    \\
+    ={}&
+    \sum_{i=1}^n (-1)^i (v \cdot x_i) \tensor x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge x_n
+    \\
+    {}&
+    +
+    \sum_{1 \leq i < j \leq n}
+    (-1)^{i+j-1}
+    v \tensor [x_i, x_j] \wedge x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge \widehat{x_j} \wedge \dotsb \wedge x_n \,.
+  \end{align*}
+\end{remark}
+
+
+
+\subsection{The Chevalley--Eilenberg Coalgebra}
+
+For~$V = \glie$ we get a chain complex~$\Exterior \glie$ with Chevalley--Eilenberg differential
+\[
+  \dce(x_1 \wedge \dotsb \wedge x_n)
+  =
+  \sum_{1 \leq i < j \leq n}
+  (-1)^{i+j-1}
+  [x_i, x_j]
+  \wedge x_1
+  \wedge \dotsb
+  \wedge \widehat{x_i}
+  \wedge \dotsb
+  \wedge \widehat{x_j}
+  \wedge \dotsb
+  \wedge x_n \,.
+\]
+We observe that the differential~$\Exterior^2 \glie \to \glie$ is precisely the Lie~bracket~$[-,-]$.
+The composition~$\Exterior^3 \glie \to \Exterior^2 \glie \to \glie$ is given by
+\begin{align*}
+  x \wedge y \wedge z
+  &\mapsto
+  [x,y] \wedge z - [x,z] \wedge y + [y,z] \wedge x
+  \\
+  &\mapsto
+  [[x,y], z] - [[x,z], y] + [[y,z], x]
+  \\
+  &=
+  -\Bigl( [z,[x,y]] + [y,[z,x]] + [x,[y,z]] \Bigr)
+\end{align*}
+We can regard~$\Exterior \glie$ as a graded coalgebra as in \cref{exterior hopf algebra}, i.e.\ such that~$V$ consists of primitive elements.
+
+\begin{proposition}
+  The Chevalley--Eilenberg differential makes~$\Exterior \glie$ into a {\dgc}, and it is the unique extension of the Lie~bracket to a coderivation of~$\Exterior \glie$.
+  Any coderivation on~$\Exterior \glie$ comes from a Lie~algebra structure of~$\glie$.
+  This gives a one-to-one correspondence between Lie~brackets on~$\glie$ and coderivations on~$\bigwedge \glie$.
+  \todo{Find a proper reference.}
+\end{proposition}
+
+
+
+
+
+\subsection{The Chevalley--Eilenberg Algebra}%
+
+
+\todo{Write this, check duality with CE-coalgebra.}
+
+
+
+
+
+\section{Differential Graded Lie Algebras}
+
+Let~$\ringchar(k) \neq 2$.
+
+\begin{recall}
+  A Lie~algebra is a vector space~$\glie$ together with a map~$[-,-] \colon \glie \tensor_k \glie \to \glie$ such that~$[-,-]$ is skew-symmetric and for every~$x \in \glie$ the map~$[x,-] \colon \glie \to \glie$ is a derivation;
+  this is equivalent to the Jacobi identity~$\sum_{\text{cyclic}} [x,[y,z]] = 0$.
+\end{recall}
+
+\begin{definition}
+  A \defemph{\dgl} is a {\dgv}~$\glie$ together with a morphism~$[-,-] \colon \glie \tensor \glie \to \glie$ such that~$[-,-]$ is skew symmmetric in the sense that the diagram
+  \[
+    \begin{tikzcd}[column sep = small]
+      \glie \tensor \glie
+      \arrow{rr}[above]{\tau}
+      \arrow{dr}[below left]{[-,-]}
+      &
+      {}
+      &
+      \glie \tensor \glie
+      \arrow{dl}[below right]{[-,-]}
+      \\
+      {}
+      &
+      \glie
+      &
+      {}
+    \end{tikzcd}
+  \]
+  commutes, and that for every homogeneous~$x \in \glie $ the map~$[x,-] \colon \glie \to \glie$ is a derivation (of degree~$\hdeg{x}$).
+\end{definition}
+
+\begin{remark}
+  Let~$\glie$ be a~{\dgl}.
+  We have~$[\glie_i, \glie_j] \subseteq \glie_{i+j}$ for all~$i,j$,
+  \begin{align}
+    [x,y]
+    &=
+    (-1)^{\hdeg{x} \hdeg{y}} [y,x]
+    \notag
+  \shortintertext{and}
+    [x, [y,z]]
+    &=
+    [[x,y], z]
+    +
+    (-1)^{\hdeg{x} \hdeg{y}}
+    [y, [x,z]]
+    \label{pre dgjacobi}
+  \shortintertext{and}
+    d([x,y])
+    &=
+    [d(x), y] + (-1)^{\hdeg{x}} [x, d(y)] \,.
+    \notag
+  \end{align}
+  Condition \eqref{pre dgjacobi} can be rewritten by the skew-symmetry of~$[-,-]$ as
+  \[
+    \sum_{\text{cyclic}}
+    (-1)^{\hdeg{x} \hdeg{z}} [x, [y,z]]
+    =
+    0 \,.
+  \]
+\end{remark}
+
+\begin{warning}
+  A {\dgl} does in general not have an underlying Lie~algebra structure.
+\end{warning}
+
+\begin{example}
+  \leavevmode
+  \begin{enumerate}
+    \item
+      Every {\dga}~$A$ becomes a {\dgl} with respect to the {\dgcom}
+      \[
+        [a,b]
+        \defined
+        ab - (-1)^{\hdeg{a} \hdeg{b}} ba  \,.
+      \]
+    \item
+      If~$A$ is a graded algebra then the graded subspace~$\gDer(A)$ of~$\gEnd(A)$ given by
+      \[
+        \gDer(A)_n
+        =
+        \{
+          \text{derivations of~$A$ of degree~$n$}
+        \}
+      \]
+      is a {\dglsub} of~$\dgEnd(A)$.
+    \item
+      If~$B$ is a {\dgb} then the set of primitive elements
+      \[
+        \prim(B)
+        =
+        \{
+          x \in B
+        \suchthat
+          \Delta(x) = x \tensor 1 + 1 \tensor x
+        \}
+      \]
+      is a {\dglsub} of~$B$.
+  \end{enumerate}
+\end{example}
+
+\begin{lemma}
+  If~$\glie$ is a {\dgl} then~$\cycles(\glie)$ is a graded Lie~subalgebra of~$\glie$,~$\boundaries(\glie)$ is a graded Lie~ideal in~$\cycles(\glie)$ and~$\homology(\glie)$ is thus an graded Lie~algebra. 
+\end{lemma}
+
+
+\begin{definition}
+  The \defemph{universal enveloping algebra} of a {\dgl}~$\glie$ is a {\dga}~$\Univ(\glie)$ together with a morphism of~{\dgls}~$i \colon \glie \to \Univ(\glie)$ such that for every other {\dga}~$A$ and every morphism of~{\dgls}~$f \colon \glie \to A$ there exists a unique morphism of {\dgas}~$F \colon \Univ(\glie) \to A$ that makes the following diagram commute:
+  \[
+    \begin{tikzcd}
+      \Univ(\glie)
+      \arrow[dashed]{r}[above]{F}
+      &
+      A
+      \\
+      \glie
+      \arrow{u}[left]{i}
+      \arrow{ur}[below right]{f}
+      &
+      {}
+    \end{tikzcd}
+  \]
+\end{definition}
+
+\begin{proposition}
+  For every {\dgl}~$\glie$ a universal enveloping algebra exists.
+  It is unique up to unique isomorphism and can be constructed as
+  \[
+    \Univ(\glie)
+    =
+    \dgTensor(\glie)
+    /
+    \bigl(
+      [x,y]_{\dgTensor(\glie)} - [x,y]_{\glie}
+    \suchthat
+      \text{$x, y \in \glie$ homogeneous}
+    \bigr)
+  \]
+  together with the composition~$i \colon \glie \to \dgTensor(\glie) \to \Univ(\glie)$.
+  It inherits from~$\dgTensor(\glie)$ the structure of a {\dgh}.
+  \qed
+\end{proposition}
+
+\begin{proof}
+  We check that the given ideal~$I$ is a {\dghi}.
+  It is generated by homegenous elements which satisfy
+  \begin{align*}
+    {}&
+    d([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
+    \\
+    ={}&
+    d([x,y]_{\dgTensor(\glie)}) - d([x,y]_{\glie})
+    \\
+    ={}&
+      [d(x), y]_{\dgTensor(\glie)}
+    + (-1)^{\hdeg{x}} [x, d(y)]_{\dgTensor(\glie)}
+    + [d(x), y]_{\glie}
+    + (-1)^{\hdeg{x}} [x, d(y)]_{\glie}
+    \\
+    ={}&
+    \biggl(
+      [d(x), y]_{\dgTensor(\glie)} - [d(x), y]_{\glie}
+    \biggr)
+    + 
+    (-1)^{\hdeg{v}}
+    \biggl(
+      [x, d(y)]_{\dgTensor(\glie)} - [x, d(y)]_{\glie}
+    \biggr)
+    \\
+    \in{}&
+    I
+  \end{align*}
+  so~$I$ is a {\dgi}.
+  Also
+  \begin{gather*}
+    \varepsilon([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
+    =
+    \varepsilon([x,y]_{\dgTensor(\glie)}) - \varepsilon([x,y]_{\glie})
+    =
+    0 - 0
+    =
+    0
+  \shortintertext{and}
+    \begin{aligned}
+      {}&
+      \Delta([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
+      \\
+      ={}&
+      \Delta([x,y]_{\dgTensor(\glie)}) - \Delta([x,y]_{\glie}))
+      \\
+      ={}&
+        [x,y]_{\dgTensor(\glie)} \tensor 1
+      + 1 \tensor [x,y]_{\dgTensor(\glie)}
+      - [x,y]_{\glie} \tensor 1
+      - 1 \tensor [x,y]_{\glie}
+      \\
+      ={}&
+        ([x,y]_{\dgTensor(\glie)} + [x,y]_{\glie}) \tensor 1
+      - 1 \tensor ([x,y]_{\dgTensor(\glie)} + [x,y]_{\glie})
+      \\
+      \in{}&
+      I \tensor \dgTensor(\glie) + \dgTensor(\glie) \tensor I \,.
+    \end{aligned}
+  \intertext{and finally}
+    S([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
+    =
+    S([x,y]_{\dgTensor(\glie)}) - S([x,y]_{\glie})
+    =
+    -[x,y]_{\dgTensor(\glie)}  + [x,y]_{\glie}
+    \in
+    I \,.
+  \end{gather*}
+  The assertion follows.
+\end{proof}
+
+
+\begin{remark}
+  Let~$\glie$,~$\hlie$ be a {\dgls}.
+  \begin{enumerate}
+    \item
+      The product~$\glie \times \hlie$ is again a {\dgl} with
+      \[
+        [(x,y), (x',y')]
+        =
+        ( [x,x'], [y,y'] )  \,.
+      \]
+      The inclusions~$\glie, \hlie \to \glie \times \hlie$ induce morphisms of {\dghs}
+      \[
+        \Univ(\glie), \Univ(\hlie)
+        \to
+        \Univ(\glie \times \hlie)
+      \]
+      that results in an isomorphism of {\dghs}~$\Univ(\glie) \tensor \Univ(\hlie) \to \Univ(\glie \times \hlie)$.
+    \item
+      The Hopf algebra structure of~$\Univ(\glie)$ is induced from underlying morphisms of {\dgls}:
+      The diagonal morphism~$\glie \to \glie \times \glie$,~$v \mapsto (v,v)$ induces the comultiplication~$\Univ(\glie) \to \Univ(\glie \times \glie) \cong \Univ(\glie) \tensor \Univ(\glie)$, the morphism~$\glie \to 0$ induced the counit~$\Univ(\glie) \to \Univ(0) = k$ and the morphism~$\glie \to \glie^{\op}$,~$v \mapsto -v$ induces the antipode~$\Univ(\glie) \to \Univ(\glie^{\op}) = \Univ(\glie)^{\op}$.
+    \item
+      The famous Poincaré–Birkhoff–Witt theorem generalizes to {\dgls}.
+      It can be expressed as an isomorphism of {\dgc}~$\dgSymm(\glie) \cong \Univ(\glie)$ and show that~$\prim(\Univ(\glie)) = \glie$.
+      See \cite[B,Theorem~2.3]{quillen} and \cite[\S21 (a)]{rational_homotopy_book} for more details on this.
+    \item
+      It holds that~$\homology(\Univ(\glie)) \cong \Univ(\homology(\glie))$, see \cite[B,Proposition~2.1]{quillen} or \cite[Theorem 21.7]{rational_homotopy_book}.
+    \item
+      If~$H$ is a graded cocommutative connected%
+      \footnote{The connectedness is defined in terms of the underlying {\dgc}, not that of the {\dga}.}
+      {\dgh} then a version of the Cartier--Milnor--Moore theorem asserts that~$H \cong \Univ(\prim(H))$, which results in an equivalence between the categories of~{\dgls} and graded cocommutative connected {\dghs}, see \cite[B,Theorem~4.5]{quillen}.
+  \end{enumerate}
+\end{remark}
+
+
+
+
+
+\section{Homology of the Primitive Part}
+
+\begin{theorem}[{\cite[Theorem~A.9]{loday}}]
+  Let~$\hopf$ be a {\dgh}.
+  The inclusion~$\prim(\hopf) \to \hopf$ is a morphism of {\dgls} and thus induced a morphism of graded Lie~algebras~$\homology(\prim(\hopf)) \to \homology(\hopf)$.
+  This morphism restricts to an isomorphism of graded Lie~algebras~$\homology(\prim(\hopf)) \to \prim(\homology(\hopf))$.
+\end{theorem}%
+\todo{Find a proof.}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\printbibliography
 \end{document}

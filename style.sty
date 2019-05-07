@@ -1,5 +1,168 @@
+%%%%% PACKAGES
+
 \usepackage{microtype}
 \usepackage[backend=biber, style=alphabetic, dateabbrev=false, urldate=long]{biblatex}
-\usepackage{mathtools, amssymb, amsthm}
+\usepackage{xparse}
 
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage[backgroundcolor=white,linecolor=white]{todonotes}
+
+\usepackage{mathtools, amssymb, amsthm}
+\usepackage{extarrows}
+\usepackage{stmaryrd}
+\usepackage{tikz-cd}
+
+\usepackage[capitalise,noabbrev]{cleveref}
+
+
+
+%%%%% CONFIGURATION
+
+% bibliography
 \bibliography{references.bib}
+
+% prevents breaking inline math around binary or relationship symbols
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+% enumitem settings
+\setlist[enumerate, 1]{leftmargin=*, align=left, label=(\arabic*)}
+
+% theorem like environments
+\newcounter{everything}[section]
+
+\theoremstyle{definition}
+\newtheorem{corollary}[everything]{Corollary}
+\newtheorem{definition}[everything]{Definition}
+\newtheorem{example}[everything]{Example}
+\newtheorem{examples}[everything]{Examples}
+\newtheorem{lemma}[everything]{Lemma}
+\newtheorem{proposition}[everything]{Proposition}
+\newtheorem{recall}[everything]{Recall}
+\newtheorem{remark}[everything]{Remark}
+\newtheorem{theorem}[everything]{Theorem}
+\newtheorem{warning}[everything]{Warning}
+
+% prinint of counters
+\renewcommand{\theeverything}{\arabic{section}.\arabic{everything}}
+
+
+
+
+
+%%%%% TEXT MACROS
+
+% text formatting
+\newcommand{\defemph}{\textbf}
+
+% shortcuts
+\newcommand{\CE}{Chevalley-Eilenberg}
+
+% shortcuts involving nobreakdash
+\newcommand{\bimodule}[1]{#1\nobreakdash-bimodule}
+\newcommand{\howmanyth}[1]{#1\nobreakdash-th}
+\newcommand{\module}[1]{#1\nobreakdash-module}
+
+% dg-shortcuts
+\newcommand{\dga}{dg\nobreakdash-algebra}
+\newcommand{\dgas}{dg\nobreakdash-algebras}
+\newcommand{\dgb}{dg\nobreakdash-bialgebra}
+\newcommand{\dgbi}{dg\nobreakdash-biideal}
+\newcommand{\dgbs}{dg\nobreakdash-bialgebras}
+\newcommand{\dgc}{dg\nobreakdash-coalgebra}
+\newcommand{\dgci}{dg\nobreakdash-coideal}
+\newcommand{\dgcom}{dg\nobreakdash-comutator}
+\newcommand{\dgcs}{dg\nobreakdash-coalgebras}
+\newcommand{\dgh}{dg\nobreakdash-Hopf~algebra}
+\newcommand{\dghi}{dg\nobreakdash-Hopf~ideal}
+\newcommand{\dghs}{dg\nobreakdash-Hopf~algebras}
+\newcommand{\dgi}{dg\nobreakdash-ideal}
+\newcommand{\dgl}{dg\nobreakdash-Lie~algebra}
+\newcommand{\dgls}{dg\nobreakdash-Lie~algebras}
+\newcommand{\dglsub}{dg\nobreakdash-Lie~subalgebra}
+\newcommand{\dgsub}{dg\nobreakdash-subspace}
+\newcommand{\dgsuba}{dg\nobreakdash-subalgebra}
+\newcommand{\dgv}{dg\nobreakdash-vector space}
+\newcommand{\dgvs}{dg\nobreakdash-vector spaces}
+
+
+
+
+
+%%%%% MATH MACROS
+
+% arrows
+\newcommand{\longonetoone}{\longleftrightarrow}
+\newcommand{\xto}{\xrightarrow}
+\newcommand{\xlongto}[1]{\xlongrightarrow{\; #1 \;}}
+
+% special sets and spaces
+\newcommand{\Integer}{\mathbb{Z}}
+
+% special letters
+\newcommand{\glie}{\mathfrak{g}}
+\newcommand{\hlie}{\mathfrak{h}}
+\newcommand{\hopf}{\mathcal{H}}
+
+% generic sets and spaces
+\DeclareMathOperator{\boundaries}{B}
+\DeclareMathOperator{\cycles}{Z}
+\DeclareMathOperator{\dgDer}{dgDer}
+\DeclareMathOperator{\dgEnd}{dgEnd}
+\DeclareMathOperator{\dgHom}{dgHom}
+\DeclareMathOperator{\dgSymm}{S}
+\DeclareMathOperator{\dgTensor}{T}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ext}{Ext}
+\newcommand{\Exterior}{\bigwedge}
+\DeclareMathOperator{\gDer}{gDer}
+\DeclareMathOperator{\gEnd}{gEnd}
+\DeclareMathOperator{\gHom}{gHom}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\homology}{H}
+\DeclareMathOperator{\im}{im}
+\newcommand{\liecohom}{\homology_{\text{Lie}}}
+\newcommand{\liehom}{\homology^{\text{Lie}}}
+\newcommand{\prim}{\mathbb{P}}
+\DeclareMathOperator{\Sh}{Sh}
+\DeclareMathOperator{\Symm}{S}
+\DeclareMathOperator{\Tensor}{T}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Univ}{U}
+
+% functions
+\newcommand{\id}{\operatorname{id}}
+\DeclareMathOperator{\ringchar}{char}
+\newcommand{\dce}{d_{\text{CE}}}
+
+% relations and binary operators
+\newcommand{\defined}{\coloneqq}
+\newcommand{\defines}{\eqqcolon}
+\newcommand{\tensor}{\otimes}
+
+% delimiters and seperators
+\DeclarePairedDelimiter{\hdeg}{\lvert}{\rvert}
+\NewDocumentCommand{\suchthat}{so}{
+  \IfValueTF{#2}
+  {
+    \,#2|\,
+  }
+  {
+    \IfBooleanTF{#1}
+    {
+      \,\middle|\,
+    }
+    {
+      \mathrel{|}
+    }
+  }
+}
+
+% decoration
+\newcommand{\cop}{\mathrm{cop}}
+\newcommand{\op}{\mathrm{op}}
+
+
+
+
