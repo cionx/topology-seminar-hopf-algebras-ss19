@@ -312,7 +312,7 @@ Then the natural isomorphism~$k \tensor V \cong V$ and~$V \tensor k \cong V$ are
 \end{examples}
 
 \begin{lemma}
-  Let~$A$,~$B$ be {\dga}.
+  Let~$A$,~$B$ be {\dgas}.
   \begin{enumerate}
     \item
       The tensor product $A \tensor B$ becomes a {\dga} with
@@ -1135,185 +1135,185 @@ Then the natural isomorphism~$k \tensor V \cong V$ and~$V \tensor k \cong V$ are
 
 
 
-\section{Chevalley--Eilenberg}
-
-For this section we fix a Lie~algebra~$\glie$.
-The algebra morphism~$\varepsilon \colon \Univ(\glie) \to k = \End_k(k)$ makes the ground field~$k$ into a symmetric~{\bimodule{$\Univ(\glie)$}}.
-
-
-
-
-
-\subsection{The Chevalley--Eilenberg Complex}
-
-\begin{definition}
-  The \defemph{{\CE} complex} of~$\glie$ is in degree~$n$ given by~$\Univ(\glie) \tensor \Exterior^n(\glie)$ and the differential~$\dce$ is given by
-  \begin{align*}
-    {}&
-    \dce(u \tensor x_1 \wedge \dotsb \wedge x_n)
-    \\
-    ={}&
-    \sum_{i=1}^n (-1)^i u x_i \tensor x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge x_n
-    \\
-    {}&
-    +
-    \sum_{1 \leq i < j \leq n}
-    (-1)^{i+j-1}
-    u \tensor [x_i, x_j] \wedge x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge \widehat{x_j} \wedge \dotsb \wedge x_n \,.
-  \end{align*}
-\end{definition}
-
-\begin{remark}
-  If we set~$[u, x] \defined u x$ and~$(x_0, x_1, \dotsc, x_n) \defined x_0 \tensor x_1 \wedge \dotsb \wedge x_n$ then
-  \[
-    \dce(x_0, x_1, \dotsc, x_n)
-    =
-    \sum_{0 \leq i < j \leq n}
-    (-1)^{j+1}
-    (x_0, x_1, \dotsc, [x_i, x_j], \dotsc, \widehat{x_j}, \dotsc, x_n)
-  \]
-  where~$[x_i, x_j]$ appears in the~{\howmanyth{$i$}} position.
-\end{remark}
-
-% A representation of~$\glie$ is a vector space~$V$ together with homomorphism of Lie~algebras~$\rho \colon \glie \to \End_k(V)$, or equivalently a bilinear action~$\glie \times V \to V$,~$(x,v) \mapsto x v$ with
+% \section{Chevalley--Eilenberg}
+% 
+% For this section we fix a Lie~algebra~$\glie$.
+% The algebra morphism~$\varepsilon \colon \Univ(\glie) \to k = \End_k(k)$ makes the ground field~$k$ into a symmetric~{\bimodule{$\Univ(\glie)$}}.
+% 
+% 
+% 
+% 
+% 
+% \subsection{The Chevalley--Eilenberg Complex}
+% 
+% \begin{definition}
+%   The \defemph{{\CE} complex} of~$\glie$ is in degree~$n$ given by~$\Univ(\glie) \tensor \Exterior^n(\glie)$ and the differential~$\dce$ is given by
+%   \begin{align*}
+%     {}&
+%     \dce(u \tensor x_1 \wedge \dotsb \wedge x_n)
+%     \\
+%     ={}&
+%     \sum_{i=1}^n (-1)^i u x_i \tensor x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge x_n
+%     \\
+%     {}&
+%     +
+%     \sum_{1 \leq i < j \leq n}
+%     (-1)^{i+j-1}
+%     u \tensor [x_i, x_j] \wedge x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge \widehat{x_j} \wedge \dotsb \wedge x_n \,.
+%   \end{align*}
+% \end{definition}
+% 
+% \begin{remark}
+%   If we set~$[u, x] \defined u x$ and~$(x_0, x_1, \dotsc, x_n) \defined x_0 \tensor x_1 \wedge \dotsb \wedge x_n$ then
+%   \[
+%     \dce(x_0, x_1, \dotsc, x_n)
+%     =
+%     \sum_{0 \leq i < j \leq n}
+%     (-1)^{j+1}
+%     (x_0, x_1, \dotsc, [x_i, x_j], \dotsc, \widehat{x_j}, \dotsc, x_n)
+%   \]
+%   where~$[x_i, x_j]$ appears in the~{\howmanyth{$i$}} position.
+% \end{remark}
+% 
+% % A representation of~$\glie$ is a vector space~$V$ together with homomorphism of Lie~algebras~$\rho \colon \glie \to \End_k(V)$, or equivalently a bilinear action~$\glie \times V \to V$,~$(x,v) \mapsto x v$ with
+% % \[
+% %   x (y v) - y (x v)
+% %   =
+% %   [x,y] v \,.
+% % \]
+% % It follows from the correspondence
+% % \begin{align*}
+% %   {}&
+% %   \{
+% %     \text{Lie algebra homomorphisms~$\glie \to \End_k(V)$}
+% %   \}
+% %   \\
+% %   \longonetoone{}& 
+% %   \{
+% %     \text{algebra homomorphism~$\Univ(\glie) \to \End_k(V)$}
+% %   \}
+% % \end{align*}
+% % that a representation of~$\glie$ is the same as a~{$\Univ(\glie)$}{module}.
+% % The action of~$\Univ(\glie)$ extends the corresponding action of~$\glie$.
+% 
+% \begin{theorem}
+%   The {\CE} complex together with the counit~$\varepsilon \colon \Univ(\glie) \to k$ is a projective resolutions of~$k$ as a left~{\module{$\Univ(\glie)$}}.
+% \end{theorem}
+% 
+% \begin{proof}
+%   A proof due to Koszul using spectrac sequences can be found in \cite[Theorem~7.7.2]{weibel}.
+%   A more elementary proof can be found in \cite[VII.4]{hilton_stammbach}.
+% \end{proof}
+% 
+% 
+% \begin{remark}
+%   The Lie~algebra cohomology of~$\glie$ with values in a left~{\module{$\Univ(\glie)$}}~$V$ is given by
+%   \begin{align*}
+%     \liecohom(\glie, V)
+%     &\defined
+%     \Ext_{\Univ(\glie)}(k, V)
+%   \intertext{and the Lie~algebra homology of~$\glie$ with values in a a right~{\module{$\Univ(\glie)$}}~$V$ is given by}
+%     \liehom(\glie, V)
+%     &\defined
+%     \Tor^{\Univ(\glie)}(V,k) \,.
+%   \end{align*}
+%   The {\CE} complex can be used to compute these:
+%   The Lie~algebra cohomology of~$\glie$ is the cohomology of the cochain complex
+%   \[
+%     \Hom_{\Univ(\glie)}\biggl( \Univ(\glie) \tensor \Exterior(\glie), V \biggr)
+%     \cong
+%     \Hom_k\biggl( \Exterior(\glie), V \biggr)
+%   \]
+%   that is in degree~$n$ given by
+%   \[
+%     \Hom_k\biggl( \Exterior^n(\glie), V \biggr)
+%     \cong
+%     \{
+%       \text{alternating multilinear maps~$\glie^{\times n} \to V$}
+%     \}
+%   \]
+%   and has the differential
+%   \begin{align*}
+%     d(\omega)(x_1, \dotsc, x_n)
+%     ={}&
+%     \sum_{i=1}^n
+%     (-1)^i x_i \omega(x_1, \dotsc, \widehat{x_i}, \dotsc, x_n)
+%     \\
+%     {}&
+%     + \sum_{1 \leq i < j \leq n}
+%       (-1)^{i+j-1} \omega([x_i, x_j], x_1, \dotsc, \widehat{x_i}, \dotsc, \widehat{x_j}, \dotsc, x_n) \,.
+%   \end{align*}
+%   The Lie~algebra homology of~$\glie$ is the homology of the chain complex
+%   \[
+%     V \tensor_{\Univ(\glie)} \Univ(\glie) \tensor_k \Exterior(\glie)
+%     \cong
+%     V \tensor_k \Exterior(\glie)
+%   \]
+%   that has the differential
+%   \begin{align*}
+%     {}&
+%     d(v \tensor x_1 \wedge \dotsb \wedge x_n)
+%     \\
+%     ={}&
+%     \sum_{i=1}^n (-1)^i (v \cdot x_i) \tensor x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge x_n
+%     \\
+%     {}&
+%     +
+%     \sum_{1 \leq i < j \leq n}
+%     (-1)^{i+j-1}
+%     v \tensor [x_i, x_j] \wedge x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge \widehat{x_j} \wedge \dotsb \wedge x_n \,.
+%   \end{align*}
+% \end{remark}
+% 
+% 
+% 
+% \subsection{The Chevalley--Eilenberg Coalgebra}
+% 
+% For~$V = \glie$ we get a chain complex~$\Exterior \glie$ with Chevalley--Eilenberg differential
 % \[
-%   x (y v) - y (x v)
+%   \dce(x_1 \wedge \dotsb \wedge x_n)
 %   =
-%   [x,y] v \,.
+%   \sum_{1 \leq i < j \leq n}
+%   (-1)^{i+j-1}
+%   [x_i, x_j]
+%   \wedge x_1
+%   \wedge \dotsb
+%   \wedge \widehat{x_i}
+%   \wedge \dotsb
+%   \wedge \widehat{x_j}
+%   \wedge \dotsb
+%   \wedge x_n \,.
 % \]
-% It follows from the correspondence
+% We observe that the differential~$\Exterior^2 \glie \to \glie$ is precisely the Lie~bracket~$[-,-]$.
+% The composition~$\Exterior^3 \glie \to \Exterior^2 \glie \to \glie$ is given by
 % \begin{align*}
-%   {}&
-%   \{
-%     \text{Lie algebra homomorphisms~$\glie \to \End_k(V)$}
-%   \}
+%   x \wedge y \wedge z
+%   &\mapsto
+%   [x,y] \wedge z - [x,z] \wedge y + [y,z] \wedge x
 %   \\
-%   \longonetoone{}& 
-%   \{
-%     \text{algebra homomorphism~$\Univ(\glie) \to \End_k(V)$}
-%   \}
+%   &\mapsto
+%   [[x,y], z] - [[x,z], y] + [[y,z], x]
+%   \\
+%   &=
+%   -\Bigl( [z,[x,y]] + [y,[z,x]] + [x,[y,z]] \Bigr)
 % \end{align*}
-% that a representation of~$\glie$ is the same as a~{$\Univ(\glie)$}{module}.
-% The action of~$\Univ(\glie)$ extends the corresponding action of~$\glie$.
-
-\begin{theorem}
-  The {\CE} complex together with the counit~$\varepsilon \colon \Univ(\glie) \to k$ is a projective resolutions of~$k$ as a left~{\module{$\Univ(\glie)$}}.
-\end{theorem}
-
-\begin{proof}
-  A proof due to Koszul using spectrac sequences can be found in \cite[Theorem~7.7.2]{weibel}.
-  A more elementary proof can be found in \cite[VII.4]{hilton_stammbach}.
-\end{proof}
-
-
-\begin{remark}
-  The Lie~algebra cohomology of~$\glie$ with values in a left~{\module{$\Univ(\glie)$}}~$V$ is given by
-  \begin{align*}
-    \liecohom(\glie, V)
-    &\defined
-    \Ext_{\Univ(\glie)}(k, V)
-  \intertext{and the Lie~algebra homology of~$\glie$ with values in a a right~{\module{$\Univ(\glie)$}}~$V$ is given by}
-    \liehom(\glie, V)
-    &\defined
-    \Tor^{\Univ(\glie)}(V,k) \,.
-  \end{align*}
-  The {\CE} complex can be used to compute these:
-  The Lie~algebra cohomology of~$\glie$ is the cohomology of the cochain complex
-  \[
-    \Hom_{\Univ(\glie)}\biggl( \Univ(\glie) \tensor \Exterior(\glie), V \biggr)
-    \cong
-    \Hom_k\biggl( \Exterior(\glie), V \biggr)
-  \]
-  that is in degree~$n$ given by
-  \[
-    \Hom_k\biggl( \Exterior^n(\glie), V \biggr)
-    \cong
-    \{
-      \text{alternating multilinear maps~$\glie^{\times n} \to V$}
-    \}
-  \]
-  and has the differential
-  \begin{align*}
-    d(\omega)(x_1, \dotsc, x_n)
-    ={}&
-    \sum_{i=1}^n
-    (-1)^i x_i \omega(x_1, \dotsc, \widehat{x_i}, \dotsc, x_n)
-    \\
-    {}&
-    + \sum_{1 \leq i < j \leq n}
-      (-1)^{i+j-1} \omega([x_i, x_j], x_1, \dotsc, \widehat{x_i}, \dotsc, \widehat{x_j}, \dotsc, x_n) \,.
-  \end{align*}
-  The Lie~algebra homology of~$\glie$ is the homology of the chain complex
-  \[
-    V \tensor_{\Univ(\glie)} \Univ(\glie) \tensor_k \Exterior(\glie)
-    \cong
-    V \tensor_k \Exterior(\glie)
-  \]
-  that has the differential
-  \begin{align*}
-    {}&
-    d(v \tensor x_1 \wedge \dotsb \wedge x_n)
-    \\
-    ={}&
-    \sum_{i=1}^n (-1)^i (v \cdot x_i) \tensor x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge x_n
-    \\
-    {}&
-    +
-    \sum_{1 \leq i < j \leq n}
-    (-1)^{i+j-1}
-    v \tensor [x_i, x_j] \wedge x_1 \wedge \dotsb \wedge \widehat{x_i} \wedge \dotsb \wedge \widehat{x_j} \wedge \dotsb \wedge x_n \,.
-  \end{align*}
-\end{remark}
-
-
-
-\subsection{The Chevalley--Eilenberg Coalgebra}
-
-For~$V = \glie$ we get a chain complex~$\Exterior \glie$ with Chevalley--Eilenberg differential
-\[
-  \dce(x_1 \wedge \dotsb \wedge x_n)
-  =
-  \sum_{1 \leq i < j \leq n}
-  (-1)^{i+j-1}
-  [x_i, x_j]
-  \wedge x_1
-  \wedge \dotsb
-  \wedge \widehat{x_i}
-  \wedge \dotsb
-  \wedge \widehat{x_j}
-  \wedge \dotsb
-  \wedge x_n \,.
-\]
-We observe that the differential~$\Exterior^2 \glie \to \glie$ is precisely the Lie~bracket~$[-,-]$.
-The composition~$\Exterior^3 \glie \to \Exterior^2 \glie \to \glie$ is given by
-\begin{align*}
-  x \wedge y \wedge z
-  &\mapsto
-  [x,y] \wedge z - [x,z] \wedge y + [y,z] \wedge x
-  \\
-  &\mapsto
-  [[x,y], z] - [[x,z], y] + [[y,z], x]
-  \\
-  &=
-  -\Bigl( [z,[x,y]] + [y,[z,x]] + [x,[y,z]] \Bigr)
-\end{align*}
-We can regard~$\Exterior \glie$ as a graded coalgebra as in \cref{exterior hopf algebra}, i.e.\ such that~$V$ consists of primitive elements.
-
-\begin{proposition}
-  The Chevalley--Eilenberg differential makes~$\Exterior \glie$ into a {\dgc}, and it is the unique extension of the Lie~bracket to a coderivation of~$\Exterior \glie$.
-  Any coderivation on~$\Exterior \glie$ comes from a Lie~algebra structure of~$\glie$.
-  This gives a one-to-one correspondence between Lie~brackets on~$\glie$ and coderivations on~$\bigwedge \glie$.
-  \todo{Find a proper reference.}
-\end{proposition}
-
-
-
-
-
-\subsection{The Chevalley--Eilenberg Algebra}%
-
-
-\todo{Write this, check duality with CE-coalgebra.}
+% We can regard~$\Exterior \glie$ as a graded coalgebra as in \cref{exterior hopf algebra}, i.e.\ such that~$V$ consists of primitive elements.
+% 
+% \begin{proposition}
+%   The Chevalley--Eilenberg differential makes~$\Exterior \glie$ into a {\dgc}, and it is the unique extension of the Lie~bracket to a coderivation of~$\Exterior \glie$.
+%   Any coderivation on~$\Exterior \glie$ comes from a Lie~algebra structure of~$\glie$.
+%   This gives a one-to-one correspondence between Lie~brackets on~$\glie$ and coderivations on~$\bigwedge \glie$.
+%   \todo{Find a proper reference.}
+% \end{proposition}
+% 
+% 
+% 
+% 
+% 
+% \subsection{The Chevalley--Eilenberg Algebra}%
+% 
+% 
+% \todo{Write this, check duality with CE-coalgebra.}
 
 
 
