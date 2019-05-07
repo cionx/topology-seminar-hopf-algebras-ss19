@@ -4,9 +4,9 @@
 \usepackage[backend=biber, style=alphabetic, dateabbrev=false, urldate=long]{biblatex}
 \usepackage{xparse}
 
+\usepackage{appendix}
 \usepackage{csquotes}
 \usepackage{enumitem}
-\usepackage[backgroundcolor=white,linecolor=white]{todonotes}
 
 \usepackage{mathtools, amssymb, amsthm}
 \usepackage{extarrows}
@@ -14,6 +14,8 @@
 \usepackage{tikz-cd}
 
 \usepackage[capitalise,noabbrev]{cleveref}
+
+
 
 
 
@@ -80,6 +82,7 @@
 \newcommand{\dgi}{dg\nobreakdash-ideal}
 \newcommand{\dgl}{dg\nobreakdash-Lie~algebra}
 \newcommand{\dgls}{dg\nobreakdash-Lie~algebras}
+\newcommand{\dgos}{dg\nobreakdash-objects}
 \newcommand{\dglsub}{dg\nobreakdash-Lie~subalgebra}
 \newcommand{\dgsub}{dg\nobreakdash-subspace}
 \newcommand{\dgsuba}{dg\nobreakdash-subalgebra}
@@ -108,17 +111,14 @@
 % generic sets and spaces
 \DeclareMathOperator{\boundaries}{B}
 \DeclareMathOperator{\cycles}{Z}
-\DeclareMathOperator{\dgDer}{dgDer}
-\DeclareMathOperator{\dgEnd}{dgEnd}
-\DeclareMathOperator{\dgHom}{dgHom}
-\DeclareMathOperator{\dgSymm}{S}
+\DeclareMathOperator{\dgDer}{Der}
+\DeclareMathOperator{\dgEnd}{End}
+\DeclareMathOperator{\dgHom}{Hom}
+\newcommand{\dgSymm}{\operatorname{\Lambda}}
 \DeclareMathOperator{\dgTensor}{T}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Ext}{Ext}
 \newcommand{\Exterior}{\bigwedge}
-\DeclareMathOperator{\gDer}{gDer}
-\DeclareMathOperator{\gEnd}{gEnd}
-\DeclareMathOperator{\gHom}{gHom}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\homology}{H}
 \DeclareMathOperator{\im}{im}
