@@ -2,9 +2,9 @@
 
 \usepackage{style}
 
-\titlehead{\hfill \today}
-\subject{Graduate Seminar on Topology}
-\title{Differential Graded Hopf Algebras I}
+\titlehead{Graduate Seminar on Topology \hfill May 20, 2019}
+% \subject{Graduate Seminar on Topology}
+\title{Differential Graded \\ Hopf Algebras I}
 % \footnote{Available online at \texttt{jendrikstelzner.de/dg\_hopf\_extended.pdf}.}}
 % \subtitle{Introducing Signs}
 \author{Jendrik Stelzner}
@@ -17,8 +17,6 @@
 \begin{document}
 
 \maketitle
-
-% \vspace{-4em}
 
 In the following~$k$ denotes a field.
 All vector spaces, all kinds of algebras, all tensor products, etc.\ are over~$k$, unless otherwise stated.
@@ -37,12 +35,12 @@ The elements~$v \in V_n$ are \defemph{homogeneous} of \defemph{degree}~$\hdeg{v}
   \fbox{Whenever we write~$\hdeg{v}$ the element~$v$ is assumed to be homogeneous.}
 \end{center}
 A map~$f \colon V \to W$ between graded vector spaces is \defemph{graded} of \defemph{degree}~$\hdeg{f} = d$ if~$f(V_n) \subseteq V_{n+d}$ for all~$n$.
-A \defemph{differential} on~$V$ is a map~$V \to V$ of degree~$-1$.
+A \defemph{differential} on~$V$ is a map~$V \to V$ of degree~$-1$ with~$d^2 = 0$.
 A \defemph{\dgv} is a graded vector space together with a differential, i.e.\ a chain complex.
 A {\dgsub} is a chain subcomplex and the usual notions of quotients, direct sums and products and morphisms apply.
 We will always regard graded objects as differential graded objects with zero differential.
 \begin{center}
-  \fbox{graded = differential graded with~$d = 0$}
+  \fbox{graded $\iff$ differential graded with~$d = 0$}
 \end{center}
 Hence every statement about {\dgos} entails a statement about graded objects.
 
@@ -108,7 +106,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
 
 
 
-\section{Differential Graded Algebra}
+\section{Differential Graded Algebras}
 
 \begin{definition}
   A \defemph{differential graded algebra} or \defemph{\dga} is a {\dgv}~$A$ together with morphisms of {\dgvs}~$m \colon A \tensor A \to A$ and~$u \colon k \to A$ that make the diagrams
