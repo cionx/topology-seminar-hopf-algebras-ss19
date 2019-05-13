@@ -37,7 +37,7 @@ The elements~$v \in V_n$ are \defemph{homogeneous} of \defemph{degree}~$\hdeg{v}
 A map~$f \colon V \to W$ between graded vector spaces is \defemph{graded} of \defemph{degree}~$\hdeg{f} = d$ if~$f(V_n) \subseteq V_{n+d}$ for all~$n$.
 A \defemph{differential} on~$V$ is a map~$V \to V$ of degree~$-1$ with~$d^2 = 0$.
 A \defemph{\dgv} is a graded vector space together with a differential, i.e.\ a chain complex.
-A {\dgsub} is a chain subcomplex and the usual notions of quotients, direct sums and products and morphisms apply.
+A {\dgsub} is a chain subcomplex and the usual notions of quotients, direct sums, morphisms, homology, etc.\ apply.
 We will always regard graded objects as differential graded objects with zero differential.
 \begin{center}
   \fbox{graded $\iff$ differential graded with~$d = 0$}
@@ -54,8 +54,21 @@ The \defemph{twist map}~$\tau \colon V \tensor W \to W \tensor V$ is given by
 \]
 We hence adhere to the Koszul-Quillen \defemph{sign convention}:
 \begin{center}
-  \fbox{Whenever elements~$x$,~$y$ are swapped, the sign~$(-1)^{\hdeg{x} \hdeg{y}}$ is introduced.}
+  \fbox{Whenever elements~$x$,~$y$ are swapped the sign~$(-1)^{\hdeg{x} \hdeg{y}}$ is introduced.}
 \end{center}
+The {\dgv}~$\dgHom(V,W)$ is~$\dgHom(V,W) \subseteq \Hom_k(V,W)$ with grading
+\begin{align*}
+  \dgHom(V,W)_n
+  &=
+  \{
+    \text{graded maps~$V \to W$ of degree~$n$}
+  \}
+\shortintertext{and differential}
+  d(f)
+  &=
+  d \circ f - (-1)^{\hdeg{f}} f \circ d \,.
+\end{align*}
+% (The spaces~$\dgHom(V,W)_n$ are linearly independent in~$\Hom_k(V,W)$ whence we can regard~$\dgHom(V,W)$ as a linear subspace of~$\Hom_k(V,W)$.)
 If~$f \colon V \to V'$ and~$g \colon W \to W'$ are graded maps then~$f \tensor g \colon V \tensor V' \to W \tensor W'$ is the graded map of degree~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$ with
 \[
   (f \tensor g)(v \tensor w)
@@ -75,21 +88,7 @@ The twist map~$\tau$ is an isomorphism of {\dgvs}.%
 \footnote{The naive twist map~$v \tensor w \mapsto w \tensor v$ is not a morphism of {\dgvs}.}
 We regard the ground field~$k$ as a~{\dgv} concentrated in degree~$0$.
 Then the natural isomorphism~$k \tensor V \cong V$ and~$V \tensor k \cong V$ are isomorphism of~{\dgvs}.
-The {\dgv}~$\dgHom(V,W)$ is given by
-\begin{align*}
-  \dgHom(V,W)_n
-  &=
-  \{
-    \text{graded maps~$V \to W$ of degree~$n$}
-  \}
-\intertext{with differential}
-  d(f)
-  &=
-  d \circ f - (-1)^{\hdeg{f}} f \circ d \,.
-\end{align*}
-% (The spaces~$\dgHom(V,W)_n$ are linearly independent in~$\Hom_k(V,W)$ whence we can regard~$\dgHom(V,W)$ as a linear subspace of~$\Hom_k(V,W)$.)
-
-If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the natural isomorphism of graded vector spaces
+It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded vector spaces, and the \defemph{algebraic Künneth isomorphism} is the natural isomorphism of graded vector spaces
 \[
   \homology(V \tensor W)
   \cong
@@ -109,7 +108,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
 \section{Differential Graded Algebras}
 
 \begin{definition}
-  A \defemph{differential graded algebra} or \defemph{\dga} is a {\dgv}~$A$ together with morphisms of {\dgvs}~$m \colon A \tensor A \to A$ and~$u \colon k \to A$ that make the diagrams
+  A \defemph{differential graded algebra} or \defemph{\dga} is a {\dgv}~$A$ together with morphisms of {\dgvs}~$m \colon A \tensor A \to A$ and~$u \colon k \to A$ that make the algebra diagrams
   \[
     \begin{tikzcd}[column sep = large]
       A \tensor A \tensor A
@@ -219,7 +218,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
   \leavevmode
   \begin{enumerate}
     \item
-      A {\dga} is the same as a graded algebra~$A$ together with a differential~$d$ such that~$d(1) = 0$ and
+      A {\dga} is the same as a graded algebra~$A$ (in particular~$\hdeg{1} = 0$) together with a differential~$d$ such that~$d(1) = 0$ and
       \[
         d(a \cdot b)
         =
@@ -255,10 +254,9 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
   \leavevmode
   \begin{enumerate}
     \item
-      Every algebra~$A$ is a {\dga} concentrated in degree~$0$.
-      This holds in particular for~$A = k$.
+      Every algebra~$A$ is a {\dga} concentrated in degree~$0$, in particular~$A = k$.
     \item
-      If~$V$ is any~{\dgv} then the algebra structure of~$\End_k(V)$ restricts to a {\dga} structure on~$\dgEnd(V) = \dgHom(V,V)$.
+      For any~{\dgv}~$V$ the algebra structure of~$\End_k(V)$ restricts to a {\dga} structure on~$\dgEnd(V) = \dgHom(V,V)$.
     \item
       If~$V$ is a~{\dgv} then~$\Tensor(V) = \bigoplus_{d \geq 0} V^{\tensor d}$ is again a {\dgv} with
       \begin{gather*}
@@ -272,7 +270,13 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
         (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_i}}
         v_1 \dotsm d(v_i) \dotsm v_n \,.
       \end{gather*}
-      This makes the tensor~$\Tensor(V)$ into a {\dga}.
+      This makes the tensor algebra~$\Tensor(V)$ into a {\dga}, with multiplication given by concatination
+      \[
+        (v_1 \dotsm v_n) \cdot (v_{n+1} \dotsm v_m)
+        =
+        v_1 \dotsm v_m \,.
+      \]
+
       The inclusion~$V \to \dgTensor(V)$ is a morphism of {\dgvs} and if~$A$ is any other {\dga} and~$f \colon V \to A$ any morphism of {\dgvs} then~$f$ extends uniquely to a morphism of {\dgas}~$F \colon \dgTensor(V) \to A$:
       \[
         \begin{tikzcd}
@@ -288,10 +292,11 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
           {}
         \end{tikzcd}
       \]
-%    TODO: {Add the shuffle dg algebra.}
-    \item
-      If~$V$ is any vector space then the symmetric algebra~$\Symm(V)$ is a graded algebra and a commutative algebra, but not a graded commutative algebra.
-      The exterior algebra~$\Exterior(V)$ is a graded algebra, it is in general not a commutative algebra (unless~$\dim V \leq 1$), but it is a graded commutative algebra.  
+      The {\dga}~$\dgTensor(V)$ is the \defemph{differential graded tensor algebra} on~$V$.
+%   TODO: {Add the shuffle dg algebra.}
+%     \item
+%       If~$V$ is any vector space then the symmetric algebra~$\Symm(V)$ is a graded algebra and a commutative algebra, but not a graded commutative algebra.
+%       The exterior algebra~$\Exterior(V)$ is a graded algebra, it is in general not a commutative algebra (unless~$\dim V \leq 1$), but it is a graded commutative algebra.  
   \end{enumerate}
 \end{examples}
 
@@ -321,31 +326,37 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
     \item
       If~$f \colon A \to A'$ and~$g \colon B \to B'$ are morphism of {\dgas} then so is~$f \tensor g$.
     \item
-      The twist map~$\tau \colon A \tensor B \to B \tensor A$ is a morphism of {\dgas}.
+      The twist map~$\tau \colon A \tensor B \to B \tensor A$ is an isomorphism of {\dgas}.
     \item
-      If~$A = (A, m, u)$ then~$A^{\op} = (A, m^{\op}, u)$ with~$m^{\op} = m \circ \tau$ is again a {\dga}.
-    \qed
+      The {\dga}~$A^{\op}$ is given by~$u_{A^{\op}} = u_A$ and~$m^{\op} = m_A \circ \tau$.
+      If~$\cdot$ denotes the multiplication in~$A$ and~$*$ the multiplication in~$A^{\op}$ then more explicitely
+      \[
+        a * b
+        =
+        (-1)^{\hdeg{a} \hdeg{b}} b \cdot a \,.
+        \tag*{\qed} %dirty hack
+      \]
   \end{enumerate}
 \end{lemma}
 
 \begin{warning}
-  If~$A$,~$B$ are {\dgas} then the underlying algebra of~$A \tensor B$ is not the tensor product of the underlying algebras of~$A$ and~$B$.
-  The underlying algebra of~$A^{\op}$ is not the opposite of the underlying algebra of~$A$.
-  (Both thanks to signs.)
+  If~$A \tensor_k B$ is the non-dg tensor product with~$(a \tensor b)(a' \tensor b') = a a' \tensor b b'$ then~$A \tensor B \neq A \tensor_k B$ as algebras, i.e.\ the underlying algebra of~$A \tensor B$ is not the tensor product of the underlying algebras of~$A$ and~$B$.
+  The underlying algebra of~$A^{\op}$ is similarly not the opposite of the underlying algebra of~$A$.
 \end{warning}
 
 \begin{definition}
-  A \defemph{\dgi} in a {\dga}~$A$ is a {\dgsub} that is also an ideal.
+  A \defemph{\dgi} in a {\dga}~$A$ is a {\dgsub} that is also an ideal.%
+  \footnote{By an ideal we always mean a two-sided ideal.}
 \end{definition}
 
 \begin{lemma}
-  For an ideal~$I$ is a {\dga}~$A$ the following conditions are equivalent:
-  \begin{enumerate}
-    \item
-      $I$ is a~{\dgi}.
-    \item
-      $I$ is generated by homogeneous elements~$x_\alpha$ with~$d(x_\alpha) \in I$ for every~$\alpha$.
-  \end{enumerate}
+  If~$I$ is a~{\dgi} in~$A$ then~$A/I$ inherits the structure of a {\dga}.
+  \qed
+\end{lemma}
+
+\begin{lemma}
+  An ideal~$I$ is a {\dga}~$A$ is a {\dgi} if and only if~$I$ is generated by homogeneous elements~$x_\alpha$ with~$d(x_\alpha) \in I$ for every~$\alpha$.
+  (Being a {\dgi} can be checked on homegenous generators.)
 \end{lemma}
 
 \begin{proof}
@@ -364,13 +375,8 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
   since~$x_\alpha, d(x_\alpha) \in I$.
 \end{proof}
 
-\begin{lemma}
-  If~$I$ is a~{\dgi} in a {\dga}~$A$ then~$A/I$ inherits the structure of a {\dga} such that the projection~$A \to A/I$ is a morphism of {\dgas}.
-  \qed
-\end{lemma}
-
 \begin{definition}
-  If~$A$ is a {\dga} then the \defemph{{\dgcom}} is given by
+  The \defemph{{\dgcom}} in a {\dga}~$A$ is the bilinear extension of
   \[
     [a,b]
     \defined
@@ -459,6 +465,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
 
 \begin{proposition}
   If~$A$ is a {\dga} then~$\cycles(A)$ is a graded subalgebra of~$A$,~$\boundaries(A)$  is a graded ideal in~$\cycles(A)$ and~$\homology(A)$ is hence a graded algebra.
+  \qed
 \end{proposition}
 
 
@@ -505,7 +512,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
     \end{tikzcd}
   \]
   commute.
-  The {\dgc}~$C$ is \defemph{graded cocommutative} if the following diagram commutes:
+  The {\dgc}~$C$ is \defemph{graded cocommutative} if the diagram
   \[
     \begin{tikzcd}[column sep = small]
       {}
@@ -524,6 +531,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
       C \tensor C
     \end{tikzcd}
   \]
+  commutes.
   A \defemph{morphism} of {\dgc}~$f \colon C \to D$ is a morphism of {\dgvs} such that the following diagrams commute:
   \[
     \begin{tikzcd}[column sep = large]
@@ -578,7 +586,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
   \leavevmode
   \begin{enumerate}
     \item
-      A {\dgc} is the same as a graded coalgebra~$C$ together with a differential~$d$ such that~$d$ vanishes on the zero boundaries and
+      A {\dgc} is the same as a graded coalgebra~$C$ together with a differential~$d$ such that~$d$ vanishes on~$\boundaries_0(C)$ and
       \[
         \Delta(d(c))
         =
@@ -597,47 +605,46 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
     \item
       A morphism of {\dgcs} is the same as a morphism of the underlying graded coalgebras that commutes with the differentials.
     \item
-      Every coalgebra~$C$ is a {\dgc} centered in degree~$0$.
-      This holds in particular for~$C = k$.
+      Every coalgebra~$C$ is a {\dgc} centered in degree~$0$, in particular~$C = k$.
   \end{enumerate}
 \end{remark}
 
-\begin{example}
-  Let~$V$ be a {\dgv}.
-  Then the induced {\dgv}~$\dgTensor(V)$ becomes a {\dgc} with the deconcatination
-  \begin{align*}
-    \Delta
-    \colon
-    \dgTensor(V)
-    \to
-    \dgTensor(V) \tensor \dgTensor(V) \,,
-    \quad
-    &v_1 \dotsm v_n
-    \mapsto
-    \sum_{i=0}^n
-    v_1 \dotsm v_i \tensor v_{i+1} \dotsm v_n \,,
-  \\
-    \varepsilon
-    \colon
-    \dgTensor(V)
-    \to
-    k \,,
-    \quad
-    &v_1 \dotsm v_n
-    \mapsto
-    \delta_{n0} \,.
-  \end{align*}
-%   This {\dgc} is in general not graded cocommutative because
+% \begin{example}
+%   Let~$V$ be a {\dgv}.
+%   Then the induced {\dgv}~$\dgTensor(V)$ becomes a {\dgc} with the deconcatination
 %   \begin{align*}
-%     \Delta(vw)
-%     &=
-%     vw \tensor 1 + v \tensor w + 1 \tensor vw \,,
+%     \Delta
+%     \colon
+%     \dgTensor(V)
+%     \to
+%     \dgTensor(V) \tensor \dgTensor(V) \,,
+%     \quad
+%     &v_1 \dotsm v_n
+%     \mapsto
+%     \sum_{i=0}^n
+%     v_1 \dotsm v_i \tensor v_{i+1} \dotsm v_n \,,
 %   \\
-%     \tau \circ \Delta(vw)
-%     &=
-%     1 \tensor vw + (-1)^{\hdeg{v}\hdeg{w}} w \tensor v + vw \tensor 1 \,.
+%     \varepsilon
+%     \colon
+%     \dgTensor(V)
+%     \to
+%     k \,,
+%     \quad
+%     &v_1 \dotsm v_n
+%     \mapsto
+%     \delta_{n0} \,.
 %   \end{align*}
-\end{example}
+% %   This {\dgc} is in general not graded cocommutative because
+% %   \begin{align*}
+% %     \Delta(vw)
+% %     &=
+% %     vw \tensor 1 + v \tensor w + 1 \tensor vw \,,
+% %   \\
+% %     \tau \circ \Delta(vw)
+% %     &=
+% %     1 \tensor vw + (-1)^{\hdeg{v}\hdeg{w}} w \tensor v + vw \tensor 1 \,.
+% %   \end{align*}
+% \end{example}
 
 \begin{lemma}
   Let~$C$,~$D$ be {\dgcs}.
@@ -671,9 +678,8 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
 \end{lemma}
 
 \begin{warning}
-  If~$C$,~$D$ are {\dgcs} then the underlying coalgebra of~$C \tensor D$ is not the tensor product of the underlying coalgebras of~$C$ and~$D$.
-  The underlying coalgebra of~$C^{\op}$ is not the coopposite of the underlying coalgebra of~$C$.
-  (Again both thanks to signs.)
+  If~$C \tensor_k D$ is the non-dg tensor product then~$C \tensor D \neq C \tensor_k D$ as coalgebras, i.e.\ the underlying coalgebra of~$C \tensor D$ is not the tensor product of the underlying coalgebras of~$C$ and~$D$.
+  The underlying coalgebra of~$C^{\op}$ is similarly not the coopposite of the underlying coalgebra of~$C$.
 \end{warning}
 
 \begin{definition}
@@ -681,7 +687,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
 \end{definition}
 
 \begin{lemma}
-  If~$I$ is a {\dgci} in a {\dgc}~$C$ then~$C/I$ inherits the structure of a~{\dgc} such that the projection~$C \to C/I$ is a morphism of~{\dgc}.
+  If~$I$ is a {\dgci} in~$C$ then~$C/I$ inherits a~{\dgc} structure.
   \qed
 \end{lemma}
 
@@ -699,19 +705,20 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
 
 \begin{lemma}
   \label{characterization of bialgebras}
-  Let~$B$ be a {\dgv}, let~$(B, m, u)$ be a {\dga} and let~$(B, \Delta, \varepsilon)$ be a {\dgc}.
-  Then the following conditions are equivalent:
+  Let~$B$ be a {\dgv},~$(B, m, u)$ a {\dga} and~$(B, \Delta, \varepsilon)$ a {\dgc}.
+  Then the following are equivalent:
   \begin{enumerate}
     \item
       $\Delta$ and~$\varepsilon$ are morphisms of {\dgas}.
     \item
       $m$ and~$u$ are morphisms of {\dgcs}.
+    \qed
   \end{enumerate}
 \end{lemma}
 
-\begin{proof}
-  The same diagramatic proof as in the non-dg case.
-\end{proof}
+% \begin{proof}
+%   The same diagramatic proof as in the non-dg case.
+% \end{proof}
 
 \begin{definition}
   A \defemph{\dgb} is a quintuple~$(B, \mu, u, \Delta, \varepsilon)$ such that the equivalent conditions of \cref{characterization of bialgebras} are satisfied.
@@ -778,13 +785,13 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
   We will see an explicit counterexample in \cref{exterior hopf algebra}.
 \end{warning}
 
-\begin{lemma}
-  If~$B$ is a {\dgb} then~$B^{\op}$,~$B^{\cop}$ and~$B^{\op,\cop}$ are again {\dgbs}.
-  \qed
-\end{lemma}
+% \begin{lemma}
+%   If~$B$ is a {\dgb} then~$B^{\op}$,~$B^{\cop}$ and~$B^{\op,\cop}$ are again {\dgbs}.
+%   \qed
+% \end{lemma}
 
 \begin{lemma}
-  If~$I$ is a {\dgbi} in a {\dgb}~$B$ then~$B/I$ inherits from~$B$ the structure of a {\dgb} such that the projection~$B \to B/I$ is a morphism of {\dgb}.
+  If~$I$ is a {\dgbi} in~$B$ then~$B/I$ inherits a {\dgb} structure.
   \qed
 \end{lemma}
 
@@ -798,7 +805,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
 \end{definition}
 
 \begin{lemma}
-  If~$B$ is a~{\dgb} and~$x, y \in B$ are primitive then~$[x,y]$ is again primitive.
+  If~$x, y \in B$ are primitive then~$[x,y]$ is again primitive.
   \qed
 \end{lemma}
 
@@ -824,77 +831,70 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
 \end{definition}
 
 \begin{warning}
-  A {\dgh} does in general not have an underlying Hopf algebra structure.
+  A {\dgh} need not have an underlying Hopf algebra structure.
 \end{warning}
 
 \begin{remark}
-  Let~$H$ be a {\dgh}.
-  \begin{enumerate}
-    \item
-      The antipode of~$H$ is unique.
-    \item
-      The antipode of~$H$ is the the unique morphism of {\dgvs}~$S \colon H \to H$ that makes the following diagram commute:
-      \begin{equation}
-        \label{antipode diagram}
-        \begin{tikzcd}[column sep = small]
-          {}
-          &
-          H \tensor H
-          \arrow{rr}[above]{S \tensor {\id}}
-          &
-          {}
-          &
-          H \tensor H
-          \arrow{dr}[above right]{m}
-          &
-          {}
-          \\
-          H
-          \arrow{ur}[above left]{\Delta}
-          \arrow{rr}[above]{\varepsilon}
-          \arrow{dr}[below left]{\Delta}
-          &
-          {}
-          &
-          k
-          \arrow{rr}[above]{u}
-          &
-          {}
-          &
-          H
-          \\
-          {}
-          &
-          H \tensor H
-          \arrow{rr}[below]{{\id} \tensor S}
-          &
-          {}
-          &
-          H \tensor H
-          \arrow{ur}[below right]{m}
-          &
-          {}
-        \end{tikzcd}
-      \end{equation}
-      This means more explicitely that
-      \[
-        \sum_{(c)} S(c_{(1)}) c_{(2)}
-        =
-        \varepsilon(c) 1_H
-        \qquad\text{and}\qquad
-        \sum_{(c)} c_{(1)} S(c_{(2)})
-        =
-        \varepsilon(c) 1_H  \,.
-      \]
-      (No additional signs occur because~$\hdeg{S} = 0$.)
-%     \item
-%       The antipode is a morphism of bialgebras~$H \to H^{\op,\cop}$.
-  \end{enumerate}
-\end{remark}%
-% TODO: Check that the antipode is an antimorphism.
+  The antipode of a {\dgh}~$H$ is the the unique morphism of {\dgvs}~$S \colon H \to H$ that makes the diagram
+  \begin{equation}
+    \label{antipode diagram}
+    \begin{tikzcd}[column sep = small]
+      {}
+      &
+      H \tensor H
+      \arrow{rr}[above]{S \tensor {\id}}
+      &
+      {}
+      &
+      H \tensor H
+      \arrow{dr}[above right]{m}
+      &
+      {}
+      \\
+      H
+      \arrow{ur}[above left]{\Delta}
+      \arrow{rr}[above]{\varepsilon}
+      \arrow{dr}[below left]{\Delta}
+      &
+      {}
+      &
+      k
+      \arrow{rr}[above]{u}
+      &
+      {}
+      &
+      H
+      \\
+      {}
+      &
+      H \tensor H
+      \arrow{rr}[below]{{\id} \tensor S}
+      &
+      {}
+      &
+      H \tensor H
+      \arrow{ur}[below right]{m}
+      &
+      {}
+    \end{tikzcd}
+  \end{equation}
+  commute.
+  This means more explicitely that
+  \[
+    \sum_{(c)} S(c_{(1)}) c_{(2)}
+    =
+    \varepsilon(c) 1_H
+    \qquad\text{and}\qquad
+    \sum_{(c)} c_{(1)} S(c_{(2)})
+    =
+    \varepsilon(c) 1_H  \,.
+  \]
+  (No additional signs occur because~$\hdeg{S} = 0$.)
+\end{remark}
 
 \begin{lemma}
-  If~$I$ is a {\dghi} in a {\dgh}~$H$ then~$H/I$ inherits from~$H$ the structure of a {\dgh} such that the projection~$H \to H/I$ is a morphism of~{\dghs}.
+  If~$I$ is a {\dghi} in~$H$ then~$H/I$ a {\dgh} structure.
+  \qed
 \end{lemma}
 
 % \begin{lemma}
@@ -941,7 +941,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
         \mapsto
         v \tensor 1 + 1 \tensor v
       \]
-      is a morphism of {\dgv} and hence induces a morphism of~{\dgas}
+      is a morphism of {\dgvs} and hence induces a morphism of~{\dgas}
       \[
         \Delta
         \colon
@@ -949,10 +949,19 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
         \to
         \dgTensor(V) \tensor \dgTensor(V) \,.
       \]
-      The zero map~$V \to 0$ induces a morphism of~{\dgas}~$\varepsilon \colon \dgTensor(V) \to \dgTensor(0) = k$.
-      These make~$\dgTensor(V)$ into a {\dgb};
-      the necessary diagrams can be checked on the algebra generators~$V$ of~$\dgTensor(V)$ because all arrows occuring in the bialgebra diagrams are now morphisms of {\dgas}.
-      The comultiplication~$\Delta$ and~$\varepsilon$ are explicitely given by
+      The zero map~$V \to 0$ induces a morphism of~{\dgas}
+      \[
+        \varepsilon
+        \colon
+        \dgTensor(V)
+        \to
+        \dgTensor(0)
+        =
+        k \,.
+      \]
+      These maps make~$\dgTensor(V)$ into a {\dgb};
+      the necessary diagrams can be checked on the algebra generators~$V$ of~$\dgTensor(V)$ because all arrows occuring in the bialgebra diagrams are morphisms of {\dgas}.
+      The maps~$\Delta$ and~$\varepsilon$ are explicitely given by
       \begin{align*}
         \Delta(v_1 \dotsm v_n)
         &=
@@ -980,12 +989,12 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
         \Bigl\{
           \hdeg{v_i} \hdeg{v_j}
         \suchthat[\Big]
-          1 \leq i \leq p, \,
-          p+1 \leq j \leq n, \,
+          1 \leq i \leq p, \;
+          p+1 \leq j \leq n, \;
           \sigma(i) > \sigma(j)
         \Bigr\} \,,
       \]
-      and the counit is given by
+      and
       \[
         \varepsilon( v_1 \dotsm v_n )
         =
@@ -1021,9 +1030,8 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
         v_n \dotsm v_1  \,.
       \]%
 %     TODO: Find an argument to check this only on algebra generators.
-      It can now be checked on monomials that~$S$ is an antipode for~$\dgTensor(V)$, making it a {\dgh}.%
-      \footnote{In the resulting expressions the terms for~$v_1 \dotsm v_p \tensor v_{p+1} \dotsm v_n$ and~$v_2 \dotsm v_p \tensor v_1 v_{p+1} \dotsm v_n$ cancel out because of signs.}
-      This is the \defemph{differential graded tensor algebra} on~$V$.
+      It can now be checked on the monomials~$v_1 \dotsm v_n$ that~$S$ is an antipode for~$\dgTensor(V)$, making it a {\dgh}.
+%       \footnote{In the resulting expressions the terms for~$v_1 \dotsm v_p \tensor v_{p+1} \dotsm v_n$ and~$v_2 \dotsm v_p \tensor v_1 v_{p+1} \dotsm v_n$ cancel out because of signs.}
     \item
       The {\dga}~$\dgSymm(V) = \dgTensor(V)/I$ from \cref{dg symmetric algebra} inherits from~$\dgTensor(V)$ the structure of a {\dgh} because the~{\dgi}
       \[
@@ -1035,7 +1043,7 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
           \text{$v,w \in V$ are homogeneous}
         \bigr)
       \]
-      is a {\dghi} in~$\dgTensor(V)$ since
+      is a {\dghi} in~$\dgTensor(V)$, since
       \begin{align*}
         \varepsilon([v,w])
         &=
@@ -1060,53 +1068,10 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
 \begin{example}[Exterior Algebra]
   \label{exterior hopf algebra}
   Let~$V$ be a vector space.
-  We may regard~$V$ as a {\dgv} centered in degree~$1$.
+  We regard~$V$ as a {\dgv} concentrated in degree~$1$.
   Then~$\dgSymm(V) = \Exterior(V)$ as graded algebras whence~$\Exterior(V)$ is a graded Hopf algebra.
-  But for~$\ringchar k \neq 2$ there exists no bialgebra structure on~$\Lambda \defined \Exterior(V)$.
-  Suppose otherwise.
-  
-  Then~$\varepsilon(v)^2 = \varepsilon(v^2) = 0$ and thus~$\varepsilon(v) = 0$ for all~$v \in V$, so~$\ker \varepsilon = \bigoplus_{d \geq 1} \Exterior^n(V) \defines I$.
-  Let~$v \in V$.
-  Then by the counital axiom,
-  \[
-    \Delta(v)
-    \equiv
-    v \tensor 1
-    \pmod{\Lambda \tensor I}
-    \qquad\text{and}\qquad
-    \Delta(v)
-    \equiv
-    1 \tensor v
-    \pmod{I \tensor \Lambda}
-  \]
-  and thus
-  \[
-    \Delta(v)
-    \equiv
-    v \tensor 1 + 1 \tensor v
-    \pmod{I \tensor I}  \,.
-  \]
-  It follows that
-  \begin{gather*}
-    \Delta(v^2)
-    \equiv
-    (v \tensor 1 + 1 \tensor v)^2
-    \pmod{ (v \tensor 1)(I \tensor I) + (1 \tensor v)(I \tensor I) + (I \tensor I)^2 } \,,
-  \intertext{and therefore}
-    \Delta(v^2)
-    \equiv
-    v^2 \tensor 1 + 2 v \tensor v + 1 \tensor v^2
-    \pmod{I \tensor I^2 + I^2 \tensor I} \,.
-  \end{gather*}
-  Now~$v^2 = 0$, hence
-  \[
-    2 v \tensor v
-    \equiv
-    0
-    \pmod{I \tensor I^2 + I^2 \tensor I}  \,.
-  \]
-  But~$2 \neq 0$ and~$v \neq 0$ hence~$2 v \tensor v \neq 0$ while~$v \tensor v \notin I \tensor I^2 + I^2 \tensor I$, a contradiction.
-  (This proof is taken from \cite{exterior_bialgebra_mo} and partially from \cite[III.{\S}11.3]{bourbaki}).
+  But for~$\ringchar k \neq 2$ there exists no bialgebra structure on~$\Lambda \defined \Exterior(V)$;
+  we prove this in \cref{exterior hopf algebra proof}.
 \end{example}
 
 \begin{proposition}
@@ -1130,6 +1095,8 @@ If~$V$,~$W$ are {\dgvs} then the \defemph{algebraic Künneth isomorphism} is the
   as graded vector spaces by the algebraic Künneth isomorphism.
   We see on representatives that this is already an isomorphism of graded Hopf algebras.
 \end{example}
+
+% TODO: Give the isomorphism on representatives.
 
 % TODO: Do this for the graded symmetric algebra by using the symmetrization operator.
 
@@ -1331,7 +1298,7 @@ Let~$\ringchar(k) \neq 2$.
 \end{recall}
 
 \begin{definition}
-  A \defemph{\dgl} is a {\dgv}~$\glie$ together with a morphism~$[-,-] \colon \glie \tensor \glie \to \glie$ such that~$[-,-]$ is \defemph{graded skew symmmetric} in the sense that the diagram
+  A \defemph{\dgl} is a {\dgv}~$\glie$ together with a morphism~$[-,-] \colon \glie \tensor \glie \to \glie$ such that~$[-,-]$ is \defemph{graded skew symmmetric}, i.e.\ such that the diagram
   \[
     \begin{tikzcd}[column sep = small]
       \glie \tensor \glie
@@ -1350,7 +1317,7 @@ Let~$\ringchar(k) \neq 2$.
       {}
     \end{tikzcd}
   \]
-  commutes, and that for every homogeneous~$x \in \glie $ the map~$[x,-] \colon \glie \to \glie$ is a derivation (of degree~$\hdeg{x}$).
+  commutes, and such that~$[x,-]$ is for every~$x$ a derivation of degree~$\hdeg{x}$.
 \end{definition}
 
 \begin{remark}
@@ -1375,7 +1342,7 @@ Let~$\ringchar(k) \neq 2$.
     [d(x), y] + (-1)^{\hdeg{x}} [x, d(y)] \,.
     \notag
   \end{align}
-  Condition \eqref{pre dgjacobi} can be rewritten by the graded skew-symmetry of~$[-,-]$ as the \defemph{graded Jacobi identity}
+  We can rewrite~\eqref{pre dgjacobi} as the \defemph{graded Jacobi identity}
   \[
     \sum_{\text{cyclic}}
     (-1)^{\hdeg{x} \hdeg{z}} [x, [y,z]]
@@ -1385,26 +1352,28 @@ Let~$\ringchar(k) \neq 2$.
 \end{remark}
 
 \begin{warning}
-  A {\dgl} does in general not have an underlying Lie~algebra structure.
+  A {\dgl} need not have an underlying Lie~algebra structure.
 \end{warning}
 
 \begin{example}
   \leavevmode
   \begin{enumerate}
     \item
-      Every {\dga}~$A$ becomes a {\dgl} with respect to the {\dgcom}.
+      Every {\dga}~$A$ becomes a {\dgl} with the {\dgcom}.
     \item
-      If~$A$ is a graded algebra then the graded subspace~$\dgDer(A)$ of~$\dgEnd(A)$ given by
+      For a graded algebra~$A$ then the graded subspace~$\dgDer(A) \subseteq \dgEnd(A)$ given by
       \[
         \dgDer(A)_n
-        =
+        \defined
         \{
           \text{derivations of~$A$ of degree~$n$}
         \}
+        \subseteq
+        \dgEnd(A)_n
       \]
       is a {\dglsub} of~$\dgEnd(A)$.
     \item
-      If~$B$ is a {\dgb} then the set of primitive elements
+      In any {\dgb}~$B$ the subspace of primitive elements
       \[
         \prim(B)
         =
@@ -1424,7 +1393,7 @@ Let~$\ringchar(k) \neq 2$.
 
 
 \begin{definition}
-  The \defemph{universal enveloping algebra} of a {\dgl}~$\glie$ is a {\dga}~$\Univ(\glie)$ together with a morphism of~{\dgls}~$i \colon \glie \to \Univ(\glie)$ such that for every other {\dga}~$A$ and every morphism of~{\dgls}~$f \colon \glie \to A$ there exists a unique morphism of {\dgas}~$F \colon \Univ(\glie) \to A$ that extends~$f$, i.e.\ that makes the following diagram commute:
+  The \defemph{universal enveloping algebra} of a {\dgl}~$\glie$ is a {\dga}~$\Univ(\glie)$ together with a morphism of~{\dgls}~$i \colon \glie \to \Univ(\glie)$ such that for every other {\dga}~$A$ and every morphism of~{\dgls}~$f \colon \glie \to A$ there exists a unique morphism of {\dgas}~$F \colon \Univ(\glie) \to A$ that extends~$f$:
   \[
     \begin{tikzcd}
       \Univ(\glie)
@@ -1489,7 +1458,7 @@ Let~$\ringchar(k) \neq 2$.
     \in{}&
     I
   \end{align*}
-  so~$I$ is a {\dgi}.
+  so it is a {\dgi}.
   Also
   \[
     \varepsilon([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
@@ -1522,7 +1491,7 @@ Let~$\ringchar(k) \neq 2$.
       \in{}&
       I \tensor \dgTensor(\glie) + \dgTensor(\glie) \tensor I
     \end{aligned}
-  \intertext{and finally}
+  \intertext{since both~$[x,y]_{\dgTensor(\glie)}$ and~$[x,y]_{\glie}$ are primitive, and finally}
     S([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
     =
     S([x,y]_{\dgTensor(\glie)}) - S([x,y]_{\glie})
@@ -1583,14 +1552,14 @@ Let~$\ringchar(k) \neq 2$.
       \]
     \item
       The famous Poincaré–Birkhoff–Witt theorem generalizes to the universal enveloping algebras of {\dgls}.
-      It can be expressed as an isomorphism of {\dgc}~$\dgSymm(\glie) \cong \Univ(\glie)$ and show that~$\prim(\Univ(\glie)) = \glie$.
-      This can be found in \cite[Appendix~B,Theorem~2.3]{quillen} and \cite[\S21(a)]{rational_homotopy_book} for more details on this.
+      It can be expressed as an isomorphism of {\dgc}~$\dgSymm(\glie) \cong \Univ(\glie)$ and shows that~$\prim(\Univ(\glie)) = \glie$.
+      Details on this can be found in \cite[Appendix~B,Theorem~2.3]{quillen} and \cite[\S21(a)]{rational_homotopy_book}.
     \item
       It holds that~$\homology(\Univ(\glie)) \cong \Univ(\homology(\glie))$, see \cite[Appendix~B,Proposition~2.1]{quillen} or \cite[Theorem 21.7]{rational_homotopy_book}.
     \item
       If~$H$ is a graded cocommutative connected%
       \footnote{The connectedness is defined in terms of the underlying {\dgc}, not that of the {\dga}.}
-      {\dgh} then a version of the Cartier--Milnor--Moore theorem asserts that~$H \cong \Univ(\prim(H))$, which results in an equivalence between the categories of~{\dgls} and graded cocommutative connected {\dghs}, see \cite[Appendix~B,Theorem~4.5]{quillen}.
+      {\dgh} then a version of the Cartier--Milnor--Moore theorem asserts that~$H \cong \Univ(\prim(H))$, which results in an equivalence between the categories of~{\dgls} and cocommutative connected {\dghs}, see \cite[Appendix~B,Theorem~4.5]{quillen}.
   \end{enumerate}
 \end{remark}
 
@@ -1617,8 +1586,58 @@ Let~$\ringchar(k) \neq 2$.
 
 
 
+\section{Calculations and Proofs}
 
-% \section{Calculations}
+
+
+
+
+\subsection{\cref{exterior hopf algebra}}
+\label{exterior hopf algebra proof}
+
+Suppose that there exists a bialgebra structure on~$\Exterior(V)$.
+Then~$\varepsilon(v)^2 = \varepsilon(v^2) = 0$ and thus~$\varepsilon(v) = 0$ for all~$v \in V$, so~$\ker \varepsilon = \bigoplus_{d \geq 1} \Exterior^n(V) \defines I$.
+Let~$v \in V$.
+Then by the counital axiom,
+\[
+  \Delta(v)
+  \equiv
+  v \tensor 1
+  \pmod{\Lambda \tensor I}
+  \qquad\text{and}\qquad
+  \Delta(v)
+  \equiv
+  1 \tensor v
+  \pmod{I \tensor \Lambda}
+\]
+and thus
+\[
+  \Delta(v)
+  \equiv
+  v \tensor 1 + 1 \tensor v
+  \pmod{I \tensor I}  \,.
+\]
+It follows that
+\begin{gather*}
+  \Delta(v^2)
+  \equiv
+  (v \tensor 1 + 1 \tensor v)^2
+  \pmod{ (v \tensor 1)(I \tensor I) + (1 \tensor v)(I \tensor I) + (I \tensor I)^2 } \,,
+\intertext{and therefore}
+  \Delta(v^2)
+  \equiv
+  v^2 \tensor 1 + 2 v \tensor v + 1 \tensor v^2
+  \pmod{I \tensor I^2 + I^2 \tensor I} \,.
+\end{gather*}
+Now~$v^2 = 0$, hence
+\[
+  2 v \tensor v
+  \equiv
+  0
+  \pmod{I \tensor I^2 + I^2 \tensor I}  \,.
+\]
+But~$2 \neq 0$ and~$v \neq 0$ hence~$2 v \tensor v \neq 0$ while~$v \tensor v \notin I \tensor I^2 + I^2 \tensor I$, a contradiction.
+(This proof is taken from \cite{exterior_bialgebra_mo} and partially from \cite[III.{\S}11.3]{bourbaki}).
 
 
 
