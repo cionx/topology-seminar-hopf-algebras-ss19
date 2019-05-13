@@ -267,7 +267,7 @@ It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded v
         d(v_1 \dotsm v_n)
         =
         \sum_{i=1}^n
-        (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_i}}
+        (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_{i-1}}}
         v_1 \dotsm d(v_i) \dotsm v_n \,.
       \end{gather*}
       This makes the tensor algebra~$\Tensor(V)$ into a {\dga}, with multiplication given by concatination
@@ -1570,7 +1570,7 @@ Let~$\ringchar(k) \neq 2$.
 \section{Homology of the Primitive Part}
 
 \begin{theorem}[{\cite[Theorem~A.9]{loday}}]
-  Let~$\hopf$ be a {\dgh}.
+  Let~$\hopf$ be a {\dgh}.f
   The inclusion~$\prim(\hopf) \to \hopf$ is a morphism of {\dgls} and thus induced a morphism of graded Lie~algebras~$\homology(\prim(\hopf)) \to \homology(\hopf)$.
   This morphism restricts to an isomorphism of graded Lie~algebras~$\homology(\prim(\hopf)) \to \prim(\homology(\hopf))$.
 \end{theorem}
