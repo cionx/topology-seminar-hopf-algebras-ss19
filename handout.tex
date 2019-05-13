@@ -2,12 +2,12 @@
 
 \usepackage{style}
 
-\titlehead{Graduate Seminar on Topology \hfill May 20, 2019}
+\titlehead{Jendrik Stelzner \hfill \texttt{jendrikstelzner.de/seminars/dg\_hopf.pdf} \hfill May 20, 2019}
 % \subject{Graduate Seminar on Topology}
-\title{Differential Graded \\ Hopf Algebras I}
+\title{Differential Graded Hopf Algebras~I}
 % \footnote{Available online at \texttt{jendrikstelzner.de/dg\_hopf\_extended.pdf}.}}
 % \subtitle{Introducing Signs}
-\author{Jendrik Stelzner}
+\author{}
 \date{}
 
 
@@ -18,10 +18,12 @@
 
 \maketitle
 
+\vspace{-4em}
+
 In the following~$k$ denotes a field.
-All vector spaces, all kinds of algebras, all tensor products, etc.\ are over~$k$, unless otherwise stated.
+All vector spaces, algebras, tensor products, etc.\ are over~$k$, unless otherwise stated.
 All occuring maps are linear unless otherwise stated.
-We will sometime assume additional constraints on the characteristic of~$k$, but will make this explicit when it occurs.
+Additional constraints on~$\ringchar(k)$ are made explicit when used.
 
 
 
@@ -29,22 +31,22 @@ We will sometime assume additional constraints on the characteristic of~$k$, but
 
 \section{Preliminary Notions and Notations}
 
-A \defemph{graded vector space} is a vector space~$V$ together with a grading~$V = \bigoplus_{n \in \Integer} V_n$.
+A \defemph{graded vector space} is a vector space~$V$ together with a \defemph{grading}~$V = \bigoplus_{n \in \Integer} V_n$.
 The elements~$v \in V_n$ are \defemph{homogeneous} of \defemph{degree}~$\hdeg{v} = n$.
 \begin{center}
   \fbox{Whenever we write~$\hdeg{v}$ the element~$v$ is assumed to be homogeneous.}
 \end{center}
-A map~$f \colon V \to W$ between graded vector spaces is \defemph{graded} of \defemph{degree}~$\hdeg{f} = d$ if~$f(V_n) \subseteq V_{n+d}$ for all~$n$.
+A map~$f \colon V \to W$ between graded vector spaces is \defemph{graded} of \defemph{degree}~$d = \hdeg{f}$ if~$f(V_n) \subseteq V_{n+d}$ for all~$n$.
 A \defemph{differential} on~$V$ is a map~$V \to V$ of degree~$-1$ with~$d^2 = 0$.
-A \defemph{\dgv} is a graded vector space together with a differential, i.e.\ a chain complex.
-A {\dgsub} is a chain subcomplex and the usual notions of quotients, direct sums, morphisms, homology, etc.\ apply.
-We will always regard graded objects as differential graded objects with zero differential.
+A \defemph{\dgv} is a graded vector space together with a differential, i.e.\ a chain complex;
+the usual definitions and assertions about chain complexes apply.
+A \defemph{\dgsub} is a chain subcomplex.
+We always regard graded objects as differential graded objects with zero differential.
 \begin{center}
-  \fbox{graded $\iff$ differential graded with~$d = 0$}
+  \fbox{graded $\longleftrightarrow$ differential graded with~$d = 0$}
 \end{center}
-Hence every statement about {\dgos} entails a statement about graded objects.
-
-If~$V$ and~$W$ are graded vector spaces then~$V \tensor W$ is again a graded vector space with~$\hdeg{v \tensor w} = \hdeg{v} + \hdeg{w}$, i.e.~$(V \tensor W)_n = \bigoplus_{i+j=n} V_i \tensor W_j$.
+% Hence every statement about {\dgos} entails a statement about graded objects.e
+If~$V$,~$W$ are graded vector spaces then~$V \tensor W$ is also one with~$\hdeg{v \tensor w} = \hdeg{v} + \hdeg{w}$, i.e.~$(V \tensor W)_n = \bigoplus_{i+j=n} V_i \tensor W_j$.
 The \defemph{twist map}~$\tau \colon V \tensor W \to W \tensor V$ is given by
 \[
   \tau(v \tensor w)
@@ -54,29 +56,30 @@ The \defemph{twist map}~$\tau \colon V \tensor W \to W \tensor V$ is given by
 \]
 We hence adhere to the Koszul-Quillen \defemph{sign convention}:
 \begin{center}
-  \fbox{Whenever elements~$x$,~$y$ are swapped the sign~$(-1)^{\hdeg{x} \hdeg{y}}$ is introduced.}
+  \fbox{Whenever homogeneous~$x$,~$y$ are swapped the sign~$(-1)^{\hdeg{x} \hdeg{y}}$ is introduced.}
 \end{center}
-The {\dgv}~$\dgHom(V,W)$ is~$\dgHom(V,W) \subseteq \Hom_k(V,W)$ with grading
+If~$V$,~$W$ are {\dgvs} then~$\dgHom(V,W)$ is the {\dgv} with
 \begin{align*}
   \dgHom(V,W)_n
   &=
   \{
     \text{graded maps~$V \to W$ of degree~$n$}
-  \}
-\shortintertext{and differential}
+  \} \,,
+  \\
   d(f)
   &=
   d \circ f - (-1)^{\hdeg{f}} f \circ d \,.
 \end{align*}
 % (The spaces~$\dgHom(V,W)_n$ are linearly independent in~$\Hom_k(V,W)$ whence we can regard~$\dgHom(V,W)$ as a linear subspace of~$\Hom_k(V,W)$.)
-If~$f \colon V \to V'$ and~$g \colon W \to W'$ are graded maps then~$f \tensor g \colon V \tensor V' \to W \tensor W'$ is the graded map of degree~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$ with
+If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \colon V \tensor V' \to W \tensor W'$ is given by
 \[
   (f \tensor g)(v \tensor w)
   =
   (-1)^{\hdeg{g} \hdeg{v}}
-  f(v) \tensor g(w) \,.
+  f(v) \tensor g(w) \,;
 \]
-If~$V$,~$W$ are {\dgv} then~$V \tensor W$ is a {\dgv} with~$d_{V \tensor W} = d \tensor {\id} + {\id} \tensor d$;
+in particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
+If~$V$,~$W$ are {\dgvs} then~$V \tensor W$ is a {\dgv} with~$d_{V \tensor W} = d_V \tensor {\id} + {\id} \tensor d_W$;
 more explicitely,
 \[
   d(v \tensor w)
@@ -86,18 +89,18 @@ more explicitely,
 Higher tensor products are defined inductively.
 The twist map~$\tau$ is an isomorphism of {\dgvs}.%
 \footnote{The naive twist map~$v \tensor w \mapsto w \tensor v$ is not a morphism of {\dgvs}.}
-We regard the ground field~$k$ as a~{\dgv} concentrated in degree~$0$.
-Then the natural isomorphism~$k \tensor V \cong V$ and~$V \tensor k \cong V$ are isomorphism of~{\dgvs}.
-It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded vector spaces, and the \defemph{algebraic Künneth isomorphism} is the natural isomorphism of graded vector spaces
-\[
-  \homology(V \tensor W)
-  \cong
-  \homology(V) \tensor \homology(W) \,,
-  \quad
-  [v \tensor w]
-  \mapsfrom
-  [v] \tensor [w] \,.
-\]
+We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
+% Then the natural isomorphism~$k \tensor V \cong V$ and~$V \tensor k \cong V$ are isomorphism of~{\dgvs}.
+% It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded vector spaces, and the \defemph{algebraic Künneth isomorphism} is the natural isomorphism of graded vector spaces
+% \[
+%   \homology(V \tensor W)
+%   \cong
+%   \homology(V) \tensor \homology(W) \,,
+%   \quad
+%   [v \tensor w]
+%   \mapsfrom
+%   [v] \tensor [w] \,.
+% \]
 
 
 
@@ -225,21 +228,21 @@ It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded v
         d(a) \cdot b + (-1)^{\hdeg{a}} a \cdot d(b) \,,
       \]
       i.e.\ such that~$d$ is a graded derivation (of degree~$-1$).
-      \[
-        \begin{tikzcd}[column sep = 8em, row sep = large]
-          \begin{tabular}{c} graded \\ vector spaces \end{tabular}
-          \arrow{r}[above]{\text{multiplication}}
-          \arrow{d}[left]{\text{differential}}
-          &
-          \begin{tabular}{c} graded \\ algebras \end{tabular}
-          \arrow{d}[right]{\text{differential}}
-          \\
-          \text{\dgvs}
-          \arrow{r}[below]{\text{multiplication}}
-          &
-          \text{\dgas}
-        \end{tikzcd}
-      \]
+%       \[
+%         \begin{tikzcd}[column sep = 8em, row sep = large]
+%           \begin{tabular}{c} graded \\ vector spaces \end{tabular}
+%           \arrow{r}[above]{\text{multiplication}}
+%           \arrow{d}[left]{\text{differential}}
+%           &
+%           \begin{tabular}{c} graded \\ algebras \end{tabular}
+%           \arrow{d}[right]{\text{differential}}
+%           \\
+%           \text{\dgvs}
+%           \arrow{r}[below]{\text{multiplication}}
+%           &
+%           \text{\dgas}
+%         \end{tikzcd}
+%       \]
     \item
       The graded commutativity of~$A$ means~$ab = (-1)^{\hdeg{a} \hdeg{b}} ba$.
       If~$\hdeg{a}$ or~$\hdeg{b}$ is even then~$ab = ba$;
@@ -259,25 +262,25 @@ It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded v
       For any~{\dgv}~$V$ the algebra structure of~$\End_k(V)$ restricts to a {\dga} structure on~$\dgEnd(V) = \dgHom(V,V)$.
     \item
       If~$V$ is a~{\dgv} then~$\Tensor(V) = \bigoplus_{d \geq 0} V^{\tensor d}$ is again a {\dgv} with
-      \begin{gather*}
+      \begin{align*}
         \hdeg{v_1 \dotsm v_n}
-        =
-        \hdeg{v_1} + \dotsb + \hdeg{v_n}
-      \shortintertext{and}
+        &=
+        \hdeg{v_1} + \dotsb + \hdeg{v_n} \,,
+      \\
         d(v_1 \dotsm v_n)
-        =
+        &=
         \sum_{i=1}^n
         (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_{i-1}}}
         v_1 \dotsm d(v_i) \dotsm v_n \,.
-      \end{gather*}
-      This makes the tensor algebra~$\Tensor(V)$ into a {\dga}, with multiplication given by concatination
+      \end{align*}
+      This makes~$\Tensor(V)$ into a {\dga}, with multiplication given by concatination
       \[
         (v_1 \dotsm v_n) \cdot (v_{n+1} \dotsm v_m)
         =
         v_1 \dotsm v_m \,.
       \]
 
-      The inclusion~$V \to \dgTensor(V)$ is a morphism of {\dgvs} and if~$A$ is any other {\dga} and~$f \colon V \to A$ any morphism of {\dgvs} then~$f$ extends uniquely to a morphism of {\dgas}~$F \colon \dgTensor(V) \to A$:
+      The inclusion~$V \to \dgTensor(V)$ is a morphism of {\dgvs} and if~$f \colon V \to A$ is any morphism of {\dgvs} into a {\dga}~$A$ then~$f$ extends uniquely to a morphism of {\dgas}~$F \colon \dgTensor(V) \to A$:
       \[
         \begin{tikzcd}
           \dgTensor(V)
@@ -322,7 +325,7 @@ It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded v
         \xlongto{u \tensor u}
         A \tensor B \,.
       \end{gather*}
-      More explicitely,~$1_{A \tensor B} = 1_A \tensor 1_B$ and~$(a \tensor b) (a' \tensor b') = (-1)^{\hdeg{a'} \hdeg{b}} a a' \tensor b b'$.
+      More explicitely,~$1_{A \tensor B} = 1_A \tensor 1_B$ and~$(a_1 \tensor b_1) (a_2 \tensor b_2) = (-1)^{\hdeg{a_2} \hdeg{b_1}} a_1 a_2 \tensor b_1 b_2$.
     \item
       If~$f \colon A \to A'$ and~$g \colon B \to B'$ are morphism of {\dgas} then so is~$f \tensor g$.
     \item
@@ -331,6 +334,10 @@ It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded v
       The {\dga}~$A^{\op}$ is given by~$u_{A^{\op}} = u_A$ and~$m^{\op} = m_A \circ \tau$.
       If~$\cdot$ denotes the multiplication in~$A$ and~$*$ the multiplication in~$A^{\op}$ then more explicitely
       \[
+        1_A
+        =
+        1_{A^\op} \,,
+        \qquad
         a * b
         =
         (-1)^{\hdeg{a} \hdeg{b}} b \cdot a \,.
@@ -1507,49 +1514,49 @@ Let~$\ringchar(k) \neq 2$.
 \begin{remark}
   Let~$\glie$,~$\hlie$ be a {\dgls}.
   \begin{enumerate}
-    \item
-      The product~$\glie \times \hlie$ is again a {\dgl} with
-      \[
-        [(x,y), (x',y')]
-        =
-        ( [x,x'], [y,y'] )  \,.
-      \]
-      The inclusions~$\glie, \hlie \to \glie \times \hlie$ induce morphisms of {\dghs}
-      \begin{align*}
-        \Univ(\glie), \Univ(\hlie)
-        \to&
-        \Univ(\glie \times \hlie)
-      \intertext{that results in an isomorphism of {\dghs}}
-        \Univ(\glie) \tensor \Univ(\hlie)
-        \cong&
-        \Univ(\glie \times \hlie) \,.
-      \end{align*}
-    \item
-      The Hopf algebra structure of~$\Univ(\glie)$ is induced from underlying morphisms of {\dgls}:
-      The diagonal morphism~$\glie \to \glie \times \glie$,~$v \mapsto (v,v)$ induces the comultiplication
-      \[
-        \Univ(\glie) 
-        \to
-        \Univ(\glie \times \glie)
-        \cong
-        \Univ(\glie) \tensor \Univ(\glie)
-      \]
-      the morphism~$\glie \to 0$ induced the counit
-      \[
-        \Univ(\glie)
-        \to
-        \Univ(0)
-        =
-        k
-      \]
-      and the morphism~$\glie \to \glie^{\op}$,~$v \mapsto -v$ induces the antipode
-      \[
-        \Univ(\glie)
-        \to
-        \Univ(\glie^{\op})
-        =
-        \Univ(\glie)^{\op}
-      \]
+%     \item
+%       The product~$\glie \times \hlie$ is again a {\dgl} with
+%       \[
+%         [(x,y), (x',y')]
+%         =
+%         ( [x,x'], [y,y'] )  \,.
+%       \]
+%       The inclusions~$\glie, \hlie \to \glie \times \hlie$ induce morphisms of {\dghs}
+%       \begin{align*}
+%         \Univ(\glie), \Univ(\hlie)
+%         \to&
+%         \Univ(\glie \times \hlie)
+%       \intertext{that results in an isomorphism of {\dghs}}
+%         \Univ(\glie) \tensor \Univ(\hlie)
+%         \cong&
+%         \Univ(\glie \times \hlie) \,.
+%       \end{align*}
+%     \item
+%       The Hopf algebra structure of~$\Univ(\glie)$ is induced from underlying morphisms of {\dgls}:
+%       The diagonal morphism~$\glie \to \glie \times \glie$,~$v \mapsto (v,v)$ induces the comultiplication
+%       \[
+%         \Univ(\glie) 
+%         \to
+%         \Univ(\glie \times \glie)
+%         \cong
+%         \Univ(\glie) \tensor \Univ(\glie)
+%       \]
+%       the morphism~$\glie \to 0$ induced the counit
+%       \[
+%         \Univ(\glie)
+%         \to
+%         \Univ(0)
+%         =
+%         k
+%       \]
+%       and the morphism~$\glie \to \glie^{\op}$,~$v \mapsto -v$ induces the antipode
+%       \[
+%         \Univ(\glie)
+%         \to
+%         \Univ(\glie^{\op})
+%         =
+%         \Univ(\glie)^{\op}
+%       \]
     \item
       The famous Poincaré–Birkhoff–Witt theorem generalizes to the universal enveloping algebras of {\dgls}.
       It can be expressed as an isomorphism of {\dgc}~$\dgSymm(\glie) \cong \Univ(\glie)$ and shows that~$\prim(\Univ(\glie)) = \glie$.
@@ -1567,15 +1574,15 @@ Let~$\ringchar(k) \neq 2$.
 
 
 
-\section{Homology of the Primitive Part}
-
-\begin{theorem}[{\cite[Theorem~A.9]{loday}}]
-  Let~$\hopf$ be a {\dgh}.f
-  The inclusion~$\prim(\hopf) \to \hopf$ is a morphism of {\dgls} and thus induced a morphism of graded Lie~algebras~$\homology(\prim(\hopf)) \to \homology(\hopf)$.
-  This morphism restricts to an isomorphism of graded Lie~algebras~$\homology(\prim(\hopf)) \to \prim(\homology(\hopf))$.
-\end{theorem}
-
-% TODO: Find a proof.
+% \section{Homology of the Primitive Part}
+% 
+% \begin{theorem}[{\cite[Theorem~A.9]{loday}}]
+%   Let~$\hopf$ be a {\dgh}.
+%   The inclusion~$\prim(\hopf) \to \hopf$ is a morphism of {\dgls} and thus induced a morphism of graded Lie~algebras~$\homology(\prim(\hopf)) \to \homology(\hopf)$.
+%   This morphism restricts to an isomorphism of graded Lie~algebras~$\homology(\prim(\hopf)) \to \prim(\homology(\hopf))$.
+% \end{theorem}
+% 
+% % TODO: Find a proof.
 
 
 
