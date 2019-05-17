@@ -31,34 +31,50 @@ Additional constraints on~$\ringchar(k)$ are made explicit when used.
 
 \section{Preliminary Notions and Notations}
 
-A \defemph{graded vector space} is a vector space~$V$ together with a \defemph{grading}~$V = \bigoplus_{n \in \Integer} V_n$.
+A \defemph{\dgvs}~$V$ is the same as a chain complex, a \defemph{\dgsub} the same as a chain subcomplex.
 The elements~$v \in V_n$ are \defemph{homogeneous} of \defemph{degree}~$\hdeg{v} = n$.
 \begin{center}
   \fbox{Whenever we write~$\hdeg{v}$ the element~$v$ is assumed to be homogeneous.}
 \end{center}
-A map~$f \colon V \to W$ between graded vector spaces is \defemph{graded} of \defemph{degree}~$d = \hdeg{f}$ if~$f(V_n) \subseteq V_{n+d}$ for all~$n$.
-A \defemph{differential} on~$V$ is a map~$V \to V$ of degree~$-1$ with~$d^2 = 0$.
-A \defemph{\dgv} is a graded vector space together with a differential, i.e.\ a chain complex;
-the usual definitions and assertions about chain complexes apply.
-A \defemph{\dgsub} is a chain subcomplex.
 We always regard graded objects as differential graded objects with zero differential.
 \begin{center}
   \fbox{graded $\longleftrightarrow$ differential graded with~$d = 0$}
 \end{center}
-% Hence every statement about {\dgos} entails a statement about graded objects.e
-If~$V$,~$W$ are graded vector spaces then~$V \tensor W$ is also one with~$\hdeg{v \tensor w} = \hdeg{v} + \hdeg{w}$, i.e.~$(V \tensor W)_n = \bigoplus_{i+j=n} V_i \tensor W_j$.
-The \defemph{twist map}~$\tau \colon V \tensor W \to W \tensor V$ is given by
+We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
+If~$V$,~$W$ are {\dgvs} then~$V \tensor W$ is a {\dgv}~with
+\[
+  \hdeg{v \tensor w}
+  =
+  \hdeg{v} + \hdeg{w} \,,
+  \quad
+  d(v \tensor w)
+  =
+  d(v) \tensor w + (-1)^{\hdeg{v}} v \tensor d(w) \,.
+\]
+The \defemph{twist map}~$\tau \colon V \tensor W \to W \tensor V$ given by
 \[
   \tau(v \tensor w)
   =
   (-1)^{\hdeg{v} \hdeg{w}}
-  w \tensor v \,.
+  w \tensor v
 \]
-We hence adhere to the Koszul-Quillen \defemph{sign convention}:
+is an isomorphism of {\dgvs}.%
+\footnote{The naive twist map~$v \tensor w \mapsto w \tensor v$ is not a morphism of {\dgvs}.}
+We use the Koszul-Quillen \defemph{sign convention}:
 \begin{center}
   \fbox{Whenever homogeneous~$x$,~$y$ are swapped the sign~$(-1)^{\hdeg{x} \hdeg{y}}$ is introduced.}
 \end{center}
-If~$V$,~$W$ are {\dgvs} then~$\dgHom(V,W)$ is the {\dgv} with
+We get a linear~{\action{$S_n$}} on~$V^{\tensor n}$ with
+\begin{gather*}
+  \sigma \cdot (v_1 \tensor \dotsb \tensor v_n)
+  =
+  \varepsilon_{v_1, \dotsc, v_n}(\sigma)
+  v_{\sigma^{-1}(1)} \tensor \dotsb \tensor v_{\sigma^{-1}(n)}
+\end{gather*}
+where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \defemph{Koszul sign}.
+(See \cref{koszul sign proof}.)
+
+A map~$f \colon V \to W$ is \defemph{graded} of \defemph{degree}~$d = \hdeg{f}$ if~$f(V_n) \subseteq V_{n+d}$ for all~$n$, and~$\dgHom(V,W)$ is the {\dgvs} with
 \begin{align*}
   \dgHom(V,W)_n
   &=
@@ -70,28 +86,15 @@ If~$V$,~$W$ are {\dgvs} then~$\dgHom(V,W)$ is the {\dgv} with
   &=
   d \circ f - (-1)^{\hdeg{f}} f \circ d \,.
 \end{align*}
-% (The spaces~$\dgHom(V,W)_n$ are linearly independent in~$\Hom_k(V,W)$ whence we can regard~$\dgHom(V,W)$ as a linear subspace of~$\Hom_k(V,W)$.)
+The differential~$d$ is a graded map of degree~$-1$.
 If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \colon V \tensor V' \to W \tensor W'$ is given by
 \[
   (f \tensor g)(v \tensor w)
   =
   (-1)^{\hdeg{g} \hdeg{v}}
-  f(v) \tensor g(w) \,;
+  f(v) \tensor g(w) \,.
 \]
-in particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
-If~$V$,~$W$ are {\dgvs} then~$V \tensor W$ is a {\dgv} with~$d_{V \tensor W} = d_V \tensor {\id} + {\id} \tensor d_W$;
-more explicitely,
-\[
-  d(v \tensor w)
-  =
-  d(v) \tensor w + (-1)^{\hdeg{d} \hdeg{v}} v \tensor d(w)
-  =
-  d(v) \tensor w + (-1)^{\hdeg{v}} v \tensor d(w) \,.
-\]
-Higher tensor products~$V_1 \tensor \dotsb \tensor V_n$ are defined inductively.
-The twist map~$\tau$ is an isomorphism of {\dgvs}.%
-\footnote{The naive twist map~$v \tensor w \mapsto w \tensor v$ is not a morphism of {\dgvs}.}
-We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
+In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
 % Then the natural isomorphism~$k \tensor V \cong V$ and~$V \tensor k \cong V$ are isomorphism of~{\dgvs}.
 % It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded vector spaces, and the \defemph{algebraic Künneth isomorphism} is the natural isomorphism of graded vector spaces
 % \[
@@ -348,7 +351,7 @@ We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
 \end{lemma}
 
 \begin{warning}
-  If~$A \tensor_k B$ is the non-dg tensor product with~$(a \tensor b)(a' \tensor b') = a a' \tensor b b'$ then~$A \tensor B \neq A \tensor_k B$ as algebras, i.e.\ the underlying algebra of~$A \tensor B$ is not the tensor product of the underlying algebras of~$A$ and~$B$.
+  If~$A \tensor_k B$ is the sign-less tensor product with~$(a \tensor b)(a' \tensor b') = a a' \tensor b b'$ then~$A \tensor B \neq A \tensor_k B$ as algebras, i.e.\ the underlying algebra of~$A \tensor B$ is not the tensor product of the underlying algebras of~$A$ and~$B$.
   The underlying algebra of~$A^{\op}$ is similarly not the opposite of the underlying algebra of~$A$.
 \end{warning}
 
@@ -397,6 +400,7 @@ We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
 \end{definition}
 
 \begin{warning}
+  \label{warning self-commutator for dga}
   If~$\hdeg{a}$ is even then~$[a,a] = 0$ but if~$\hdeg{a}$ is odd then~$[a,a] = 2 a^2$.
 \end{warning}
 
@@ -440,45 +444,6 @@ We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
 
 \end{example}
 
-% TODO: Fix this; probably not needed.
-% \begin{remark}
-%   Let~$V, W$ be {\dgvs}.
-%   \begin{enumerate}
-%     \item
-%       The inclusions~$V, W \to V \oplus W$ induce morphisms of {\dghs}
-%       \[
-%         \dgSymm(V), \dgSymm(W)
-%         \to
-%         \dgSymm(V \oplus W)
-%       \]
-%       which give an isomorphism of {\dghs}~$\dgSymm(V) \tensor \dgSymm(W) \to \dgSymm(V \oplus W)$.
-% %     TODO: Check this.
-%   \end{enumerate}
-%   Let now~$\ringchar(k) \neq 2$.
-%   \begin{enumerate}[resume]
-%     \item
-%       If~$V$ is concentrated in even degrees then~$\dgSymm(V) = \Symm(V)$ and if~$V$ is concentrated in odd degrees then~$\dgSymm(V) = \Exterior(V)$, both with the gradings induced by~$V$.
-%     \item
-%       If~$V_{\text{even}} = \bigoplus_{n \in \Integer} V_{2n}$ and~$V_{\text{odd}} = \bigoplus_{n \in \Integer} V_{2n+1}$ then
-%       \[
-%         \dgSymm(V)
-%         =
-%         \dgSymm(V_{\text{even}} \oplus V_{\text{odd}})
-%         \cong
-%         \dgSymm(V_{\text{even}}) \tensor \dgSymm(V_{\text{odd}})
-%         \cong
-%         \Symm(V_{\text{even}}) \tensor \Exterior(V_{\text{odd}}) \,.
-%       \]
-%       Moreover, the tensor factors~$\Symm(V_{\text{even}})$ and~$\Exterior(V_{\text{odd}})$ strictly commute in~$\dgSymm(V)$ (i.e.~$xy = yx$) so that
-%       \[
-%         \dgSymm(V)
-%         \cong
-%         \Symm(V_{\text{even}}) \tensor_k \Exterior(V_{\text{odd}})
-%       \]
-%       as algebras, where~$\tensor_k$ denotes \enquote{tensor product without signs}.
-%   \end{enumerate}
-% \end{remark}
-
 \begin{remark}
   \label{explicit description of dgsa}
   If~$V$ is a graded vector space with decomposition~$V_{\text{even}} = \bigoplus_{n \in \Integer} V_{2n}$ and~$V_{\text{odd}} = \bigoplus_{n \in \Integer} V_{2n+1}$ then the inclusions~$V_{\text{even}}, V_{\text{odd}} \to V$ induce an isomorphism of graded vector spaces
@@ -504,7 +469,6 @@ We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
   \]
 \end{corollary}
 
-
 \begin{proposition}
   \label{homology of dga}
   If~$A$ is a {\dga} then~$\cycles(A)$ is a graded subalgebra of~$A$,~$\boundaries(A)$ is a graded ideal in~$\cycles(A)$ and~$\homology(A)$ is hence a graded algebra.
@@ -524,15 +488,18 @@ We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
   and hence~$ab \in \cycles(A)$.
   The boundaries~$\boundaries(A)$ is a graded subspace and if~$a \in \cycles(A)$ and~$b \in \boundaries(B)$ are homogeneous with~$b = d(a')$ then
   \[
-    a \cdot b
+    b \cdot a
+    =
+    d(a') \cdot a
     =
     d(a \cdot a')
     -
-    (-1)^{\hdeg{a}} d(a) \cdot a'
+    (-1)^{\hdeg{a}} a' \cdot d(a)
     =
     d(a \cdot a')
   \]
-  and hence~$ab \in \boundaries(A)$.
+  and hence~$ba \in \boundaries(A)$.
+  Simlarly~$ab \in \boundaries(A)$.
 \end{proof}
 
 
@@ -542,7 +509,7 @@ We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
 \section{Differential Graded Coalgebras}
 
 \begin{definition}
-  A \defemph{differential graded coalgebra} or \defemph{\dgc} is a {\dgv}~$C$ together with morphisms of~{\dgv}~$\Delta \colon C \to C \tensor C$ and~$\varepsilon \colon C \to k$ that make the diagrams
+  A \defemph{differential graded coalgebra} or \defemph{\dgc} is a {\dgv}~$C$ together with morphisms of~{\dgvs}~$\Delta \colon C \to C \tensor C$ and~$\varepsilon \colon C \to k$ that make the diagrams
   \[
     \begin{tikzcd}[column sep = large]
       C
@@ -568,7 +535,7 @@ We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
       \arrow{r}[above]{\Delta}
       &
       C \tensor C
-      \arrow{d}[right]{\varepsilon \tensor {\id}}
+      \arrow{d}[right]{{\id} \tensor \varepsilon}
       \\
       k \tensor C
       \arrow{r}[above]{\sim}
@@ -635,20 +602,20 @@ We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
   \]
 \end{definition}
 
-\begin{definition}
-  A graded map~$\omega \colon C \to C$ of a graded coalgebra is a \defemph{coderivation} if
-  \begin{gather*}
-    \Delta \circ \omega
-    =
-    (\omega \tensor {\id} + {\id} \tensor \omega) \circ \Delta \,;
-  \shortintertext{more explicitely,}
-    \Delta(\omega(c))
-    =
-    \sum_{(c)}
-    \omega(c_{(1)}) \tensor c_{(2)}
-    + (-1)^{\hdeg{\omega} \hdeg{c_{(1)}}} c_{(1)} \tensor \omega(c_{(2)})  \,.
-  \end{gather*}
-\end{definition}
+% \begin{definition}
+%   A graded map~$\omega \colon C \to C$ of a graded coalgebra is a \defemph{coderivation} if
+%   \begin{gather*}
+%     \Delta \circ \omega
+%     =
+%     (\omega \tensor {\id} + {\id} \tensor \omega) \circ \Delta \,;
+%   \shortintertext{more explicitely,}
+%     \Delta(\omega(c))
+%     =
+%     \sum_{(c)}
+%     \omega(c_{(1)}) \tensor c_{(2)}
+%     + (-1)^{\hdeg{\omega} \hdeg{c_{(1)}}} c_{(1)} \tensor \omega(c_{(2)})  \,.
+%   \end{gather*}
+% \end{definition}
 
 \begin{remark}
   \leavevmode
@@ -660,9 +627,9 @@ We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
         =
         \sum_{(c)}
         d(c_{(1)}) \tensor c_{(2)}
-        + (-1)^{\hdeg{c_{(1)}}} c_{(1)} \tensor d(c_{(2)}) \,,
+        + (-1)^{\hdeg{c_{(1)}}} c_{(1)} \tensor d(c_{(2)}) \,.
       \]
-      i.e.\ such that~$d$ is a graded coderivation of degree~$-1$.
+%       i.e.\ such that~$d$ is a graded coderivation of degree~$-1$.
     \item
       The graded cocommutativity of~$C$ means
       \[
@@ -677,42 +644,36 @@ We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
   \end{enumerate}
 \end{remark}
 
-% \begin{example}
-%   Let~$V$ be a {\dgv}.
-%   Then the induced {\dgv}~$\dgTensor(V)$ becomes a {\dgc} with the deconcatination
-%   \begin{align*}
-%     \Delta
-%     \colon
-%     \dgTensor(V)
-%     \to
-%     \dgTensor(V) \tensor \dgTensor(V) \,,
-%     \quad
-%     &v_1 \dotsm v_n
-%     \mapsto
-%     \sum_{i=0}^n
-%     v_1 \dotsm v_i \tensor v_{i+1} \dotsm v_n \,,
-%   \\
-%     \varepsilon
-%     \colon
-%     \dgTensor(V)
-%     \to
-%     k \,,
-%     \quad
-%     &v_1 \dotsm v_n
-%     \mapsto
-%     \delta_{n0} \,.
-%   \end{align*}
-% %   This {\dgc} is in general not graded cocommutative because
-% %   \begin{align*}
-% %     \Delta(vw)
-% %     &=
-% %     vw \tensor 1 + v \tensor w + 1 \tensor vw \,,
-% %   \\
-% %     \tau \circ \Delta(vw)
-% %     &=
-% %     1 \tensor vw + (-1)^{\hdeg{v}\hdeg{w}} w \tensor v + vw \tensor 1 \,.
-% %   \end{align*}
-% \end{example}
+\begin{example}
+  \label{example for dgc}
+  For any {\dgv}~$V$ the induced {\dgv}~$\dgTensor(V)$ becomes a {\dgc} with the deconcatination
+  \begin{align*}
+    \Delta
+    \colon
+    \dgTensor(V)
+    \to
+    \dgTensor(V) \tensor \dgTensor(V) \,,
+    \quad
+    &v_1 \dotsm v_n
+    \mapsto
+    \sum_{i=0}^n
+    v_1 \dotsm v_i \tensor v_{i+1} \dotsm v_n \,,
+  \\
+    \varepsilon
+    \colon
+    \dgTensor(V)
+    \to
+    k \,,
+    \quad
+    &v_1 \dotsm v_n
+    \mapsto
+    \begin{cases}
+      1 & \text{if~$n = 0$} \,, \\
+      0 & \text{otherwise} \,.
+    \end{cases}
+  \end{align*}
+  (See \cref{example for dgc proof} for the explicit calculations.)
+\end{example}
 
 % \begin{lemma}
 %   Let~$C$,~$D$ be {\dgcs}.
@@ -877,6 +838,7 @@ If~$C$,~$D$ are {\dgcs} then
 % \end{lemma}
 
 \begin{lemma}
+  \label{quotient of dgb}
   If~$I$ is a {\dgbi} in~$B$ then~$B/I$ inherits a {\dgb} structure.
 \end{lemma}
 
@@ -916,15 +878,18 @@ If~$C$,~$D$ are {\dgcs} then
 
 \begin{lemma}
   \label{convolution dga}
-  If~$C$ is a {\dgc} and~$A$ is a {\dga} then the convolution product on~$\Hom_k(C,A)$ makes~$\dgHom(C,A)$ into a {\dga}.
-  \qed
+  If~$C$ is a {\dgc} and~$A$ is a {\dga} then the convolution product
+  \[
+    f * g
+    =
+    m_A \circ (f \tensor g) \circ \Delta_C
+  \]
+  on~$\Hom_k(C,A)$ makes~$\dgHom(C,A)$ into a {\dga}.
 \end{lemma}
 
 \begin{proof}
   See \cref{convolution dga proof}.
 \end{proof}
-
-% TODO: Dual of dg-coalgebra is a dg-algebra.
 
 \begin{definition}
   An \defemph{antipode} for a~{\dgb}~$H$ is an inverse~$S$ to~$\id_H$ with respect to the convolution product of~$\dgHom(H,H)$.
@@ -938,6 +903,7 @@ If~$C$,~$D$ are {\dgcs} then
 \end{warning}
 
 \begin{remark}
+  \label{remark about antipode}
   The antipode of a {\dgh}~$H$ is the the unique morphism of {\dgvs}~$S \colon H \to H$ that makes the diagram
   \begin{equation}
     \label{antipode diagram}
@@ -982,55 +948,32 @@ If~$C$,~$D$ are {\dgcs} then
     \end{tikzcd}
   \end{equation}
   commute.
+  (See \cref{remark about antipode proof}.)
   This means more explicitely that
   \[
-    \sum_{(c)} S(c_{(1)}) c_{(2)}
+    \sum_{(h)} S(h_{(1)}) h_{(2)}
     =
-    \varepsilon(c) 1_H
+    \varepsilon(h) 1_H
     \qquad\text{and}\qquad
-    \sum_{(c)} c_{(1)} S(c_{(2)})
+    \sum_{(h)} h_{(1)} S(h_{(2)})
     =
-    \varepsilon(c) 1_H  \,.
+    \varepsilon(h) 1_H  \,.
   \]
   (No additional signs occur because~$\hdeg{S} = 0$.)
 \end{remark}
 
 \begin{lemma}
-  If~$I$ is a {\dghi} in~$H$ then~$H/I$ a {\dgh} structure.
+  If~$I$ is a {\dghi} in~$H$ then~$H/I$ inherits a {\dgh} structure.
   \qed
 \end{lemma}
 
-% \begin{lemma}
-%   Let~$H$ be a~{\dgb} and let~$S \colon H \to H^\op$ be a morphism of~{\dgas}.
-%   If the diagram~\eqref{antipode diagram} commutes on an algebra generating set of~$H$ then~$S$ is an antipode for~$H$.
-% \end{lemma}
-% 
-% \begin{proof}
-%   The sets
-%   \[
-%     \{
-%       x \in H
-%     \suchthat
-%       m \circ (S \tensor {\id}) \circ \Delta (x)
-%       =
-%       \varepsilon(x) 1_H
-%     \}
-%   \]
-%   and
-%   \[
-%     \{
-%      x \in H
-%     \suchthat
-%       m \circ ({\id} \tensor S) \circ \Delta (x)
-%       =
-%       \varepsilon(x) 1_H
-%     \}
-%   \]
-%   subalgebras of~$H$ that contain all algebra generators.
-% \end{proof}
-
+\begin{proof}
+  It follows from \cref{quotient of dgb} that~$H$ is a {\dgb} and the condition~$S(I) \subseteq I$ ensures that~$S$ induced a morphism of {\dgvs}~$\overline{S} \colon H/I \to H/I$.
+  The antipode conditions for~$\overline{S}$ can now be checked on representatives.
+\end{proof}
 
 \begin{example}
+  \label{examples for dgh}
   Let~$V$ be a {\dgv}.
   \begin{enumerate}
     \item
@@ -1081,24 +1024,11 @@ If~$C$,~$D$ are {\dgcs} then
         \sum_{p=0}^n
         \;
         \sum_{\sigma \in \Sh(p,n-p)}
-        (-1)^{n_p(\sigma)}
+        \varepsilon_{v_1, \dotsc, v_n}(\sigma^{-1})
         v_{\sigma(1)} \dotsm v_{\sigma(p)}
         \tensor
         v_{\sigma(p+1)} \dotsm v_{\sigma(n)}
       \end{align*}
-      where
-      \[
-        n_p(\sigma)
-        =
-        \sum
-        \Bigl\{
-          \hdeg{v_i} \hdeg{v_j}
-        \suchthat[\Big]
-          1 \leq i \leq p, \;
-          p+1 \leq j \leq n, \;
-          \sigma(i) > \sigma(j)
-        \Bigr\} \,,
-      \]
       and
       \[
         \varepsilon( v_1 \dotsm v_n )
@@ -1136,7 +1066,7 @@ If~$C$,~$D$ are {\dgcs} then
       \]%
 %     TODO: Find an argument to check this only on algebra generators.
       It can now be checked on the monomials~$v_1 \dotsm v_n$ that~$S$ is an antipode for~$\dgTensor(V)$, making it a {\dgh}.
-%       \footnote{In the resulting expressions the terms for~$v_1 \dotsm v_p \tensor v_{p+1} \dotsm v_n$ and~$v_2 \dotsm v_p \tensor v_1 v_{p+1} \dotsm v_n$ cancel out because of signs.}
+      (See \cref{examples for dgh proof} for the explicit calculations.)
     \item
       The {\dga}~$\dgSymm(V) = \dgTensor(V)/I$ from \cref{dg symmetric algebra} inherits from~$\dgTensor(V)$ the structure of a {\dgh} because the~{\dgi}
       \[
@@ -1230,7 +1160,7 @@ If~$C$,~$D$ are {\dgcs} then
       \]
       where~$v_1, \dotsc, v_n \in \cycles(V)$.
       The symmetrization map~$s \colon \dgSymm(V) \to \dgTensor(V)$ given by
-      \[
+      \begin{align*}
         s_n
         \colon
         \dgSymm(V)_n
@@ -1238,41 +1168,60 @@ If~$C$,~$D$ are {\dgcs} then
         \dgTensor(V)_n \,,
         \quad
         v_1 \dotsm v_n
-        \mapsto
-        \frac{1}{n!} \sum_{\sigma \in S_n} (-1)^{n(\sigma)}
+        &\mapsto
+        \frac{1}{n!} \sum_{\sigma \in S_n}
+        \sigma \cdot (v_1 \tensor \dotsb \tensor v_n)
+        \\
+        &=
+        \frac{1}{n!}
+        \sum_{\sigma \in S_n}
+        \varepsilon_{v_1, \dotsc, v_n}(\sigma^{-1})
         v_{\sigma(1)} \tensor \dotsb \tensor v_{\sigma(n)}
-      \]
-      with~$n(\sigma) = \sum \{ \hdeg{v_i} \hdeg{v_j} \suchthat 1 \leq i < j \leq n, \sigma(i) > \sigma(j) \}$ is a section for the projection~$p \colon \dgTensor(V) \to \dgSymm(V)$.
+      \end{align*}
+      is a section for the projection~$p \colon \dgTensor(V) \to \dgSymm(V)$.
       The map~$s$ is a morphism of {\dgvs} and we have the following diagram:
 %     TODO: Check compatiblity with differential.
       \[
         \begin{tikzcd}[column sep = huge, row sep = 4em]
-          \homology_n(\dgTensor(V))
-          \arrow[bend left = 9]{r}[above]{\alpha_n}
-          \arrow[bend right = 15]{d}[left]{\homology_n(p)}
-          &
           \dgTensor(\homology(V))_n
+          \arrow[bend left = 9]{r}[above]{\alpha_n}
+          \arrow[bend right = 15]{d}[left]{\tilde{p}_n}
+          &
+          \homology_n(\dgTensor(V))
           \arrow[bend left = 9]{l}[below]{\alpha_n^{-1}}
-          \arrow[bend right = 15]{d}[left]{p_n}
+          \arrow[bend right = 15]{d}[left]{\homology_n(p)}
           \\
-          \homology_n(\dgSymm(V))
-          \arrow[bend right = 15]{u}[right]{\homology_n(s)}
+          \dgSymm(\homology(V))_n
+          \arrow[bend right = 15]{u}[right]{\tilde{s}_n}
           \arrow[dashed, bend left = 9]{r}[above]{\beta_n}
           &
-          \dgSymm(\homology(V))_n
-          \arrow[bend right = 15]{u}[right]{s_n}
+          \homology_n(\dgSymm(V))
+          \arrow[bend right = 15]{u}[right]{\homology_n(s)}
           \arrow[dashed, bend left = 9]{l}[below]{\beta'_n}
         \end{tikzcd}
       \]
+
+%       \[
+%         \begin{tikzcd}[column sep = huge, row sep = 4em]
+%           \homology_n(\dgTensor(V))
+%           \arrow[bend left = 9]{r}[above]{\alpha_n}
+%           \arrow[bend right = 15]{d}[left]{\homology_n(p)}
+%           &
+%           \dgTensor(\homology(V))_n
+%           \arrow[bend left = 9]{l}[below]{\alpha_n^{-1}}
+%           \arrow[bend right = 15]{d}[left]{\tilde{p}_n}
+%           \\
+%           \homology_n(\dgSymm(V))
+%           \arrow[bend right = 15]{u}[right]{\homology_n(s)}
+%           \arrow[dashed, bend left = 9]{r}[above]{\beta_n}
+%           &
+%           \dgSymm(\homology(V))_n
+%           \arrow[bend right = 15]{u}[right]{\tilde{s}_n}
+%           \arrow[dashed, bend left = 9]{l}[below]{\beta'_n}
+%         \end{tikzcd}
+%       \]
       Here~$\tilde{p} \colon \dgTensor(\homology(V)) \to \dgSymm(\homology(V))$ and~$\tilde{s} \colon \dgSymm(\homology(V)) \to \dgTensor(\homology(V))$ denote the projection and section.
-      We have~$\beta_n = p_n \circ \alpha_n \circ \homology_n(s)$.
-      The composition~$\beta'_n \defined \homology_n(p) \circ \alpha_n^{-1} \circ s_n$ is given by
-      \[
-        \beta'_n([v_1] \dotsm [v_n])
-        =
-        [v_1 \dotsm v_n]
-      \]
-      and hence an inverse to~$\beta_n$.
+      We have~$\beta_n = \homology_n(p) \circ \alpha_n \circ \tilde{s}_n$, and~$\beta' \defined \tilde{p}_n \circ \alpha_n^{-1} \circ \homology_n(s)$ is an inverse to~$\beta$ (see \cref{homology of tensor and symmetric proof}).
       This shows that~$\beta_n$ is an isomorphism.
   \end{enumerate}
 \end{example}
@@ -1502,9 +1451,13 @@ Let~$\ringchar(k) = 0$.
 \end{definition}
 
 \begin{remark}
-  Let~$\glie$ be a~{\dgl}.
-  Then~$[\glie_i, \glie_j] \subseteq \glie_{i+j}$ for all~$i,j$ and
+  That~$\glie$ is a {\dgl} means
   \begin{align}
+    [\glie_i, \glie_j]
+    &\subseteq
+    \glie_{i+j} \,,
+    \notag
+  \\
     [x,y]
     &=
     -(-1)^{\hdeg{x} \hdeg{y}} [y,x] \,,
@@ -1540,17 +1493,18 @@ Let~$\ringchar(k) = 0$.
     \item
       It may happen that~$[x,x] \neq 0$.
       If~$\hdeg{x}$ is even then~$[x,x] = -[x,x]$ and thus~$[x,x] = 0$ but if~$\hdeg{x}$ is odd then this may not hold.
+      (See \cref{warning self-commutator for dga}.)
   \end{enumerate}
 \end{warning}
 
 \begin{example}
   \label{examples for dgls}
-  \leavevmode
+  (See \cref{examples for dgls proof} for explicit calculations.)
   \begin{enumerate}
     \item
       Every {\dga}~$A$ becomes a {\dgl} with the graded commutator.
     \item
-      For a graded algebra~$A$ then the graded subspace~$\dgDer(A) \subseteq \dgEnd(A)$ given by
+      For a graded algebra~$A$ the graded subspace~$\dgDer(A) \subseteq \dgEnd(A)$ given by
       \[
         \dgDer(A)_n
         \defined
@@ -1574,12 +1528,41 @@ Let~$\ringchar(k) = 0$.
       \]
       is a {\dglsub} of~$B$.
   \end{enumerate}
-  (See \cref{examples for dgls proof} for explicit calculations.)
 \end{example}
 
 \begin{lemma}
+  \label{homology of dgl}
   If~$\glie$ is a {\dgl} then~$\cycles(\glie)$ is a graded Lie~subalgebra of~$\glie$,~$\boundaries(\glie)$ is a graded Lie~ideal in~$\cycles(\glie)$ and~$\homology(\glie)$ is thus an graded Lie~algebra. 
 \end{lemma}
+
+\begin{proof}
+  The cycles~$\cycles(\glie)$ form a graded subspace of~$\glie$.
+  For homogeneous~$x, y \in \cycles(\glie)$,
+  \[
+    d([x,y])
+    =
+    [d(x), y] + (-1)^{\hdeg{x}} [x, d(y)]
+    =
+    [0, y] + (-1)^{\hdeg{x}} [x, 0]
+    =
+    0 \,,
+  \]
+  so~$\cycles(\glie)$ is indeed a graded Lie~subalgebra of~$\glie$.
+  The boundaries~$\boundaries(\glie)$ form a graded subspace of~$\cycles(\glie)$.
+  If~$x \in \boundaries(\glie)$ with~$x = d(x')$, where~$x' \in \glie$ is homogeneous, then for every~$y \in \cycles(\glie)$,
+  \[
+    [x,y]
+    =
+    [d(x'), y]
+    =
+    d([x',y]) - (-1)^{\hdeg{x'}} [x', \underbrace{d(y)}_{=0}]
+    =
+    d([x',y])
+    \in
+    \boundaries(\glie) \,.
+  \]
+  Thus~$\boundaries(\glie)$ is a graded Lie~ideal in~$\cycles(\glie)$.
+\end{proof}
 
 \begin{definition}
   The \defemph{universal enveloping algebra} of a {\dgl}~$\glie$ is a {\dga}~$\Univ(\glie)$ together with a morphism of~{\dgls}~$i \colon \glie \to \Univ(\glie)$ such that for every other {\dga}~$A$ and every morphism of~{\dgls}~$f \colon \glie \to A$ there exists a unique morphism of {\dgas}~$F \colon \Univ(\glie) \to A$ that extends~$f$:
@@ -1643,8 +1626,7 @@ Let~$\ringchar(k) = 0$.
     \biggl(
       [x, d(y)]_{\dgTensor(\glie)} - [x, d(y)]_{\glie}
     \biggr)
-    \\
-    \in{}&
+    \in
     I
   \end{align*}
   so it is a {\dgi}.
@@ -1693,8 +1675,8 @@ Let~$\ringchar(k) = 0$.
 \end{proof}
 
 We will now show that~$\homology(\Univ(\glie)) \cong \Univ(\homology(\glie))$.
-For this we need a version of the Poincaré–Birkhoff–Witt theorem (PBW~theorem) for {\dgl};
-we will not prove this, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~\cite[\S21(a)]{rational_homotopy_book}
+For this we need a version of the Poincaré–Birkhoff–Witt theorem (PBW~theorem) for {\dgls};
+we will not prove this here, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~\cite[\S21(a)]{rational_homotopy_book}
 
 \begin{recall}
   If~$\glie$ is a Lie~algebra with basis~$(x_\alpha)_{\alpha \in A}$ where~$(A, \leq)$ is linearly ordered then the PBW~theorem asserts that~$\Univ(\glie)$ has as a basis all ordered monomials
@@ -1725,6 +1707,8 @@ we will not prove this, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~
     \item
       The canonical map~$\glie \to \Univ(\glie)$ is injective.
     \item
+      It holds that~$\prim(\Univ(\glie)) = \glie$.
+    \item
       If~$s \colon \dgSymm(\glie) \to \dgTensor(\glie)$ denotes the symmetrization map from \cref{homology of tensor and symmetric} then the composition
       \[
         e
@@ -1737,7 +1721,8 @@ we will not prove this, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~
         \quad
         x_1 \dotsm x_n
         \mapsto
-        \frac{1}{n!} \sum_{\sigma \in S_n} (-1)^{n(\sigma)}
+        \frac{1}{n!} \sum_{\sigma \in S_n}
+        \varepsilon_{x_1, \dotsc, x_n}(\sigma^{-1})
         x_{\sigma(1)} \dotsm x_{\sigma(n)}
       \]
       is an isomorphism of {\dgvs} (and even of {\dgc}).
@@ -1763,7 +1748,7 @@ we will not prove this, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~
 \end{corollary}
 
 \begin{proof}
-  We denote the isomorphisms~$\dgSymm(\glie) \to \Univ(\glie)$ and~$\dgSymm(\homology(\glie)) \to \Univ(\homology(\glie))$ from \cref{consequences of pbw} by~$e$.
+  We denote the isomorphisms~$\dgSymm(\glie) \to \Univ(\glie)$ and~$\dgSymm(\homology(\glie)) \to \Univ(\homology(\glie))$ from \cref{consequences of pbw} by~$e$ and~$\tilde{e}$.
   With the isomorphism of graded algebras
   \[
     \beta
@@ -1780,7 +1765,7 @@ we will not prove this, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~
   \[
     \begin{tikzcd}
       \dgSymm(\homology(\glie))
-      \arrow{r}[below]{e}[above]{\sim}
+      \arrow{r}[below]{\tilde{e}}[above]{\sim}
       \arrow{d}[left]{\beta}[right]{\sim}
       &
       \Univ(\homology(\glie))
@@ -1804,7 +1789,8 @@ we will not prove this, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~
     \item
       If~$H$ is a graded cocommutative connected%
       \footnote{The connectedness is defined in terms of the underlying {\dgc}, not that of the {\dga}.}
-      {\dgh} then a version of the Cartier--Milnor--Moore theorem asserts that~$H \cong \Univ(\prim(H))$, which results in an equivalence between the categories of~{\dgls} and cocommutative connected {\dghs}, see \cite[Appendix~B,Theorem~4.5]{quillen}.
+      {\dgh} then a version of the Cartier--Milnor--Moore theorem asserts that~$H \cong \Univ(\prim(H))$.
+      Together with \cref{consequences of pbw} this results in an equivalence between the categories of~{\dgls} and cocommutative connected {\dghs}, see \cite[Appendix~B,Theorem~4.5]{quillen}.
 %     \item
 %       The product~$\glie \times \hlie$ is again a {\dgl} with
 %       \[
@@ -1864,6 +1850,168 @@ we will not prove this, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~
 \section{Calculations and Proofs}
 
 
+\subsection{The Koszul Sign}
+\label{koszul sign proof}
+
+We first show that the twist maps~$\tau$ extends to a group action of~$S_n$ of~$V^{\tensor n}$, and then give an explicit formula for the resulting Koszul~sign~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$.
+
+We have for every~$i = 1, \dotsc, n-1$ a twist map
+\begin{align*}
+  \tau_i
+  \colon
+  V^{\tensor n}
+  &\to
+  V^{\tensor n} \,,
+  \\
+  v_1 \tensor \dotsb \tensor v_n
+  &\mapsto
+  v_1 \tensor \dotsb \tensor \tau(v_i \tensor v_{i+1}) \tensor \dotsb \tensor v_n
+  \\
+  &\mapsto
+  (-1)^{\hdeg{v_i} \hdeg{v_{i+1}}}
+  v_1 \tensor \dotsb \tensor v_{i+1} \tensor v_i \tensor \dotsb \tensor v_n \,.
+\end{align*}
+The group~$S_n$ is generated by the simple reflections~$\sigma_1, \dotsc, \sigma_{n-1}$ with relations
+\begin{alignat*}{2}
+  \sigma_i^2
+  &=
+  1
+  &
+  \quad
+  &\text{for~$i = 1, \dotsc, n-1$} \,,
+  \\
+  \sigma_i \sigma_j
+  &=
+  \sigma_j \sigma_i
+  &
+  \quad
+  &\text{for~$\abs{i-j} \geq 2$} \,,
+  \\
+  \sigma_i \sigma_{i+1} \sigma_i
+  &=
+  \sigma_{i+1} \sigma_i \sigma_{i+1}
+  &
+  \quad
+  &\text{for~$i = 1, \dotsc, n-2$} \,.
+\end{alignat*}
+We check that the twist maps~$\tau_1, \dotsc, \tau_{n-1}$ satisfy these relations, which shows that~$S_n$ acts on~$V^{\tensor n}$ such that~$s_i$ acts via~$\tau_i$:
+We have
+\[
+  \tau_i^2(v_1 \tensor \dotsb \tensor v_n)
+  =
+  (-1)^{\hdeg{v_i} \hdeg{v_{i+1}}}
+  \tau_i(v_1 \tensor \dotsb \tensor v_{i+1} \tensor v_i \tensor \dotsb v_n)
+  =
+  v_1 \tensor \dotsb \tensor v_n
+\]
+and thus~$\tau_i^2 = 1$.
+If~$\abs{i-j} \geq 2$ then
+\begin{align*}
+  {}&
+  \tau_i \tau_j (v_1 \tensor \dotsb \tensor v_n)
+  \\
+  ={}&
+  (-1)^{\hdeg{v_i} \hdeg{v_{i+1}} + \hdeg{v_j} \hdeg{v_{j+1}}}
+          v_1
+  \tensor \dotsb
+  \tensor v_{i+1} \tensor v_i
+  \tensor \dotsb
+  \tensor v_{j+1} \tensor v_j
+  \tensor \dotsb
+  \tensor v_n
+  \\
+  ={}&
+  \tau_j \tau_i (v_1 \tensor \dotsb \tensor v_n)
+\end{align*}
+and thus~$\tau_i \tau_j = \tau_j \tau_i$.
+We also have
+\begin{align*}
+  {}&
+  \tau_i \tau_{i+1} \tau_i (v_1 \tensor \dotsb \tensor v_n)
+  \\
+  ={}&
+  (-1)^{\hdeg{v_i} \hdeg{v_{i+1}}}
+  \tau_i \tau_{i+1}
+  (
+            v_1
+    \tensor \dotsb
+    \tensor v_{i+1} \tensor v_i \tensor v_{i+2}
+    \tensor \dotsb
+    \tensor v_n
+  )
+  \\
+  ={}&
+  (-1)^{ \hdeg{v_i} \hdeg{v_{i+1}} + \hdeg{v_i} \hdeg{v_{i+2}} }
+  \tau_i
+  (
+            v_1
+    \tensor \dotsb
+    \tensor v_{i+1} \tensor v_{i+2} \tensor v_i
+    \tensor \dotsb
+    \tensor v_n
+  )
+  \\
+  ={}&
+  (-1)^{ \hdeg{v_i} \hdeg{v_{i+1}} + \hdeg{v_i} \hdeg{v_{i+2}} + \hdeg{v_{i+1}} \hdeg{v_{i+2}} }
+          v_1
+  \tensor \dotsb
+  \tensor v_{i+2} \tensor v_{i+1} \tensor v_i
+  \tensor \dotsb
+  \tensor v_n
+\shortintertext{and similarly}
+  {}&
+  \tau_{i+1} \tau_i \tau_{i+1} (v_1 \tensor \dotsb \tensor v_n)
+  \\
+  ={}&
+  (-1)^{\hdeg{v_{i+1}} \hdeg{v_{i+2}}}
+  \tau_{i+1} \tau_i
+  (
+            v_1
+    \tensor \dotsb
+    \tensor v_i \tensor v_{i+2} \tensor v_{i+1}
+    \tensor \dotsb
+    \tensor v_n
+  )
+  \\
+  ={}&
+  (-1)^{\hdeg{v_i} \hdeg{v_{i+2}} + \hdeg{v_{i+1}} \hdeg{v_{i+2}}}
+  \tau_{i+1}
+  (
+            v_1
+    \tensor \dotsb
+    \tensor v_{i+2} \tensor v_i \tensor v_{i+1}
+    \tensor \dotsb
+    \tensor v_n
+  )
+  \\
+  ={}&
+  (-1)^{\hdeg{v_i} \hdeg{v_{i+1}} + \hdeg{v_i} \hdeg{v_{i+2}} + \hdeg{v_{i+1}} \hdeg{v_{i+2}}}
+          v_1
+  \tensor \dotsb
+  \tensor v_{i+2} \tensor v_{i+1} \tensor v_i
+  \tensor \dotsb
+  \tensor v_n \,.
+\end{align*}
+Therefore~$\tau_i \tau_{i+1} \tau_i = \tau_{i+1} \tau_i \tau_{i+1}$.
+We now have the desired action of~$S_n$ on~$V^{\tensor n}$.
+
+Without the sign the action of~$S_n$ on~$V^{\tensor n}$ would be given by
+\[
+  \sigma \cdot (v_1 \tensor \dotsb \tensor v_n)
+  =
+  v_{\sigma^{-1}(1)} \tensor \dotsb \tensor v_{\sigma^{-1}(n)}
+\]
+(so that the tensor factor~$v_i$ it moved to the~{\howmanyth{$\sigma(i)$}} position).
+The above action of~$S_n$ on~$V^{\tensor n}$ is hence given by
+\[
+  \sigma \cdot (v_1 \tensor \dotsb \tensor v_n)
+  =
+  \varepsilon_{v_1, \dotsc, v_n}(\sigma)
+  v_{\sigma^{-1}(1)} \tensor \dotsb \tensor v_{\sigma^{-1}(n)}
+\]
+for some signs~$\varepsilon_{v_1, \dotsc, v_n}(\sigma) \in \{1, -1\}$.
+
+
 
 \subsection{\cref{examples for dgas}}
 
@@ -1883,7 +2031,7 @@ we will not prove this, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~
       &=
       d \circ f \circ g
       -
-      (-1)^{\hdeg{f} + \hdeg{g} f \circ g \circ d}
+      (-1)^{\hdeg{f} + \hdeg{g}} f \circ g \circ d
       \\
       &=
       d \circ f \circ g
@@ -2013,13 +2161,13 @@ we will not prove this, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~
 \label{explicit description of dgsa proof}
 
 Let~$A$ and~$B$ be two {\dgas}.
-If~$C$ is any other {\dga} and if~$f \colon A \to C$ and~$g \colon B \to C$ are two morphisms of {\dgas} with
+If~$C$ is any other {\dga} and if~$f \colon A \to C$ and~$g \colon B \to C$ are two morphisms of {\dgas} whose images graded-commute, in the sense that
 \[
   f(a) g(b)
   =
   (-1)^{\hdeg{a} \hdeg{b}} g(b) f(a)
 \]
-for all~$a \in A$,~$b \in B$ then the linear map
+for all~$a \in A$,~$b \in B$, then the linear map
 \[
   \varphi
   \colon
@@ -2039,14 +2187,15 @@ This gives a one-to-one correspondence
   \left\{
     \begin{tabular}{@{}c@{}}
       morphisms of {\dgas} \\
-      $f \colon A \to C$,~$g \colon B \to C$
+      $f \colon A \to C$,~$g \colon B \to C$ \\
+      whose images graded-commute
     \end{tabular}
   \right\}
   &\longonetoone
   \left\{
     \begin{tabular}{@{}c@{}}
       morphisms of {\dgas} \\
-      $\varphi \colon A \tensor B \to C$.
+      $\varphi \colon A \tensor B \to C$
     \end{tabular}
   \right\} \,,
   \\
@@ -2121,6 +2270,87 @@ Hence
   \Symm(V_{\text{even}}) \tensor_k \Exterior(V_{\text{odd}})
 \]
 where~$\tensor_k$ denotes the sign-less tensor product.
+
+
+
+\subsection{\cref{example for dgc}}
+\label{example for dgc proof}
+
+We have seen in a previous talk that~$(\dgTensor(C), \Delta, \varepsilon)$ is a coalgebra.
+We have for every~$i = 0, \dotsc, n$ that
+\begin{align*}
+  \hdeg{v_1 \dotsm v_i \tensor v_{i+1} \dotsm v_n}
+  &=
+  \hdeg{v_1 \dotsm v_i} + \hdeg{v_{i+1} \dotsm v_n}
+  \\
+  &=
+  \hdeg{v_1} + \dotsb + \hdeg{v_i} + \hdeg{v_{i+1}} + \dotsb + \hdeg{v_n}
+  \\
+  &=
+  \hdeg{v_1} + \dotsb + \hdeg{v_n}  \,,
+\end{align*}
+so we have a graded coalgebra.
+We also have
+\begingroup
+\allowdisplaybreaks
+\begin{align*}
+  {}&
+  d(\Delta(v_1 \dotsm v_n))
+  \\
+  ={}&
+  \sum_{i=0}^n d(v_1 \dotsm v_i \tensor v_{i+1} \dotsm v_n)
+  \\
+  ={}&
+  \sum_{i=0}^n
+  \bigl(
+      d(v_1 \dotsm v_i) \tensor v_{i+1} \dotsm v_n
+    + (-1)^{\hdeg{v_1 \dotsm v_i}}
+      v_1 \dotsm v_i \tensor d(v_{i+1} \dotsm v_n)
+  \bigr)
+  \\
+  ={}&
+  \sum_{i=0}^n
+  \Biggl(
+    \sum_{j=1}^i
+    (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_{j-1}}}
+    v_1 \dotsm d(v_j) \dotsm v_i \tensor v_{i+1} \dotsm v_n
+  \\
+  {}&
+  \phantom{\sum_{i=0}^n \biggl(}
+  + (-1)^{\hdeg{v_1 \dotsm v_i}}
+  \sum_{j=i+1}^n
+  (-1)^{\hdeg{v_{i+1}} + \dotsb + \hdeg{v_{j-1}}}
+  v_1 \dotsm v_i \tensor v_{i+1} \dotsm d(v_j) \dotsm v_n
+  \Biggl)
+  \\
+  ={}&
+  \sum_{i=0}^n
+  \Biggl(
+    \sum_{j=1}^i
+    (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_{j-1}}}
+    v_1 \dotsm d(v_j) \dotsm v_i \tensor v_{i+1} \dotsm v_n
+  \\
+  {}&
+  \phantom{\sum_{i=0}^n \biggl(}
+  + \sum_{j=i+1}^n
+  (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_{j-1}}}
+  v_1 \dotsm v_i \tensor v_{i+1} \dotsm d(v_j) \dotsm v_n
+  \Biggl)
+  \\
+  &=
+  \Delta
+  \Biggl(
+    \sum_{j=1}^n
+     (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_j}}
+     v_1 \tensor \dotsm \tensor d(v_j) \tensor \dotsb \tensor v_n
+  \Biggr)
+  \\
+  &=
+  \Delta(d(v_1 \dotsm v_n))
+\end{align*}
+\endgroup
+which shows that~$\Delta$ is a morphism of {\dgvs}.
+
 
 
 
@@ -2308,6 +2538,214 @@ Hence~$\dgHom(C,A)$ is a {\dga} with respect to the convolution product.
 
 
 
+\subsection{\cref{remark about antipode}}
+\label{remark about antipode proof}
+
+We need to explain why an inverse to~$\id_H$ in~$\Hom(H,H)$ with respect to the convolution product~$*$ is again a  morphism of {\dgvs}.
+For this we use the following result:
+
+\begin{lemma}
+  \label{inverse in dga}
+  Let~$A$ be a {\dga} and let~$a \in A$ be a homogeneous unit.
+  \begin{enumerate}
+    \item
+      The inverse~$a^{-1}$ is homogeneous of degree~$\hdeg{a^{-1}} = - \hdeg{a}$.
+    \item
+      If~$a$ is a cycle then so is~$a^{-1}$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \leavevmode
+  \begin{enumerate}
+    \item
+      Let~$d = \hdeg{a}$ and let~$a^{-1} = \sum_n a'_n$ be the homogeneous decomposition of~$a^{-1}$.
+      It follows from~$1 = ab = \sum_n a a'_n$ that in degree zero,~$1 = a a'_{-d}$.
+      Thus~$a'_{-d}$ is the inverse of~$a$, i.e.~$a^{-1} = a'_{-d} \in A_{-d}$.
+    \item
+      It follows from
+      \[
+        0
+        =
+        d(1)
+        =
+        d(a a^{-1})
+        =
+        d(a) a^{-1}
+        +
+        (-1)^{\hdeg{a}} a d(a^{-1})
+      \]
+      that~$(-1)^{\hdeg{a}} a d(a^{-1}) = 0$ because~$d(a) = 0$.
+      Hence~$d(a^{-1}) = 0$ as~$a$ is a unit.
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+The space~$\cycles_0(\Hom(V,W))$ consists of the morphism of {\dgvs}~$V \to W$.
+It hence follows from \cref{inverse in dga} that if~$f \in \cycles_0(\Hom(V,W))$ admits an inverse~$g$ with respect to the convolution product that again~$g \in \cycles_0(\Hom(V,W))$.
+
+
+
+\subsection{\cref{examples for dgh}}
+\label{examples for dgh proof}
+
+\begin{enumerate}[start=2]
+  \item
+    It remains to check the equalities
+    \[
+      \sum_{(h)} S(h_{(1)}) h_{(2)}
+      =
+      \varepsilon(h) 1_H
+      \quad
+      \text{and}\quad
+      \sum_{(h)} h_{(1)} S(h_{(2)})
+      =
+      \varepsilon(h) 1_H
+    \]
+    for the monomials~$h = v_1 \dotsm v_n$.
+    If~$n = 0$ then~$h = 1$ and both equalities hold, so we consider in the following the case~$n \geq 1$.
+    Then~$\varepsilon(v_1 \dotsm v_n) = 0$ so we have to show that in the sums~$\sum_{(h)} S(h_{(1)}) h_{(2)}$ and~$\sum_{(h)} h_{(1)} S(h_{(2)})$ all terms cancel out.
+    We consider for simplicity only the sum~$\sum_{(h)} S(h_{(1)}) h_{(2)}$.%
+    \footnote{The author hasn’t actually checked the other sum.}
+    We have
+    \begin{equation}
+      \label{formula for delta}
+      \Delta(v_1 \dotsm v_n)
+      =
+      \sum_{p=0}^n
+      \;
+      \sum_{\sigma \in \Sh(p,n-p)}
+      \varepsilon_{v_1, \dotsc, v_n}(\sigma^{-1})
+      v_{\sigma(1)} \dotsm v_{\sigma(p)} \tensor v_{\sigma(p+1)} \dotsm v_{\sigma(n)} \,.
+    \end{equation}
+    Here
+    \[
+      S(v_{\sigma(1)} \dotsm v_{\sigma(p)})
+      =
+      (-1)^p
+      (-1)^{\sum_{1 \leq i < j \leq p} \hdeg{v_{\sigma(i)}} \hdeg{v_{\sigma(j)}}}
+      v_{\sigma(p)} \dotsm v_{\sigma(1)}
+    \]
+    and thus
+    \begin{align}
+      {}&
+      (m \circ (S \tensor {\id}) \circ \Delta)(v_1 \dotsm v_n)
+      \notag
+    \\
+      ={}&
+      \sum_{p=0}^n
+      \;
+      \sum_{\sigma \in \Sh(p,n-p)}
+      \varepsilon_{v_1, \dotsc, v_n}(\sigma^{-1})
+      (-1)^p
+      (-1)^{\sum_{1 \leq i < j \leq p} \hdeg{v_{\sigma(i)}} \hdeg{v_{\sigma(j)}}}
+      \notag
+    \\
+      {}&
+      \phantom{\sum_{p=0}^n \; \sum_{\sigma \in \Sh(p,n-p)}}
+      \cdot v_{\sigma(p)} \dotsm v_{\sigma(1)} v_{\sigma(p+1)} \dotsm v_{\sigma(n)} \,.
+      \label{product expression}
+    \end{align}
+    We see that in~\eqref{formula for delta} any two terms of the form
+    \[
+      w_1 w_2 \dotsm w_i \tensor w_{i+1} \dotsm w_n
+      \quad\text{and}\quad
+      w_2 \dotsm w_i \tensor w_1 w_{i+1} \dotsm w_n
+    \]
+    give in~\eqref{product expression} the up to sign same term~$w_i \dotsm w_2 w_1 w_{i+1} \dotsm w_n$.
+    We now check that the signs differ, so that in~\eqref{product expression} both terms cancel out.
+    This then shows that in~$(m \circ (S \tensor {\id}) \circ \Delta)(v_1 \dotsm v_n)$ the two terms cancel out, so that the overall sum becomes zero.
+    
+    For~$1 \leq p \leq n$ and~$\sigma \in \Sh(p,n-p)$ with~$\sigma(p) < \sigma(1)$ the term associated to~$v_{\sigma(1)} \dotsm v_{\sigma(p)} \tensor v_{(p+1)} \dotsm v_{\sigma(n)}$ is given by
+    \[
+      v_{\sigma(2)} \dotsm v_{\sigma(p)} \tensor v_{\sigma(1)} v_{\sigma(p+1)} \dotsm v_{\sigma(n)}
+      =
+      v_{\tau(1)} \dotsm v_{\tau(p-1)} \tensor v_{\tau(p)} \dotsm v_{\tau(n)}
+    \]
+    for the permuation~$\omega \in \Sh(p-1,n-p+1)$ given by
+    \begin{gather*}
+      \omega
+      =
+      \sigma \circ (1 \, 2 \, \dotsb \, p) \,,
+    \shortintertext{i.e.}
+      \omega(i)
+      =
+      \begin{cases}
+        \sigma(i+1) & \text{if~$1 \leq i \leq p-1$} \,, \\
+        \sigma(1)   & \text{if~$i = p$} \,, \\
+        \sigma(i)   & \text{if~$p+1 \leq i \leq n$} \,.
+      \end{cases}
+    \end{gather*}
+    We see from the Koszul sign rule that the signs~$\varepsilon_{v_1, \dotsc, v_n}(\sigma^{-1})$ and~$\varepsilon_{v_1, \dotsc, v_n}(\omega^{-1})$ differ by the factor~$(-1)^{\hdeg{v_{\sigma(1)}} \hdeg{v_{\sigma(2)}} + \dotsb + \hdeg{v_{\sigma(1)}} \hdeg{v_{\sigma(p)}}}$.
+    Therefore
+    \begin{align*}
+      {}&
+      \varepsilon_{v_1, \dotsc, v_n}(\sigma^{-1})
+      (-1)^p
+      (-1)^{\sum_{1 \leq i < j \leq p} \hdeg{v_{\sigma(i)}} \hdeg{v_{\sigma(j)}}}
+      \\
+      ={}&
+      \varepsilon_{v_1, \dotsc, v_n}(\omega^{-1})
+      (-1)^{\hdeg{v_{\sigma(1)}} \hdeg{v_{\sigma(2)}} + \dotsb + \hdeg{v_{\sigma(1)}} \hdeg{v_{\sigma(p)}}}
+      (-1)^p
+      (-1)^{\sum_{1 \leq i < j \leq p} \hdeg{v_{\sigma(i)}} \hdeg{v_{\sigma(j)}}}
+      \\
+      ={}&
+      \varepsilon_{v_1, \dotsc, v_n}(\omega^{-1})
+      (-1)^p
+      (-1)^{\sum_{2 \leq i < j \leq p} \hdeg{v_{\sigma(i)}} \hdeg{v_{\sigma(j)}}}
+      \\
+      ={}&
+      \varepsilon_{v_1, \dotsc, v_n}(\omega^{-1})
+      (-1)^p
+      (-1)^{\sum_{1 \leq i < j \leq p-1} \hdeg{v_{\omega(i)}} \hdeg{v_{\omega(j)}}}
+      \\
+      ={}&
+      -
+      \varepsilon_{v_1, \dotsc, v_n}(\omega^{-1})
+      (-1)^{p-1}
+      (-1)^{\sum_{1 \leq i < j \leq p-1} \hdeg{v_{\omega(i)}} \hdeg{v_{\omega(j)}}} \,.
+    \end{align*}
+    Thus the signs differ as claimed.
+  \item
+    We have
+    \begin{align*}
+      \varepsilon([v,w])
+      &=
+      \varepsilon\bigl( vw - (-1)^{\hdeg{v} \hdeg{w}} wv \bigr)
+      \\
+      &=
+      \varepsilon(vw) - (-1)^{\hdeg{v} \hdeg{w}} wv
+      \\
+      &=
+      \varepsilon(v)\varepsilon(w) - (-1)^{\hdeg{v}\hdeg{w}} \varepsilon(w)\varepsilon(v)
+      \\
+      &=
+      0
+    \end{align*}
+    as~$\varepsilon(v) = \varepsilon(w) = 0$.
+    Also
+    \begin{align*}
+      S([v,w])
+      &=
+      S\bigl( vw - (-1)^{\hdeg{v} \hdeg{w}} wv \bigr)
+      \\
+      &=
+      S(vw) - (-1)^{\hdeg{v}\hdeg{w}} S(wv)
+      \\
+      &=
+      (-1)^{\hdeg{v}\hdeg{w}} wv - vw
+      \\
+      &=
+      - \bigl( vw - (-1)^{\hdeg{v}\hdeg{w}} wv \bigr)
+      \\
+      &=
+      - [v,w] \,.
+    \end{align*}
+\end{enumerate}
+
+
+
 \subsection{\cref{exterior hopf algebra}}
 \label{exterior hopf algebra proof}
 
@@ -2354,6 +2792,107 @@ Now~$v^2 = 0$, hence
 \]
 But~$2 \neq 0$ and~$v \neq 0$ hence~$2 v \tensor v \neq 0$ while~$v \tensor v \notin I \tensor I^2 + I^2 \tensor I$, a contradiction.
 (This proof is taken from \cite{exterior_bialgebra_mo} and partially from \cite[III.{\S}11.3]{bourbaki}).
+
+
+
+\subsection{\cref{homology of tensor and symmetric}}
+\label{homology of tensor and symmetric proof}
+
+We observe that the diagrams
+\[
+  \begin{tikzcd}
+    \dgTensor(\homology(V))_n
+    \arrow{r}[above]{\alpha_n}
+    \arrow{d}[left]{\tilde{p}_n}
+    &
+    \homology(\Tensor(V))
+    \arrow{d}[right]{\homology_n(p)}
+    \\
+    \dgSymm(\homology(V))_n
+    \arrow{r}[above]{\beta_n}
+    &
+    \homology_n(\dgSymm(V))
+  \end{tikzcd}
+  \qquad\text{and}\qquad
+  \begin{tikzcd}
+    \dgTensor(\homology(V))_n
+    \arrow{r}[above]{\alpha_n}
+    &
+    \homology(\Tensor(V))
+    \\
+    \dgSymm(\homology(V))_n
+    \arrow{u}[left]{\tilde{s}_n}
+    \arrow{r}[above]{\beta_n}
+    &
+    \homology_n(\dgSymm(V))
+    \arrow{u}[right]{\homology_n(s)}
+  \end{tikzcd}
+\]
+commute.
+Indeed, for representatives~$v_1, \dotsc, v_n \in \cycles(V)$ the first diagram is given by
+\[
+  \begin{tikzcd}
+    {[v_1]} \tensor \dotsb \tensor {[v_n]}
+    \arrow[mapsto]{r}
+    \arrow[mapsto]{d}
+    &
+    {[v_1 \tensor \dotsb \tensor v_n]}
+    \arrow[mapsto]{d}
+    \\
+    {[v_1]} \dotsm {[v_n]}
+    \arrow[mapsto]{r}
+    &
+    {[v_1 \dotsm v_n]}
+  \end{tikzcd}
+\]
+and the second diagram is given by
+\[
+  \begin{tikzcd}
+    \frac{1}{n!} \sum_{\sigma \in S_n} \varepsilon(\sigma^{-1})
+    {[v_{\sigma(1)}]} \tensor \dotsb \tensor {[v_{\sigma(n)}]}
+    \arrow[mapsto]{r}
+    &
+    \frac{1}{n!} \sum_{\sigma \in S_n} \varepsilon(\sigma^{-1})
+    {[v_{\sigma(1)} \tensor \dotsb \tensor v_{\sigma(n)}]}
+    \\
+    {[v_1]} \dotsm {[v_n]}
+    \arrow[mapsto]{u}
+    \arrow[mapsto]{r}
+    &
+    {[v_1 \dotsm v_n]}
+    \arrow[mapsto]{u}
+  \end{tikzcd}
+\]
+It follows that
+\[
+  \beta_n \beta'_n
+  =
+  \beta_n \tilde{p}_n \alpha_n^{-1} \homology_n(s)
+  =
+  \homology_n(p) \alpha_n \alpha_n^{-1} \homology_n(s)
+  =
+  \homology_n(p) \homology_n(s)
+  =
+  \id_{\homology_n(\dgSymm(V))}
+\]
+and similarly
+\[
+  \beta'_n \beta_n
+  =
+  \tilde{p}_n \alpha_n^{-1} \homology_n(s) \beta_n
+  =
+  \tilde{p}_n \alpha_n^{-1} \alpha_n \tilde{s}_n
+  =
+  \tilde{p}_n \tilde{s}_n
+  =
+  \id_{\dgSymm(\homology(V))_n}
+\]
+
+
+
+
+
+
 
 
 

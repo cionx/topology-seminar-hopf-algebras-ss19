@@ -61,6 +61,7 @@
 \newcommand{\CE}{Chevalley-Eilenberg}
 
 % shortcuts involving nobreakdash
+\newcommand{\action}[1]{#1\nobreakdash-action}
 \newcommand{\bimodule}[1]{#1\nobreakdash-bimodule}
 \newcommand{\howmanyth}[1]{#1\nobreakdash-th}
 \newcommand{\module}[1]{#1\nobreakdash-module}
@@ -142,6 +143,7 @@
 \newcommand{\tensor}{\otimes}
 
 % delimiters and seperators
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\hdeg}{\lvert}{\rvert}
 \NewDocumentCommand{\suchthat}{so}{
   \IfValueTF{#2}
