@@ -22,6 +22,9 @@
 
 % bibliography
 \bibliography{references.bib}
+% no unplaned surprises with \cite
+\DeclareFieldFormat{postnote}{#1}
+\DeclareFieldFormat{multipostnote}{#1}
 
 % prevents breaking inline math around binary or relationship symbols
 \binoppenalty=\maxdimen
@@ -163,6 +166,8 @@
 
 % decoration
 \newcommand{\cop}{\mathrm{cop}}
+\newcommand{\even}{\mathrm{even}}
+\newcommand{\odd}{\mathrm{odd}}
 \newcommand{\op}{\mathrm{op}}
 
 

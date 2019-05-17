@@ -2,7 +2,7 @@
 
 \usepackage{style}
 
-\titlehead{Jendrik Stelzner \hfill \texttt{jendrikstelzner.de/seminars/dg\_hopf.pdf} \hfill May 20, 2019}
+\titlehead{Jendrik Stelzner \hfill May 20, 2019}
 % \subject{Graduate Seminar on Topology}
 \title{Differential Graded \\ Hopf Algebras~I}
 % \footnote{Available online at \texttt{jendrikstelzner.de/dg\_hopf\_extended.pdf}.}}
@@ -30,6 +30,7 @@ Additional constraints on~$\ringchar(k)$ are made explicit when used.
 
 
 \section{Preliminary Notions and Notations}
+\label{notions and notations}
 
 A \defemph{\dgvs}~$V$ is the same as a chain complex, a \defemph{\dgsub} the same as a chain subcomplex.
 The elements~$v \in V_n$ are \defemph{homogeneous} of \defemph{degree}~$\hdeg{v} = n$.
@@ -46,7 +47,7 @@ If~$V$,~$W$ are {\dgvs} then~$V \tensor W$ is a {\dgv}~with
   \hdeg{v \tensor w}
   =
   \hdeg{v} + \hdeg{w} \,,
-  \quad
+  \qquad
   d(v \tensor w)
   =
   d(v) \tensor w + (-1)^{\hdeg{v}} v \tensor d(w) \,.
@@ -64,14 +65,14 @@ We use the Koszul-Quillen \defemph{sign convention}:
 \begin{center}
   \fbox{Whenever homogeneous~$x$,~$y$ are swapped the sign~$(-1)^{\hdeg{x} \hdeg{y}}$ is introduced.}
 \end{center}
-We get a linear~{\action{$S_n$}} on~$V^{\tensor n}$ with
+This results in an~{\action{$S_n$}} on~$V^{\tensor n}$ via morphisms of {\dgvs}, given by
 \begin{gather*}
   \sigma \cdot (v_1 \tensor \dotsb \tensor v_n)
   =
   \varepsilon_{v_1, \dotsc, v_n}(\sigma)
-  v_{\sigma^{-1}(1)} \tensor \dotsb \tensor v_{\sigma^{-1}(n)}
+  v_{\sigma^{-1}(1)} \tensor \dotsb \tensor v_{\sigma^{-1}(n)} \,.
 \end{gather*}
-where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \defemph{Koszul sign}.
+Here~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \defemph{Koszul sign}.
 (See \cref{koszul sign proof}.)
 
 A map~$f \colon V \to W$ is \defemph{graded} of \defemph{degree}~$d = \hdeg{f}$ if~$f(V_n) \subseteq V_{n+d}$ for all~$n$, and~$\dgHom(V,W)$ is the {\dgvs} with
@@ -87,7 +88,7 @@ A map~$f \colon V \to W$ is \defemph{graded} of \defemph{degree}~$d = \hdeg{f}$ 
   d \circ f - (-1)^{\hdeg{f}} f \circ d \,.
 \end{align*}
 The differential~$d$ is a graded map of degree~$-1$.
-If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \colon V \tensor V' \to W \tensor W'$ is given by
+If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \colon V \tensor V' \to W \tensor W'$ is the graded map given by
 \[
   (f \tensor g)(v \tensor w)
   =
@@ -222,6 +223,8 @@ In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
   \end{align*}
 \end{definition}
 
+\pagebreak
+
 \begin{remark}
   \leavevmode
   \begin{enumerate}
@@ -260,7 +263,7 @@ In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
 
 \begin{examples}
   \label{examples for dgas}
-  \leavevmode
+  (See \cref{examples for dgas proof} for the explicit calculations.)
   \begin{enumerate}
     \item
       Every algebra~$A$ is a {\dga} concentrated in degree~$0$, in particular~$A = k$.
@@ -335,7 +338,7 @@ In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
     \item
       The twist map~$\tau \colon A \tensor B \to B \tensor A$ is an isomorphism of {\dgas} and if~$f \colon A \to A'$ and~$g \colon B \to B'$ are morphism of {\dgas} then so is~$f \tensor g \colon A \tensor B \to A' \tensor B'$.
     \item
-      The {\dga}~$A^{\op}$ is given by~$u_{A^{\op}} = u_A$ and~$m^{\op} = m_A \circ \tau$.
+      The {\dga}~$A^{\op}$ is given by~$u_{A^{\op}} = u_A$ and~$m_{A^{\op}} = m_A \circ \tau$.
       If~$\cdot$ denotes the multiplication in~$A$ and~$*$ the multiplication in~$A^{\op}$ then more explicitely
       \[
         1_A
@@ -417,7 +420,7 @@ In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
       \text{$v,w \in V$ are homogeneous}
     \bigr)
   \]
-  is a {\dgi} in~$\dgTensor(V)$ since the generators~$[v,w]$ are homogeneous with (by \cref{examples for dgls})
+  is a {\dgi} in~$\dgTensor(V)$ since the generators~$[v,w]$ are homogeneous and (by \cref{examples for dgls})
   \[
     d([v,w])
     =
@@ -446,9 +449,9 @@ In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
 
 \begin{remark}
   \label{explicit description of dgsa}
-  If~$V$ is a graded vector space with decomposition~$V_{\text{even}} = \bigoplus_{n \in \Integer} V_{2n}$ and~$V_{\text{odd}} = \bigoplus_{n \in \Integer} V_{2n+1}$ then the inclusions~$V_{\text{even}}, V_{\text{odd}} \to V$ induce an isomorphism of graded vector spaces
+  If~$V$ is a graded vector space with decomposition~$V = V_{\even} \oplus V_{\odd}$ where~$V_{\even} = \bigoplus_{n \in \Integer} V_{2n}$ and~$V_{\odd} = \bigoplus_{n \in \Integer} V_{2n+1}$ then the inclusions~$V_{\even}, V_{\odd} \to V$ induce an isomorphism of graded vector spaces
   \[
-    \Symm(V_{\text{even}}) \tensor_k \Exterior(V_{\text{odd}})
+    \Symm(V_{\even}) \tensor_k \Exterior(V_{\odd})
     \xlongto{\sim}
     \dgSymm(V)
   \]
@@ -463,11 +466,14 @@ In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
   \[
     x_{\alpha_1}^{n_1} \dotsm x_{\alpha_t}^{n_t}
     \qquad
-    \text{where~$t \geq 0$,~$\alpha_1 < \dotsb < \alpha_t$,~$n_i \geq 0$ and~$n_i = 1$ if~$\hdeg{x_{\alpha_i}}$ is odd}.%
+    \text{where~$t \geq 0$,~$\alpha_1 < \dotsb < \alpha_t$,~$n_i \geq 1$ and~$n_i = 1$ if~$\hdeg{x_{\alpha_i}}$ is odd}.%
     \footnote{The condition~$n_i = 1$ for~$\hdeg{x_{\alpha_i}}$ odd commes from the equality~$\alpha_i^2 = [\alpha_i, \alpha_i]/2$.}
-    \tag*{\qed}
   \]
 \end{corollary}
+
+\begin{proof}
+  See \cref{basis of the symmetric algebra proof}.
+\end{proof}
 
 \begin{proposition}
   \label{homology of dga}
@@ -475,7 +481,7 @@ In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
 \end{proposition}
 
 \begin{proof}
-  The cycles~$\cycles(A)$ is a graded subspace with~$1 \in \cycles(A)$ and if~$a, b \in \cycles(A)$ are homogeneous then
+  The cycles~$\cycles(A)$ form a graded subspace with~$1 \in \cycles(A)$ and if~$a, b \in \cycles(A)$ are homogeneous then
   \[
     d(a \cdot b)
     =
@@ -486,7 +492,7 @@ In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
     0
   \]
   and hence~$ab \in \cycles(A)$.
-  The boundaries~$\boundaries(A)$ is a graded subspace and if~$a \in \cycles(A)$ and~$b \in \boundaries(B)$ are homogeneous with~$b = d(a')$ then
+  The boundaries~$\boundaries(A)$ form a graded subspace and if~$a \in \cycles(A)$ and~$b \in \boundaries(B)$ are homogeneous with~$b = d(a')$ then
   \[
     b \cdot a
     =
@@ -621,7 +627,7 @@ In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
   \leavevmode
   \begin{enumerate}
     \item
-      A {\dgc} is the same as a graded coalgebra~$C$ together with a differential~$d$ such that~$d$ vanishes on~$\boundaries_0(C)$ and
+      A {\dgc} is the same as a graded coalgebra~$C$ together with a differential~$d$ such that~$\varepsilon$ vanishes on~$\boundaries_0(C)$ and
       \[
         \Delta(d(c))
         =
@@ -707,7 +713,7 @@ In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
 % \end{lemma}
 
 \begin{remark}
-One can now define tensor product of {\dgcs} and the opposite of a {\dgc}.
+One can now define tensor products of {\dgcs} and the opposite of a {\dgc}.
 If~$C$,~$D$ are {\dgcs} then
 \[
   \Delta_{C \tensor D}(c \tensor d)
@@ -733,7 +739,7 @@ If~$C$,~$D$ are {\dgcs} then
 \end{lemma}
 
 \begin{proof}
-  The quotient~$C/I$ is a {\dgvs} and a coalgebra, and the compatibility of these structures can be checked on representatives.
+  The quotient~$C/I$ is a {\dgv} and a coalgebra, and the compatibility of these structures can be checked on representatives.
 \end{proof}
 
 \begin{proposition}
@@ -765,7 +771,7 @@ If~$C$,~$D$ are {\dgcs} then
 \end{lemma}
 
 \begin{proof}
-  The same diagramatic proof as in the non-dg case.
+  The same diagramatic proof as in the non-dg case (see talk~$2$).
 \end{proof}
 
 \begin{definition}
@@ -786,7 +792,7 @@ If~$C$,~$D$ are {\dgcs} then
     =
     \sum_{(b), (c)}
     (-1)^{\hdeg{b_{(2)}} \hdeg{c_{(1)}}}
-    b_{(1)} c_{(1)} \tensor b_{(2)} c_{(2)}
+    b_{(1)} c_{(1)} \tensor b_{(2)} c_{(2)} \,.
   \end{gather*}
 
 \end{remark}
@@ -963,13 +969,13 @@ If~$C$,~$D$ are {\dgcs} then
 \end{remark}
 
 \begin{lemma}
-  If~$I$ is a {\dghi} in~$H$ then~$H/I$ inherits a {\dgh} structure.
+  If~$I$ is a {\dghi} in a {\dgh}~$H$ then~$H/I$ inherits a {\dgh} structure.
   \qed
 \end{lemma}
 
 \begin{proof}
-  It follows from \cref{quotient of dgb} that~$H$ is a {\dgb} and the condition~$S(I) \subseteq I$ ensures that~$S$ induced a morphism of {\dgvs}~$\overline{S} \colon H/I \to H/I$.
-  The antipode conditions for~$\overline{S}$ can now be checked on representatives.
+  It follows from \cref{quotient of dgb} that~$H$ is a {\dgb} and the condition~$S(I) \subseteq I$ ensures that~$S$ induces a morphism of {\dgvs}~$\overline{S} \colon H/I \to H/I$.
+  The antipode condition for~$\overline{S}$ can now be checked on representatives.
 \end{proof}
 
 \begin{example}
@@ -1008,7 +1014,7 @@ If~$C$,~$D$ are {\dgcs} then
         k \,.
       \]
       These maps make~$\dgTensor(V)$ into a {\dgb};
-      the necessary diagrams can be checked on the algebra generators~$V$ of~$\dgTensor(V)$ because all arrows occuring in the bialgebra diagrams are morphisms of {\dgas}.
+      the necessary diagrams can be checked on the algebra generatoring set~$V$ of~$\dgTensor(V)$ since all arrows occuring in the bialgebra diagrams are morphisms of {\dgas}.
       The maps~$\Delta$ and~$\varepsilon$ are explicitely given by
       \begin{align*}
         \Delta(v_1 \dotsm v_n)
@@ -1096,7 +1102,7 @@ If~$C$,~$D$ are {\dgcs} then
         \in
         I \,.
       \end{align*}
-      For the computation of~$\Delta$ we use that~$v$,~$w$ are primitive in~$\dgTensor(V)$ and~$[v,w]$ is therefore again primitive.
+      For the computation of~$\Delta([v,w])$ we use that~$v$,~$w$ are primitive in~$\dgTensor(V)$ and that~$[v,w]$ is therefore again primitive.
   \end{enumerate}
 \end{example}
 
@@ -1105,13 +1111,17 @@ If~$C$,~$D$ are {\dgcs} then
   Let~$V$ be a vector space.
   We regard~$V$ as a {\dgv} concentrated in degree~$1$.
   Then~$\dgSymm(V) = \Exterior(V)$ as graded algebras whence~$\Exterior(V)$ is a graded Hopf algebra.
-  But for~$\ringchar k \neq 2$ there exists no bialgebra structure on~$\Lambda \defined \Exterior(V)$, see \cref{exterior hopf algebra proof}.
+  But for~$\ringchar k \neq 2$ there exists no bialgebra structure on~$\Lambda \defined \Exterior(V)$ (see \cref{exterior hopf algebra proof}).
 \end{example}
 
 \begin{proposition}
   If~$\hopf$ is a {\dgh} with antipode~$S$ then the graded bialgebra~$\homology(\hopf)$ is a graded Hopf algebra with antipode induced by~$S$.
-  \qed
 \end{proposition}
+
+\begin{proof}
+  The quotient~$\homology(\hopf)$ is a {\dgb} and~$\homology(S) \colon \homology(\hopf) \to \homology(\hopf)$ is an antipode for~$\homology(\hopf)$, as can be checked on representatives.
+\end{proof}
+
 
 \begin{example}
   \label{homology of tensor and symmetric}
@@ -1131,7 +1141,8 @@ If~$C$,~$D$ are {\dgcs} then
         [v_1 \dotsm v_n]
       \]
       where~$v_1, \dotsc, v_n \in \cycles(V)$.
-      We see on representatives that~$\alpha$ is a morphism of graded Hopf~algebras and from
+      We see on representatives that~$\alpha$ is a morphism of graded Hopf~algebras.
+      We can write~$\alpha$ as
       \[
         \homology(\dgTensor(V))
         =
@@ -1143,7 +1154,7 @@ If~$C$,~$D$ are {\dgcs} then
         =
         \dgTensor(\homology(V))
       \]
-      that~$\alpha$ is an isomorphism.
+      which shows that~$\alpha$ is an isomorphism.
     \item
       If~$\ringchar(k) = 0$ then also~$\homology(\dgSymm(V)) \cong \dgSymm(\homology(V))$:
       We get again a canonical morphism of graded algebras
@@ -1178,9 +1189,8 @@ If~$C$,~$D$ are {\dgcs} then
         \varepsilon_{v_1, \dotsc, v_n}(\sigma^{-1})
         v_{\sigma(1)} \tensor \dotsb \tensor v_{\sigma(n)}
       \end{align*}
-      is a section for the projection~$p \colon \dgTensor(V) \to \dgSymm(V)$.
-      The map~$s$ is a morphism of {\dgvs} and we have the following diagram:
-%     TODO: Check compatiblity with differential.
+      is a section for the projection~$p \colon \dgTensor(V) \to \dgSymm(V)$ and a morphism of {\dgvs} (see \cref{homology of tensor and symmetric proof}).
+      Together with the projection~$\tilde{p} \colon \dgTensor(\homology(V)) \to \dgSymm(\homology(V))$ and section~$\tilde{s} \colon \dgSymm(\homology(V)) \to \dgTensor(\homology(V))$ we have the following diagram:
       \[
         \begin{tikzcd}[column sep = huge, row sep = 4em]
           \dgTensor(\homology(V))_n
@@ -1200,27 +1210,6 @@ If~$C$,~$D$ are {\dgcs} then
           \arrow[dashed, bend left = 9]{l}[below]{\beta'_n}
         \end{tikzcd}
       \]
-
-%       \[
-%         \begin{tikzcd}[column sep = huge, row sep = 4em]
-%           \homology_n(\dgTensor(V))
-%           \arrow[bend left = 9]{r}[above]{\alpha_n}
-%           \arrow[bend right = 15]{d}[left]{\homology_n(p)}
-%           &
-%           \dgTensor(\homology(V))_n
-%           \arrow[bend left = 9]{l}[below]{\alpha_n^{-1}}
-%           \arrow[bend right = 15]{d}[left]{\tilde{p}_n}
-%           \\
-%           \homology_n(\dgSymm(V))
-%           \arrow[bend right = 15]{u}[right]{\homology_n(s)}
-%           \arrow[dashed, bend left = 9]{r}[above]{\beta_n}
-%           &
-%           \dgSymm(\homology(V))_n
-%           \arrow[bend right = 15]{u}[right]{\tilde{s}_n}
-%           \arrow[dashed, bend left = 9]{l}[below]{\beta'_n}
-%         \end{tikzcd}
-%       \]
-      Here~$\tilde{p} \colon \dgTensor(\homology(V)) \to \dgSymm(\homology(V))$ and~$\tilde{s} \colon \dgSymm(\homology(V)) \to \dgTensor(\homology(V))$ denote the projection and section.
       We have~$\beta_n = \homology_n(p) \circ \alpha_n \circ \tilde{s}_n$, and~$\beta' \defined \tilde{p}_n \circ \alpha_n^{-1} \circ \homology_n(s)$ is an inverse to~$\beta$ (see \cref{homology of tensor and symmetric proof}).
       This shows that~$\beta_n$ is an isomorphism.
   \end{enumerate}
@@ -1447,11 +1436,11 @@ Let~$\ringchar(k) = 0$.
       {}
     \end{tikzcd}
   \]
-  commutes, and such that~$[x,-]$ is for every~$x$ a derivation of degree~$\hdeg{x}$.
+  commutes, and such that~$[x,-]$ is for every homogeneous~$x$ a derivation of degree~$\hdeg{x}$.
 \end{definition}
 
 \begin{remark}
-  That~$\glie$ is a {\dgl} means
+  That~$\glie$ is a {\dgl} means that
   \begin{align}
     [\glie_i, \glie_j]
     &\subseteq
@@ -1499,7 +1488,7 @@ Let~$\ringchar(k) = 0$.
 
 \begin{example}
   \label{examples for dgls}
-  (See \cref{examples for dgls proof} for explicit calculations.)
+  \leavevmode
   \begin{enumerate}
     \item
       Every {\dga}~$A$ becomes a {\dgl} with the graded commutator.
@@ -1528,11 +1517,12 @@ Let~$\ringchar(k) = 0$.
       \]
       is a {\dglsub} of~$B$.
   \end{enumerate}
+  (See \cref{examples for dgls proof} for explicit calculations.)
 \end{example}
 
 \begin{lemma}
   \label{homology of dgl}
-  If~$\glie$ is a {\dgl} then~$\cycles(\glie)$ is a graded Lie~subalgebra of~$\glie$,~$\boundaries(\glie)$ is a graded Lie~ideal in~$\cycles(\glie)$ and~$\homology(\glie)$ is thus an graded Lie~algebra. 
+  If~$\glie$ is a {\dgl} then~$\cycles(\glie)$ is a graded Lie~subalgebra of~$\glie$,~$\boundaries(\glie)$ is a graded Lie~ideal in~$\cycles(\glie)$ and~$\homology(\glie)$ is thus a graded Lie~algebra. 
 \end{lemma}
 
 \begin{proof}
@@ -1603,7 +1593,7 @@ Let~$\ringchar(k) = 0$.
 
 \begin{proof}
   We check that the given ideal~$I$ is a {\dghi}.
-  It is generated by homegenous elements which satisfy
+  It is generated by homogenous elements which satisfy
   \begin{align*}
     {}&
     d([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
@@ -1679,11 +1669,11 @@ For this we need a version of the Poincaré–Birkhoff–Witt theorem (PBW~theor
 we will not prove this here, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~\cite[\S21(a)]{rational_homotopy_book}
 
 \begin{recall}
-  If~$\glie$ is a Lie~algebra with basis~$(x_\alpha)_{\alpha \in A}$ where~$(A, \leq)$ is linearly ordered then the PBW~theorem asserts that~$\Univ(\glie)$ has as a basis all ordered monomials
+  If~$\glie$ is a Lie~algebra with basis~$(x_\alpha)_{\alpha \in A}$ where~$(A, \leq)$ is linearly ordered then the PBW~theorem asserts that~$\Univ(\glie)$ has as a basis the ordered monomials
   \[
     x_{\alpha_1}^{n_1} \dotsm x_{\alpha_t}^{n_t}
     \qquad
-    \text{where~$t \geq 0$,~$\alpha_1 < \dotsb < \alpha_t$ and~$n_i \geq 0$} \,.
+    \text{where~$t \geq 0$,~$\alpha_1 < \dotsb < \alpha_t$ and~$n_i \geq 1$} \,.
   \]
   This shows in particular that the Lie~algebra homomorphism~$\glie \to \Univ(\glie)$ is injective, and it also follows that~$\prim(\Univ(\glie)) = \glie$.
   Moreover,~$\gr \Univ(\glie) \cong \Symm(\glie)$ where~$\gr \Univ(\glie)$ denotes the associated graded for the standard filtration of~$\Univ(\glie)$.
@@ -1695,7 +1685,7 @@ we will not prove this here, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen}
   \[
     x_{\alpha_1} \dotsm x_{\alpha_n}
     \qquad
-    \text{where~$t \geq 0$,~$\alpha_1 < \dotsb < \alpha_t$,~$n_i \geq 0$ and~$n_i = 1$ if~$\hdeg{x_{\alpha_i}}$ is odd.}
+    \text{where~$t \geq 0$,~$\alpha_1 < \dotsb < \alpha_t$,~$n_i \geq 1$ and~$n_i = 1$ if~$\hdeg{x_{\alpha_i}}$ is odd.}
     \tag*{\qed}
   \]
 \end{theorem}
@@ -1730,7 +1720,7 @@ we will not prove this here, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen}
   \end{enumerate}
 \end{corollary}
 
-\begin{corollary}[{\cite[Appendix~B]{quillen}}]
+\begin{corollary}
   The inclusion~$\glie \to \Univ(\glie)$ is a morphism of {\dgl} and thus induces a morphism of graded Lie~algebras~$\homology(\glie) \to \homology(\Univ(\glie))$, which is turn induces a morphism of graded algebras
   \[
     \gamma
@@ -1761,7 +1751,7 @@ we will not prove this here, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen}
     \mapsto
     [x_1 \dotsm x_n]
   \]
-  where~$x_1, \dotsc, x_n \in \cycles(\glie)$ from \cref{homology of tensor and symmetric} we get the following commutative diagram:
+  from \cref{homology of tensor and symmetric} we get the following commutative diagram:
   \[
     \begin{tikzcd}
       \dgSymm(\homology(\glie))
@@ -1852,8 +1842,6 @@ we will not prove this here, but refer to~\cite[Appendix~B,Theorem~2.3]{quillen}
 
 \subsection{The Koszul Sign}
 \label{koszul sign proof}
-
-We first show that the twist maps~$\tau$ extends to a group action of~$S_n$ of~$V^{\tensor n}$, and then give an explicit formula for the resulting Koszul~sign~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$.
 
 We have for every~$i = 1, \dotsc, n-1$ a twist map
 \begin{align*}
@@ -1994,6 +1982,7 @@ We also have
 \end{align*}
 Therefore~$\tau_i \tau_{i+1} \tau_i = \tau_{i+1} \tau_i \tau_{i+1}$.
 We now have the desired action of~$S_n$ on~$V^{\tensor n}$.
+The twist maps~$\tau_i$ are morphisms of {\dgvs} whence~$S_n$ acts by morphisms of {\dgvs}.
 
 Without the sign the action of~$S_n$ on~$V^{\tensor n}$ would be given by
 \[
@@ -2009,11 +1998,12 @@ The above action of~$S_n$ on~$V^{\tensor n}$ is hence given by
   \varepsilon_{v_1, \dotsc, v_n}(\sigma)
   v_{\sigma^{-1}(1)} \tensor \dotsb \tensor v_{\sigma^{-1}(n)}
 \]
-for some signs~$\varepsilon_{v_1, \dotsc, v_n}(\sigma) \in \{1, -1\}$.
+with signs~$\varepsilon_{v_1, \dotsc, v_n}(\sigma) \in \{1, -1\}$.
 
 
 
 \subsection{\cref{examples for dgas}}
+\label{examples for dgas proof}
 
 \begin{enumerate}[start=2]
   \item
@@ -2252,24 +2242,70 @@ More explicitely, the inclusions~$V \to V \oplus W$ and~$W \to V \oplus W$ induc
 
 Let~$V$ be a graded vector space.
 If~$V$ is concentrated in even degrees then~$\dgSymm(V) = \Symm(V)$ and if~$V$ is concentrated in odd degrees then~$\dgSymm(V) = \Exterior(V)$, with the grading of~$\dgSymm(V)$ and~$\Exterior(V)$ induced by the one of~$V$.
-We have~$V = V_{\text{even}} \oplus V_{\text{odd}}$ as graded vector spaces where~$V_{\text{even}} = \bigoplus_n V_{2n}$ and~$V_{\text{odd}} = \bigoplus_n V_{2n+1}$, and hence
+We have~$V = V_{\even} \oplus V_{\odd}$ as graded vector spaces where~$V_{\even} = \bigoplus_n V_{2n}$ and~$V_{\odd} = \bigoplus_n V_{2n+1}$, and hence
 \[
   \dgSymm(V)
   =
-  \dgSymm(V_{\text{even}} \oplus V_{\text{odd}})
+  \dgSymm(V_{\even} \oplus V_{\odd})
   \cong
-  \dgSymm(V_{\text{even}}) \tensor \dgSymm(V_{\text{odd}})
+  \dgSymm(V_{\even}) \tensor \dgSymm(V_{\odd})
   =
-  \Symm(V_{\text{even}}) \tensor \Exterior(V_{\text{odd}})
+  \Symm(V_{\even}) \tensor \Exterior(V_{\odd})
 \]
-The graded algebra~$\Symm(V_{\text{even}})$ is concentrated in even degree and so it follows that in the tensor product~$\Symm(V_{\text{even}}) \tensor \Exterior(V_{\text{odd}})$ the simple tensors (strictly) commute, i.e.~$(a \tensor b)(a' \tensor b) = a a' \tensor b b'$.
+The graded algebra~$\Symm(V_{\even})$ is concentrated in even degree and so it follows that in the tensor product~$\Symm(V_{\even}) \tensor \Exterior(V_{\odd})$ the simple tensors (strictly) commute, i.e.~$(a \tensor b)(a' \tensor b) = a a' \tensor b b'$.
 Hence
 \[
   \dgSymm(V)
   \cong
-  \Symm(V_{\text{even}}) \tensor_k \Exterior(V_{\text{odd}})
+  \Symm(V_{\even}) \tensor_k \Exterior(V_{\odd})
 \]
 where~$\tensor_k$ denotes the sign-less tensor product.
+
+
+
+\subsection{\cref{basis of the symmetric algebra}}
+\label{basis of the symmetric algebra proof}
+
+We use that
+\begin{equation}
+  \label{decomposition of graded symmetric}
+  \dgSymm(V)
+  \cong
+  \Symm(V_{\even}) \tensor_k \Exterior(V_{\odd})
+\end{equation}
+as graded algebras, as stated in \cref{explicit description of dgsa} and explained in \cref{explicit description of dgsa proof}.
+We may split up the given basis~$(x_\alpha)_{\alpha \in A}$ of~$V$ into a basis~$(x_\alpha)_{\alpha \in A'}$ of~$V_{\even}$ and~$(x_\alpha)_{\alpha \in A''}$ of~$V_{\odd}$ (since all~$x_\alpha$ are homogeneous).
+Then~$\Symm(V_{\even})$ has as a basis the ordered monomials
+\[
+  x_{\alpha_1}^{n_1} \dotsm x_{\alpha_r}^{n_r}
+  \qquad
+  \text{where~$r \geq 0$,~$\alpha_1 < \dotsb < \alpha_r$ and~$n_i \geq 1$} \,,
+\]
+and~$\Exterior(V_{\odd})$ has as a basis the ordered wedges
+\[
+  x_{\alpha_1} \wedge \dotsb \wedge x_{\alpha_s}
+  \qquad
+  \text{where~$s \geq 0$,~$\alpha_1 < \dotsb < \alpha_s$} \,.
+\]
+It follows that with~\eqref{decomposition of graded symmetric} that~$\dgSymm(V)$ admits the basis
+\[
+  x_{\alpha_1}^{n_1} \dotsm x_{\alpha_r}^{n_r} \cdot x_{\beta_1} \dotsb x_{\beta_s}
+  \qquad
+  \text{
+  where
+  $
+  \left\{
+  \begin{tabular}{@{}c@{}}
+    $r, s \geq 0$,~$n_i \geq 1$, \\
+    $\alpha_1 < \dotsb < \alpha_r$, \\
+    $\beta_1 < \dotsb < \beta_s$, \\
+    $\hdeg{x_{\alpha_i}}$ even,~$\hdeg{x_{\beta_j}}$ odd.
+  \end{tabular}
+  \right.
+  $
+  }
+\]
+We can now rearrange these basis vectors into the desired form becaus the factors~$x_{\alpha_i}^{n_i}$ and~$x_{\beta_j}$ commute.
 
 
 
@@ -2798,96 +2834,119 @@ But~$2 \neq 0$ and~$v \neq 0$ hence~$2 v \tensor v \neq 0$ while~$v \tensor v \n
 \subsection{\cref{homology of tensor and symmetric}}
 \label{homology of tensor and symmetric proof}
 
-We observe that the diagrams
-\[
-  \begin{tikzcd}
-    \dgTensor(\homology(V))_n
-    \arrow{r}[above]{\alpha_n}
-    \arrow{d}[left]{\tilde{p}_n}
-    &
-    \homology(\Tensor(V))
-    \arrow{d}[right]{\homology_n(p)}
-    \\
-    \dgSymm(\homology(V))_n
-    \arrow{r}[above]{\beta_n}
-    &
-    \homology_n(\dgSymm(V))
-  \end{tikzcd}
-  \qquad\text{and}\qquad
-  \begin{tikzcd}
-    \dgTensor(\homology(V))_n
-    \arrow{r}[above]{\alpha_n}
-    &
-    \homology(\Tensor(V))
-    \\
-    \dgSymm(\homology(V))_n
-    \arrow{u}[left]{\tilde{s}_n}
-    \arrow{r}[above]{\beta_n}
-    &
-    \homology_n(\dgSymm(V))
-    \arrow{u}[right]{\homology_n(s)}
-  \end{tikzcd}
-\]
-commute.
-Indeed, for representatives~$v_1, \dotsc, v_n \in \cycles(V)$ the first diagram is given by
-\[
-  \begin{tikzcd}
-    {[v_1]} \tensor \dotsb \tensor {[v_n]}
-    \arrow[mapsto]{r}
-    \arrow[mapsto]{d}
-    &
-    {[v_1 \tensor \dotsb \tensor v_n]}
-    \arrow[mapsto]{d}
-    \\
-    {[v_1]} \dotsm {[v_n]}
-    \arrow[mapsto]{r}
-    &
-    {[v_1 \dotsm v_n]}
-  \end{tikzcd}
-\]
-and the second diagram is given by
-\[
-  \begin{tikzcd}
-    \frac{1}{n!} \sum_{\sigma \in S_n} \varepsilon(\sigma^{-1})
-    {[v_{\sigma(1)}]} \tensor \dotsb \tensor {[v_{\sigma(n)}]}
-    \arrow[mapsto]{r}
-    &
-    \frac{1}{n!} \sum_{\sigma \in S_n} \varepsilon(\sigma^{-1})
-    {[v_{\sigma(1)} \tensor \dotsb \tensor v_{\sigma(n)}]}
-    \\
-    {[v_1]} \dotsm {[v_n]}
-    \arrow[mapsto]{u}
-    \arrow[mapsto]{r}
-    &
-    {[v_1 \dotsm v_n]}
-    \arrow[mapsto]{u}
-  \end{tikzcd}
-\]
-It follows that
-\[
-  \beta_n \beta'_n
-  =
-  \beta_n \tilde{p}_n \alpha_n^{-1} \homology_n(s)
-  =
-  \homology_n(p) \alpha_n \alpha_n^{-1} \homology_n(s)
-  =
-  \homology_n(p) \homology_n(s)
-  =
-  \id_{\homology_n(\dgSymm(V))}
-\]
-and similarly
-\[
-  \beta'_n \beta_n
-  =
-  \tilde{p}_n \alpha_n^{-1} \homology_n(s) \beta_n
-  =
-  \tilde{p}_n \alpha_n^{-1} \alpha_n \tilde{s}_n
-  =
-  \tilde{p}_n \tilde{s}_n
-  =
-  \id_{\dgSymm(\homology(V))_n}
-\]
-
+\begin{enumerate}
+  \item
+    The action of~$S_n$ on~$V^{\tensor n}$ is by morphism of {\dgvs} as mentioned in \cref{notions and notations} and shown in \cref{koszul sign proof}.
+    The symmetrization map
+    \[
+      \tilde{s}_n
+      \colon
+      \dgTensor(V)_n
+      \to
+      \dgTensor(V)_n \,,
+      \quad
+      x
+      \mapsto
+      \frac{1}{n!}
+      \sum_{\sigma \in S_n}
+      \sigma \cdot x
+    \]
+    therefore results in a morphism of {\dgvs}~$\tilde{s} \colon \dgTensor(V) \to \dgTensor(V)$.%
+    \footnote{This map is a projection of~$\dgTensor(V)$ on its {\dgsub} of graded symmetric tensors.}
+    It follows that the factored map~$s \colon \dgSymm(V) \to \dgTensor(V)$ is again a morphism of {\dgvs}.
+  \item
+    We observe that the diagrams
+    \[
+      \begin{tikzcd}
+        \dgTensor(\homology(V))_n
+        \arrow{r}[above]{\alpha_n}
+        \arrow{d}[left]{\tilde{p}_n}
+        &
+        \homology(\Tensor(V))
+        \arrow{d}[right]{\homology_n(p)}
+        \\
+        \dgSymm(\homology(V))_n
+        \arrow{r}[above]{\beta_n}
+        &
+        \homology_n(\dgSymm(V))
+      \end{tikzcd}
+      \qquad\text{and}\qquad
+      \begin{tikzcd}
+        \dgTensor(\homology(V))_n
+        \arrow{r}[above]{\alpha_n}
+        &
+        \homology(\Tensor(V))
+        \\
+        \dgSymm(\homology(V))_n
+        \arrow{u}[left]{\tilde{s}_n}
+        \arrow{r}[above]{\beta_n}
+        &
+        \homology_n(\dgSymm(V))
+        \arrow{u}[right]{\homology_n(s)}
+      \end{tikzcd}
+    \]
+    commute.
+    Indeed, for representatives~$v_1, \dotsc, v_n \in \cycles(V)$ the first diagram gives
+    \[
+      \begin{tikzcd}
+        {[v_1]} \tensor \dotsb \tensor {[v_n]}
+        \arrow[mapsto]{r}
+        \arrow[mapsto]{d}
+        &
+        {[v_1 \tensor \dotsb \tensor v_n]}
+        \arrow[mapsto]{d}
+        \\
+        {[v_1]} \dotsm {[v_n]}
+        \arrow[mapsto]{r}
+        &
+        {[v_1 \dotsm v_n]}
+      \end{tikzcd}
+    \]
+    and the second diagram is given as follows:
+    \[
+      \begin{tikzcd}
+        \displaystyle
+        \frac{1}{n!} \sum_{\sigma \in S_n} \varepsilon(\sigma^{-1})
+        {[v_{\sigma(1)}]} \tensor \dotsb \tensor {[v_{\sigma(n)}]}
+        \arrow[mapsto]{r}
+        &
+        \displaystyle
+        \frac{1}{n!} \sum_{\sigma \in S_n} \varepsilon(\sigma^{-1})
+        {[v_{\sigma(1)} \tensor \dotsb \tensor v_{\sigma(n)}]}
+        \\
+        {[v_1]} \dotsm {[v_n]}
+        \arrow[mapsto]{u}
+        \arrow[mapsto]{r}
+        &
+        {[v_1 \dotsm v_n]}
+        \arrow[mapsto]{u}
+      \end{tikzcd}
+    \]
+    It follows that
+    \[
+      \beta_n \beta'_n
+      =
+      \beta_n \tilde{p}_n \alpha_n^{-1} \homology_n(s)
+      =
+      \homology_n(p) \alpha_n \alpha_n^{-1} \homology_n(s)
+      =
+      \homology_n(p) \homology_n(s)
+      =
+      \id_{\homology_n(\dgSymm(V))}
+    \]
+    and similarly
+    \[
+      \beta'_n \beta_n
+      =
+      \tilde{p}_n \alpha_n^{-1} \homology_n(s) \beta_n
+      =
+      \tilde{p}_n \alpha_n^{-1} \alpha_n \tilde{s}_n
+      =
+      \tilde{p}_n \tilde{s}_n
+      =
+      \id_{\dgSymm(\homology(V))_n}
+    \]
+\end{enumerate}
 
 
 
