@@ -1,6 +1,9 @@
 \section{Calculations, Proofs and Remarks}
 
 
+
+
+
 \subsection{The Koszul Sign}
 \label{koszul sign proof}
 
@@ -163,11 +166,25 @@ with signs~$\varepsilon_{v_1, \dotsc, v_n}(\sigma) \in \{1, -1\}$.
 
 
 
+
+
 \subsection{\cref{dga remarks}}
 \label{dga remarks proof}
 
 \leavevmode
 \begin{enumerate}
+  \item
+     If~$A$ is a graded algebra then a graded map~$\delta \colon A \to A$ is a \defemph{derivation} if
+    \begin{align*}
+      \delta \circ m
+      &=
+      m \circ (\delta \tensor {\id} + {\id} \tensor \delta) \,;
+    \shortintertext{more explicitely,}
+      \delta(ab)
+      &=
+      \delta(a) b + (-1)^{\hdeg{\delta} \hdeg{a}} a \delta(b) \,.
+    \end{align*}
+    The compatibility condition~\eqref{compatibility of multiplication with differential} in the definition of a {\dga} thus states that the differential~$d$ is a derivation for~$A$.
   \item
     We see that there are two equivalent ways to make a graded vector space into a {\dga}:
     \[
@@ -193,6 +210,9 @@ with signs~$\varepsilon_{v_1, \dotsc, v_n}(\sigma) \in \{1, -1\}$.
     A morphism~$f$ of~{\dgas} is the same as a morphism of the underlying graded algebras that commutes with the differentials.
     (No additional signs occur since~$\hdeg{f} = 0$.)
 \end{enumerate}
+
+
+
 
 
 \subsection{\cref{examples for dgas}}
@@ -339,6 +359,9 @@ with signs~$\varepsilon_{v_1, \dotsc, v_n}(\sigma) \in \{1, -1\}$.
 \end{enumerate}
 
 
+
+
+
 \subsection{\cref{induced dga}}
 \label{induced dga proof}
 
@@ -374,6 +397,13 @@ with signs~$\varepsilon_{v_1, \dotsc, v_n}(\sigma) \in \{1, -1\}$.
   \leavevmode
 \end{enumerate}
 
+\begin{warning}
+  If~$A \tensor_k B$ is the sign-less tensor product with~$(a \tensor b)(a' \tensor b') = a a' \tensor b b'$ then~$A \tensor B \neq A \tensor_k B$ as algebras, i.e.\ the underlying algebra of~$A \tensor B$ is not the tensor product of the underlying algebras of~$A$ and~$B$.
+  The underlying algebra of~$A^{\op}$ is similarly not the opposite of the underlying algebra of~$A$.
+\end{warning}
+
+
+
 
 
 \subsection{\cref{criterion for dg ideal}}
@@ -392,6 +422,19 @@ The ideal~$I$ is spanned by~$a x_\alpha b$ with~$a, b \in A$ homogeneous, and
   I
 \]
 since~$x_\alpha, d(x_\alpha) \in I$.
+
+
+
+
+
+\subsection{\cref{definition of graded commutator}}
+\label{definition of graded commutator remark}
+
+If~$A$ is a {\dga} and~$\hdeg{a}$ is even then~$[a,a] = 0$.
+But if~$\hdeg{a}$ is odd then~$[a,a] = 2 a^2$.
+This means in particular that the graded commutator of an element with itself does not necessarily vanish (because not every element need to graded-commute with itself).
+
+
 
 
 
@@ -516,7 +559,9 @@ since~$x_\alpha, d(x_\alpha) \in I$.
     \]
   \item
     Let~$V$ be a graded vector space.
+    
     If~$V$ is concentrated in even degrees then~$\dgSymm(V) = \Symm(V)$ and if~$V$ is concentrated in odd degrees then~$\dgSymm(V) = \Exterior(V)$, with the grading of~$\dgSymm(V)$ and~$\Exterior(V)$ induced by the one of~$V$.
+    
     We have~$V = V_{\even} \oplus V_{\odd}$ as graded vector spaces where~$V_{\even} = \bigoplus_n V_{2n}$ and~$V_{\odd} = \bigoplus_n V_{2n+1}$, and hence
     \[
       \dgSymm(V)
@@ -552,7 +597,7 @@ since~$x_\alpha, d(x_\alpha) \in I$.
       \Symm(V_{\even}) \tensor_k \Exterior(V_{\odd})
     \end{equation}
     as graded algebras:
-    We may split up the given basis~$(x_\alpha)_{\alpha \in A}$ of~$V$ into a basis~$(x_\alpha)_{\alpha \in A'}$ of~$V_{\even}$ and~$(x_\alpha)_{\alpha \in A''}$ of~$V_{\odd}$ (since all~$x_\alpha$ are homogeneous).
+    We split up the given basis~$(x_\alpha)_{\alpha \in A}$ of~$V$ into a basis~$(x_\alpha)_{\alpha \in A'}$ of~$V_{\even}$ and~$(x_\alpha)_{\alpha \in A''}$ of~$V_{\odd}$ (since all~$x_\alpha$ are homogeneous).
     Then~$\Symm(V_{\even})$ has as a basis the ordered monomials
     \[
       x_{\alpha_1}^{n_1} \dotsm x_{\alpha_r}^{n_r}
@@ -587,10 +632,29 @@ since~$x_\alpha, d(x_\alpha) \in I$.
 \end{enumerate}
 
 
+
+
+
 \subsection{\cref{dgc remarks}}
 \label{dgc remarks proof}
 
 \begin{enumerate}
+  \item
+    If~$C$ is a graded coalgebra then a graded map~$\omega \colon C \to C$ is a \defemph{coderivation} if
+    \[
+      \Delta \circ \omega
+      =
+      (\omega \tensor {\id} + {\id} \tensor \omega) \circ \Delta \,.
+    \]
+    This means more explicitely that
+    \[
+      \Delta(\omega(c))
+      =
+      \sum_{(c)}
+        \omega(c_{(1)}) \tensor c_{(2)}
+      + (-1)^{\hdeg{\omega} \hdeg{c_{(1)}}} c_{(1)} \tensor \omega( c_{(2)} ) \,.
+    \]
+    The compability~\eqref{compatibility of comultiplication with differential} means that the differential~$d$ (which is a graded map of degree~$\hdeg{-d} = -1$) is a coderivation.
   \item
     The graded cocommutativity of~$C$ means
     \[
@@ -606,10 +670,12 @@ since~$x_\alpha, d(x_\alpha) \in I$.
 
 
 
+
+
 \subsection{\cref{example for dgc}}
 \label{example for dgc proof}
 
-We have seen in a previous talk that~$(\dgTensor(C), \Delta, \varepsilon)$ is a coalgebra.
+We have seen in the first talk that~$(\dgTensor(C), \Delta, \varepsilon)$ is a coalgebra.
 We have for every~$i = 0, \dotsc, n$ that
 \begin{align*}
   \hdeg{v_1 \dotsm v_i \tensor v_{i+1} \dotsm v_n}
@@ -674,15 +740,18 @@ We also have
   \Delta
   \Biggl(
     \sum_{j=1}^n
-     (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_j}}
-     v_1 \tensor \dotsm \tensor d(v_j) \tensor \dotsb \tensor v_n
+    (-1)^{\hdeg{v_1} + \dotsb + \hdeg{v_j}}
+    v_1 \tensor \dotsm \tensor d(v_j) \tensor \dotsb \tensor v_n
   \Biggr)
   \\
   &=
   \Delta(d(v_1 \dotsm v_n))
-\end{align*}
-\endgroup
+  \end{align*}
+  \endgroup
 which shows that~$\Delta$ is a morphism of {\dgvs}.
+
+
+
 
 
 \subsection{\cref{induced dgc}}
@@ -774,6 +843,8 @@ which shows that~$\Delta$ is a morphism of {\dgvs}.
 
 
 
+
+
 \subsection{\cref{induced dgb}}
 \label{induced dgb proof}
 
@@ -784,6 +855,9 @@ which shows that~$\Delta$ is a morphism of {\dgvs}.
   \item
     It follows from \cref{induced dga} and \cref{induced dgc} that~$\homology(\bialg)$ is again a {\dga} and {\dgc}, and the compatibility of these structures can be checked on representatives.
 \end{enumerate}
+
+
+
 
 
 \subsection{\cref{convolution dga}}
@@ -880,6 +954,8 @@ Hence~$\dgHom(C,A)$ is a {\dga} with respect to the convolution product.
 
 
 
+
+
 \subsection{\cref{remark about antipode}}
 \label{remark about antipode proof}
 
@@ -928,6 +1004,8 @@ It hence follows from \cref{inverse in dga} that if~$f \in \cycles_0(\Hom(V,W))$
 
 
 
+
+
 \subsection{\cref{induced dgh}}
 \label{induced dgh proof}
 \begin{enumerate}
@@ -937,6 +1015,8 @@ It hence follows from \cref{inverse in dga} that if~$f \in \cycles_0(\Hom(V,W))$
   \item
     The homology~$\homology(\hopf)$ is a {\dgb} by \cref{induced dgb} and that~$\homology(S_{\hopf})$ is an antipode can be checked on representatives.
 \end{enumerate}
+
+
 
 
 
@@ -1009,7 +1089,7 @@ We see that in~\eqref{formula for delta} any two terms of the form
 \]
 give in~\eqref{product expression} the up to sign same term~$w_i \dotsm w_2 w_1 w_{i+1} \dotsm w_n$.
 We now check that the signs differ, so that in~\eqref{product expression} both terms cancel out.
-This then shows that in~$(m \circ (S \tensor {\id}) \circ \Delta)(v_1 \dotsm v_n)$ the two terms cancel out, so that the overall sum becomes zero.
+This then shows that the sum~\eqref{product expression} becomes zero.
 
 For~$1 \leq p \leq n$ and~$\sigma \in \Sh(p,n-p)$ with~$\sigma(p) < \sigma(1)$ the term associated to~$v_{\sigma(1)} \dotsm v_{\sigma(p)} \tensor v_{(p+1)} \dotsm v_{\sigma(n)}$ is given by
 \[
@@ -1062,6 +1142,8 @@ Therefore
   (-1)^{\sum_{1 \leq i < j \leq p-1} \hdeg{v_{\omega(i)}} \hdeg{v_{\omega(j)}}} \,.
 \end{align*}
 Thus the signs differ as claimed.
+
+
 
 
 
@@ -1118,6 +1200,7 @@ Also
 
 
 
+
 \subsection{\cref{exterior hopf algebra}}
 \label{exterior hopf algebra proof}
 
@@ -1164,6 +1247,8 @@ Now~$v^2 = 0$, hence
 \]
 But~$2 \neq 0$ and~$v \neq 0$ hence~$2 v \tensor v \neq 0$ while~$v \tensor v \notin I \tensor I^2 + I^2 \tensor I$, a contradiction.
 (This proof is taken from \cite{exterior_bialgebra_mo} and partially from \cite[III.{\S}11.3]{bourbaki}).
+
+
 
 
 
@@ -1283,9 +1368,6 @@ But~$2 \neq 0$ and~$v \neq 0$ hence~$2 v \tensor v \neq 0$ while~$v \tensor v \n
       \id_{\dgSymm(\homology(V))}
     \]
 \end{enumerate}
-
-
-
 
 
 
@@ -1413,7 +1495,142 @@ But~$2 \neq 0$ and~$v \neq 0$ hence~$2 v \tensor v \neq 0$ while~$v \tensor v \n
       0 \,.
     \end{align*}
   \item
-    The subspace~$\dgDer(A)$ is by construction a graded subspace of~$\dgEnd(A)$.
+    If~$a \in \prim(B)$ with homogeneous decomposition~$a = \sum_n a_n$ then
+    \[
+      \Delta(a)
+      =
+      \Delta\biggl( \sum_n a_n \biggr)
+      =
+      \sum_n \Delta(a_n)
+    \]
+    but also
+    \[
+      \Delta(a)
+      =
+      a \tensor 1 + 1 \tensor a
+      =
+      \sum_n (a_n \tensor 1 + 1 \tensor a_n) \,.
+    \]
+    By comparing homogeneous components we see that~$\Delta(a_n) = a_n \tensor 1 + 1 \tensor a_n$ for all~$n$.
+    This means that all homogeneous components~$a_n$ are again primitive, which shows that~$\prim(B)$ is a graded subspace of~$B$.    
+    If~$a \in \prim(B)$ then
+    \begin{align*}
+      \Delta(d(a))
+      &=
+      d(\Delta(a))
+      \\
+      &=
+      d(a \tensor 1 + 1 \tensor a)
+      \\
+      &=
+        d(a \tensor 1)
+      + d(1 \tensor a)
+      \\
+      &=
+        d(a) \tensor 1
+      + (-1)^{\hdeg{a}} a \tensor d(1)
+      + d(1) \tensor a
+      + (-1)^{\hdeg{1}} 1 \tensor d(a)
+      \\
+      &=
+        d(a) \tensor 1
+      + 1 \tensor d(a)
+    \end{align*}
+    because~$\hdeg{1} = 0$ and~$d(1) = 0$.
+    Therefore~$\prim(B)$ is a {\dgsub} of~$B$.
+
+    If~$a, b \in \prim(B)$ then
+    \begin{align*}
+      \Delta(ab)
+      &=
+      \Delta(a) \Delta(b)
+      \\
+      &=
+      (a \tensor 1 + 1 \tensor a)
+      (b \tensor 1 + 1 \tensor b)
+      \\
+      &=
+        (a \tensor 1)(b \tensor 1)
+      + (a \tensor 1)(1 \tensor b)
+      + (1 \tensor a)(b \tensor 1)
+      + (1 \tensor a)(1 \tensor b)
+      \\
+      &=
+        ab \tensor 1
+      + a \tensor b
+      + (-1)^{\hdeg{a} \hdeg{b}}
+        b \tensor a
+      + 1 \tensor ab \,.
+    \end{align*}
+    If~$a$,~$b$ are homogeneous then it follows that
+    \begingroup
+    \allowdisplaybreaks
+    \begin{align*}
+        \Delta([a,b])
+        ={}&
+        \Delta\bigl( ab - (-1)^{\hdeg{a} \hdeg{b}} ba \bigr)
+        \\
+        ={}&
+          \Delta(ab)
+        - (-1)^{\hdeg{a} \hdeg{b}}
+        \Delta(ba)
+      \\
+        ={}&
+          ab \tensor 1
+        + a \tensor b
+        + (-1)^{\hdeg{a} \hdeg{b}}
+          b \tensor a
+        + 1 \tensor ab
+      \\
+        {}&
+        - (-1)^{\hdeg{a} \hdeg{b}}
+        \bigl(
+            ba \tensor 1
+          + b \tensor a
+          + (-1)^{\hdeg{a} \hdeg{b}}
+            a \tensor b
+          + 1 \tensor ba
+        \bigr)
+      \\
+        ={}&
+          ab \tensor 1
+        + a \tensor b
+        + (-1)^{\hdeg{a} \hdeg{b}}
+          b \tensor a
+        + 1 \tensor ab
+        \\
+        {}&
+        - (-1)^{\hdeg{a} \hdeg{b}}
+          ba \tensor 1
+        - (-1)^{\hdeg{a} \hdeg{b}}
+          b \tensor a
+        - a \tensor b
+        - (-1)^{\hdeg{a} \hdeg{b}}
+          1 \tensor ba
+      \\
+        ={}&
+          \bigl( ab - (-1)^{\hdeg{a} \hdeg{b}} ba \bigr) \tensor 1
+        + 1 \tensor \bigl( ab - (-1)^{\hdeg{a} \hdeg{b}} ba \bigr)
+      \\
+        ={}&
+        [a,b] \tensor 1 + 1 \tensor [a,b]
+    \end{align*}
+    \endgroup
+    which shows that~$[a,b] \in \prim(B)$.
+    Thus~$\prim(B)$ is a {\dglsub} of~$B$.
+  \item
+    If~$A$ is a graded algebra, then the graded subspace~$\dgDer(A) \subseteq \dgEnd(A)$ given by
+    \[
+      \dgDer(A)_n
+      \defined
+      \{
+        \text{derivations of~$A$ of degree~$n$}
+      \}
+      \subseteq
+      \dgEnd(A)_n
+    \]
+    is a {\dglsub} of~$\dgEnd(A)$:
+    
     Let~$\delta$,~$\varepsilon$ be graded derivations.
     Then for all homogeneous~$a, b \in A$,
     \begingroup
@@ -1570,132 +1787,11 @@ But~$2 \neq 0$ and~$v \neq 0$ hence~$2 v \tensor v \neq 0$ while~$v \tensor v \n
       [d, \delta]
     \]
     is again a graded derivation, and hence~$\dgDer(A)$ is a {\dgsub} of~$\dgEnd(A)$.
-    
-  \item
-    If~$a \in \prim(B)$ with homogeneous decomposition~$a = \sum_n a_n$ then
-    \[
-      \Delta(a)
-      =
-      \Delta\biggl( \sum_n a_n \biggr)
-      =
-      \sum_n \Delta(a_n)
-    \]
-    but also
-    \[
-      \Delta(a)
-      =
-      a \tensor 1 + 1 \tensor a
-      =
-      \sum_n (a_n \tensor 1 + 1 \tensor a_n) \,.
-    \]
-    By comparing homogeneous components we see that~$\Delta(a_n) = a_n \tensor 1 + 1 \tensor a_n$ for all~$n$.
-    This means that all homogeneous components~$a_n$ are again primitive, which shows that~$\prim(B)$ is a graded subspace of~$B$.    
-    If~$a \in \prim(B)$ then
-    \begin{align*}
-      \Delta(d(a))
-      &=
-      d(\Delta(a))
-      \\
-      &=
-      d(a \tensor 1 + 1 \tensor a)
-      \\
-      &=
-        d(a \tensor 1)
-      + d(1 \tensor a)
-      \\
-      &=
-        d(a) \tensor 1
-      + (-1)^{\hdeg{a}} a \tensor d(1)
-      + d(1) \tensor a
-      + (-1)^{\hdeg{1}} 1 \tensor d(a)
-      \\
-      &=
-        d(a) \tensor 1
-      + 1 \tensor d(a)
-    \end{align*}
-    because~$\hdeg{1} = 0$ and~$d(1) = 0$.
-    Therefore~$\prim(B)$ is a {\dgsub} of~$B$.
-
-    If~$a, b \in \prim(B)$ then
-    \begin{align*}
-      \Delta(ab)
-      &=
-      \Delta(a) \Delta(b)
-      \\
-      &=
-      (a \tensor 1 + 1 \tensor a)
-      (b \tensor 1 + 1 \tensor b)
-      \\
-      &=
-        (a \tensor 1)(b \tensor 1)
-      + (a \tensor 1)(1 \tensor b)
-      + (1 \tensor a)(b \tensor 1)
-      + (1 \tensor a)(1 \tensor b)
-      \\
-      &=
-        ab \tensor 1
-      + a \tensor b
-      + (-1)^{\hdeg{a} \hdeg{b}}
-        b \tensor a
-      + 1 \tensor ab \,.
-    \end{align*}
-    If~$a$,~$b$ are homogeneous then it follows that
-    \begingroup
-    \allowdisplaybreaks
-    \begin{align*}
-        \Delta([a,b])
-        ={}&
-        \Delta\bigl( ab - (-1)^{\hdeg{a} \hdeg{b}} ba \bigr)
-        \\
-        ={}&
-          \Delta(ab)
-        - (-1)^{\hdeg{a} \hdeg{b}}
-        \Delta(ba)
-      \\
-        ={}&
-          ab \tensor 1
-        + a \tensor b
-        + (-1)^{\hdeg{a} \hdeg{b}}
-          b \tensor a
-        + 1 \tensor ab
-      \\
-        {}&
-        - (-1)^{\hdeg{a} \hdeg{b}}
-        \bigl(
-            ba \tensor 1
-          + b \tensor a
-          + (-1)^{\hdeg{a} \hdeg{b}}
-            a \tensor b
-          + 1 \tensor ba
-        \bigr)
-      \\
-        ={}&
-          ab \tensor 1
-        + a \tensor b
-        + (-1)^{\hdeg{a} \hdeg{b}}
-          b \tensor a
-        + 1 \tensor ab
-        \\
-        {}&
-        - (-1)^{\hdeg{a} \hdeg{b}}
-          ba \tensor 1
-        - (-1)^{\hdeg{a} \hdeg{b}}
-          b \tensor a
-        - a \tensor b
-        - (-1)^{\hdeg{a} \hdeg{b}}
-          1 \tensor ba
-      \\
-        ={}&
-          \bigl( ab - (-1)^{\hdeg{a} \hdeg{b}} ba \bigr) \tensor 1
-        + 1 \tensor \bigl( ab - (-1)^{\hdeg{a} \hdeg{b}} ba \bigr)
-      \\
-        ={}&
-        [a,b] \tensor 1 + 1 \tensor [a,b]
-    \end{align*}
-    \endgroup
-    which shows that~$[a,b] \in \prim(B)$.
-    Thus~$\prim(B)$ is a {\dglsub} of~$B$.
 \end{enumerate}
+
+
+
+
 
 \subsection{\cref{induced dgl}}
 \label{induced dgl proof}
@@ -1735,79 +1831,90 @@ But~$2 \neq 0$ and~$v \neq 0$ hence~$2 v \tensor v \neq 0$ while~$v \tensor v \n
 
 
 
-\subsection{\cref{existence and structure of uea}}
-\label{existence and structure of uea proof}
 
-We check that the given ideal~$I$ is a {\dghi}.
-It is generated by homogenous elements which satisfy
-\begin{align*}
-  {}&
-  d([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
-  \\
-  ={}&
-  d([x,y]_{\dgTensor(\glie)}) - d([x,y]_{\glie})
-  \\
-  ={}&
-    [d(x), y]_{\dgTensor(\glie)}
-  + (-1)^{\hdeg{x}} [x, d(y)]_{\dgTensor(\glie)}
-  - [d(x), y]_{\glie}
-  - (-1)^{\hdeg{x}} [x, d(y)]_{\glie}
-  \\
-  ={}&
-  \biggl(
-    [d(x), y]_{\dgTensor(\glie)} - [d(x), y]_{\glie}
-  \biggr)
-  + 
-  (-1)^{\hdeg{x}}
-  \biggl(
-    [x, d(y)]_{\dgTensor(\glie)} - [x, d(y)]_{\glie}
-  \biggr)
-  \in
-  I
-\end{align*}
-so it is a {\dgi}.
-Also
-\[
-  \varepsilon([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
-  =
-  \varepsilon([x,y]_{\dgTensor(\glie)}) - \varepsilon([x,y]_{\glie})
-  =
-  0 - 0
-  =
-  0
-\]
-because~$[x,y]_{\dgTensor(\glie)}$ and~$[x,y]_{\glie}$ are homogoneous of degree~$\geq 1$,
-\begin{gather*}
-  \begin{aligned}
-    {}&
-    \Delta([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
-    \\
-    ={}&
-    \Delta([x,y]_{\dgTensor(\glie)}) - \Delta([x,y]_{\glie}))
-    \\
-    ={}&
-      [x,y]_{\dgTensor(\glie)} \tensor 1
-    + 1 \tensor [x,y]_{\dgTensor(\glie)}
-    - [x,y]_{\glie} \tensor 1
-    - 1 \tensor [x,y]_{\glie}
-    \\
-    ={}&
-      ([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie}) \tensor 1
-    + 1 \tensor ([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
-    \\
-    \in{}&
-    I \tensor \dgTensor(\glie) + \dgTensor(\glie) \tensor I
-  \end{aligned}
-\intertext{since both~$[x,y]_{\dgTensor(\glie)}$ and~$[x,y]_{\glie}$ are primitive, and finally}
-  S([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
-  =
-  S([x,y]_{\dgTensor(\glie)}) - S([x,y]_{\glie})
-  =
-  -[x,y]_{\dgTensor(\glie)}  + [x,y]_{\glie}
-  \in
-  I \,.
-\end{gather*}
-Thus the {\dgi}~$I$ is already a~{\dghi}.
+
+\subsection{\cref{properties of uea}}
+\label{properties of uea proof}
+
+\begin{enumerate}
+  \item
+    This follows from the choice of ideal~$I$.
+  \item
+    This is a combination of the universal properties of the {\dgta} and that of the quotient {\dga}.
+  \item
+    We check that the given ideal~$I$ is a {\dghi}.
+    It is generated by homogenous elements which satisfy
+    \begin{align*}
+      {}&
+      d([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
+      \\
+      ={}&
+      d([x,y]_{\dgTensor(\glie)}) - d([x,y]_{\glie})
+      \\
+      ={}&
+        [d(x), y]_{\dgTensor(\glie)}
+      + (-1)^{\hdeg{x}} [x, d(y)]_{\dgTensor(\glie)}
+      - [d(x), y]_{\glie}
+      - (-1)^{\hdeg{x}} [x, d(y)]_{\glie}
+      \\
+      ={}&
+      \biggl(
+        [d(x), y]_{\dgTensor(\glie)} - [d(x), y]_{\glie}
+      \biggr)
+      + 
+      (-1)^{\hdeg{x}}
+      \biggl(
+        [x, d(y)]_{\dgTensor(\glie)} - [x, d(y)]_{\glie}
+      \biggr)
+      \in
+      I
+    \end{align*}
+    so it is a {\dgi}.
+    Also
+    \[
+      \varepsilon([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
+      =
+      \varepsilon([x,y]_{\dgTensor(\glie)}) - \varepsilon([x,y]_{\glie})
+      =
+      0 - 0
+      =
+      0
+    \]
+    because~$[x,y]_{\dgTensor(\glie)}$ and~$[x,y]_{\glie}$ are homogoneous of degree~$\geq 1$,
+    \begin{gather*}
+      \begin{aligned}
+        {}&
+        \Delta([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
+        \\
+        ={}&
+        \Delta([x,y]_{\dgTensor(\glie)}) - \Delta([x,y]_{\glie}))
+        \\
+        ={}&
+          [x,y]_{\dgTensor(\glie)} \tensor 1
+        + 1 \tensor [x,y]_{\dgTensor(\glie)}
+        - [x,y]_{\glie} \tensor 1
+        - 1 \tensor [x,y]_{\glie}
+        \\
+        ={}&
+          ([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie}) \tensor 1
+        + 1 \tensor ([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
+        \\
+        \in{}&
+        I \tensor \dgTensor(\glie) + \dgTensor(\glie) \tensor I
+      \end{aligned}
+    \intertext{since both~$[x,y]_{\dgTensor(\glie)}$ and~$[x,y]_{\glie}$ are primitive, and finally}
+      S([x,y]_{\dgTensor(\glie)} - [x,y]_{\glie})
+      =
+      S([x,y]_{\dgTensor(\glie)}) - S([x,y]_{\glie})
+      =
+      -[x,y]_{\dgTensor(\glie)}  + [x,y]_{\glie}
+      \in
+      I \,.
+    \end{gather*}
+    Thus the {\dgi}~$I$ is already a~{\dghi}.
+\end{enumerate}
+
+
 
 
 \subsection{The Poincaré–Birkhoff–Witt theorem}
@@ -1834,4 +1941,15 @@ Thus the {\dgi}~$I$ is already a~{\dghi}.
     \tag*{\qed}
   \]
 \end{theorem}
+
+We will not attempt to prove this theorem here, and instead refer to~\cite[Appendix~B,Theorem~2.3]{quillen} and~\cite[\S21(a)]{rational_homotopy_book}.
+
+
+
+
+
+\printbibliography
+
+
+
 
