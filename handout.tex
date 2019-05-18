@@ -20,17 +20,17 @@
 
 \vspace{-4em}
 
-In the following~$k$ denotes an arbitrary field.
-All vector spaces, algebras, tensor products, etc.\ are over~$k$, unless otherwise stated.
-All occuring maps are linear unless otherwise stated.
-We abbreviate \enquote{differential graded} by \enquote{dg}.
-
 
 
 
 
 \section{Preliminary Notions and Notations}
 \label{notions and notations}
+
+In the following~$k$ denotes an arbitrary field.
+All vector spaces, algebras, tensor products, etc.\ are over~$k$, unless otherwise stated.
+All occuring maps are linear unless otherwise stated.
+We abbreviate \enquote{differential graded} by \enquote{dg}.
 
 A \defemph{\dgv}~$V$ is the same as a chain complex, a \defemph{\dgsub} the same as a chain subcomplex.
 We write~$\hdeg{v}$ for the degree of~$v$ and assume~$v$ to be homogeneous.
@@ -58,7 +58,7 @@ is an isomorphism of {\dgvs}.%
 \footnote{The naive twist map~$v \tensor w \mapsto w \tensor v$ is not a homomorphism of {\dgvs}.}
 We use the Koszul-Quillen \defemph{sign convention}:
 Whenever~$x$,~$y$ are swapped the sign~$(-1)^{\hdeg{x} \hdeg{y}}$ is introduced.
-This results in a well-defined~{\action{$S_n$}} on~$V^{\tensor n}$ via homomorphisms of {\dgvs}, given by
+This results in a well-defined~{\action{$\symm_n$}} on~$V^{\tensor n}$ via homomorphisms of {\dgvs}, given by
 \begin{gather*}
   \sigma \cdot (v_1 \tensor \dotsb \tensor v_n)
   =
@@ -68,18 +68,7 @@ This results in a well-defined~{\action{$S_n$}} on~$V^{\tensor n}$ via homomorph
 for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \defemph{Koszul sign}.
 (See \cref{koszul sign proof}.)
 
-A map~$f \colon V \to W$ is \defemph{graded} of \defemph{degree}~$d = \hdeg{f}$ if~$f(V_n) \subseteq V_{n+d}$ for all~$n$, and~$\dgHom(V,W)$ is the {\dgv} with
-\begin{align*}
-  \dgHom(V,W)_n
-  &=
-  \{
-    \text{graded maps~$V \to W$ of degree~$n$}
-  \} \,,
-  \\
-  d(f)
-  &=
-  d \circ f - (-1)^{\hdeg{f}} f \circ d \,.
-\end{align*}
+A map~$f \colon V \to W$ is \defemph{graded} of \defemph{degree}~$d = \hdeg{f}$ if~$f(V_n) \subseteq V_{n+d}$ for all~$n$.
 The differential~$d$ is a graded map of degree~$-1$.
 If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \colon V \tensor V' \to W \tensor W'$ is the graded map of degree~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$ given by
 \[
@@ -88,6 +77,7 @@ If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \c
   (-1)^{\hdeg{g} \hdeg{v}}
   f(v) \tensor g(w) \,.
 \]
+If~$f$,~$g$ are homomorphisms of {\dgvs} then so is~$f \tensor g$.
 % In particular~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$.
 % It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded vector spaces, and the \defemph{algebraic Künneth isomorphism} is the natural isomorphism of graded vector spaces
 % \[
@@ -223,12 +213,10 @@ If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \c
 
 \begin{examples}
   \label{examples for dgas}
-  (See \cref{examples for dgas proof} for the explicit calculations)
+  (See \cref{examples for dgas proof} for the explicit calculations and further examples.)
   \begin{enumerate}
     \item
       Every algebra~$A$ is a {\dga} concentrated in degree~$0$, in particular~$A = k$.
-    \item
-      For any~{\dgv}~$V$ the algebra structure of~$\End_k(V)$ restricts to a {\dga} structure on~$\dgEnd(V) = \dgHom(V,V)$.
     \item
       If~$V$ is a~{\dgv} then~$\dgTensor(V) = \bigoplus_{d \geq 0} V^{\tensor d}$ is again a {\dgv} with
       \begin{align*}
@@ -498,13 +486,17 @@ If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \c
   \begin{enumerate}
     \item
       The tensor product~$C \tensor D$ is again a {\dgc} with
-      \[
+      \begin{align*}
+        \varepsilon_{C \tensor D}(c \tensor d)
+        &=
+        \varepsilon(c) \varepsilon(d) \,,
+      \\
         \Delta_{C \tensor D}(c \tensor d)
-        =
+        &=
         \sum_{(c), (d)}
         (-1)^{\hdeg{c_{(2)}} \hdeg{d_{(1)}}}
         (c_{(1)} \tensor d_{(1)}) \tensor (c_{(2)} \tensor d_{(2)}) \,.
-      \]
+      \end{align*}
     \item
       We have a co-opposite {\dgc}~$C^{\cop}$.
     \item
@@ -524,27 +516,13 @@ If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \c
 
 \section{Differential Graded Bialgebras}
 
-\begin{lemma}
-  \label{characterization of bialgebras}
-  Let~$B$ be a {\dgv},~$(B, m, u)$ a {\dga} and~$(B, \Delta, \varepsilon)$ a {\dgc}.
-  Then the following are equivalent:
-  \begin{enumerate}
-    \item
-      $\Delta$ and~$\varepsilon$ are homomorphisms of {\dgas}.
-    \item
-      $m$ and~$u$ are homomorphisms of {\dgcs}.
-  \end{enumerate}
-\end{lemma}
-
-\begin{proof}
-  The same diagramatic proof as in the non-dg case (as seen in the second talk).
-\end{proof}
-
 \begin{definition}
+  \label{definition of dgb}
   \leavevmode
   \begin{enumerate}
     \item
-      If the conditions of \cref{characterization of bialgebras} are satisfied then~$(B, \mu, u, \Delta, \varepsilon)$ is a \defemph{\dgb}.
+      A \defemph{\dgb} is a tuple~$(B, m, u, \Delta, \varepsilon)$ so that~$(B, m, u)$ is a {\dga},~$(B, \Delta, \varepsilon)$ is a {\dgc} and~$\Delta$,~$\varepsilon$ are homomorphisms of {\dgas}.
+      (See \cref{definition of dgb remark} for remarks about this definition.)
     \item
       A map~$f \colon B \to C$ is a \defemph{homomorphism} of {\dgbs} if it is both a homomorphism of {\dgas} and of {\dgcs}.
     \item
@@ -624,53 +602,67 @@ If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \c
   See \cref{induced dgb proof}
 \end{proof}
 
-\begin{definition}
-  In a {\dgb}~$B$,~$x \in B$ is \defemph{primitive} if~$\Delta(x) = x \tensor 1 + 1 \tensor x$, and
-  \[
-    \prim(B)
-    \defined
-    \{
-      x \in B
-    \suchthat
-      \text{$x$ is primitive} \,.
-    \}
-  \]
-\end{definition}
-
-\begin{lemma}
-  If~$x, y \in B$ are primitive then~$[x,y]$ is again primitive.
-\end{lemma}
-
-\begin{proof}
-  See \cref{examples for dgls}.
-\end{proof}
-
 
 
 
 
 \section{Differential Graded Hopf Algebras}
 
-\begin{lemma}
-  \label{convolution dga}
-  If~$C$ is a {\dgc} and~$A$ is a {\dga} then the convolution product
-  \[
-    f * g
-    =
-    m_A \circ (f \tensor g) \circ \Delta_C
-  \]
-  on~$\Hom_k(C,A)$ makes~$\dgHom(C,A)$ into a {\dga}.
-\end{lemma}
-
-\begin{proof}
-  See \cref{convolution dga proof}.
-\end{proof}
-
 \begin{definition}
   \leavevmode
   \begin{enumerate}
     \item
-      An \defemph{antipode} for a~{\dgb}~$H$ is a convolution-inverse~$S$ to~$\id_H$ in~$\dgHom(H,H)$.
+      An \defemph{antipode} for a~{\dgb}~$H$ is a homomorphism of {\dgvs}
+      \[
+        S
+        \colon
+        H
+        \to
+        H
+      \]
+      that makes the following diagram commute:
+      \begin{equation}
+        \label{antipode diagram}
+        \begin{tikzcd}[column sep = small]
+          {}
+          &
+          H \tensor H
+          \arrow{rr}[above]{S \tensor {\id}}
+          &
+          {}
+          &
+          H \tensor H
+          \arrow{dr}[above right]{m}
+          &
+          {}
+          \\
+          H
+          \arrow{ur}[above left]{\Delta}
+          \arrow{rr}[above]{\varepsilon}
+          \arrow{dr}[below left]{\Delta}
+          &
+          {}
+          &
+          k
+          \arrow{rr}[above]{u}
+          &
+          {}
+          &
+          H
+          \\
+          {}
+          &
+          H \tensor H
+          \arrow{rr}[below]{{\id} \tensor S}
+          &
+          {}
+          &
+          H \tensor H
+          \arrow{ur}[below right]{m}
+          &
+          {}
+        \end{tikzcd}
+      \end{equation}
       If~$H$ admits an antipode then it is a \defemph{\dgh}.
     \item
       A \defemph{homomorphism} of {\dghs} is a homomorphism of {\dgbs}.
@@ -685,62 +677,24 @@ If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \c
 
 \begin{remark}
   \label{remark about antipode}
-  The antipode of a {\dgh}~$H$ is the the unique homomorphism of {\dgvs}~$S \colon H \to H$ that makes the diagram
-  \begin{equation}
-    \label{antipode diagram}
-    \begin{tikzcd}[column sep = small]
-      {}
-      &
-      H \tensor H
-      \arrow{rr}[above]{S \tensor {\id}}
-      &
-      {}
-      &
-      H \tensor H
-      \arrow{dr}[above right]{m}
-      &
-      {}
-      \\
-      H
-      \arrow{ur}[above left]{\Delta}
-      \arrow{rr}[above]{\varepsilon}
-      \arrow{dr}[below left]{\Delta}
-      &
-      {}
-      &
-      k
-      \arrow{rr}[above]{u}
-      &
-      {}
-      &
-      H
-      \\
-      {}
-      &
-      H \tensor H
-      \arrow{rr}[below]{{\id} \tensor S}
-      &
-      {}
-      &
-      H \tensor H
-      \arrow{ur}[below right]{m}
-      &
-      {}
-    \end{tikzcd}
-  \end{equation}
-  commute.
-  (See \cref{remark about antipode proof}.)
-  This means more explicitely that
-  \[
-    \sum_{(h)} S(h_{(1)}) h_{(2)}
-    =
-    \varepsilon(h) 1_H
-    \qquad\text{and}\qquad
-    \sum_{(h)} h_{(1)} S(h_{(2)})
-    =
-    \varepsilon(h) 1_H  \,.
-  \]
-  (No additional signs occur because~$\hdeg{S} = 0$.)
+  Let~$H$ be a {\dgh}.
+  \begin{enumerate}
+    \item
+      The commutativity of the diagram~\eqref{antipode diagram} means more explicitely that
+      \[
+        \sum_{(h)} S(h_{(1)}) h_{(2)}
+        =
+        \varepsilon(h) 1_H
+        \qquad\text{and}\qquad
+        \sum_{(h)} h_{(1)} S(h_{(2)})
+        =
+        \varepsilon(h) 1_H  \,.
+      \]
+      (No additional signs occur because~$\hdeg{S} = 0$.)
+    \item
+      One can again characterize~$S$ using the convolution product on~$\Hom_k(C,A)$ (see \cref{remark about antipode proof}).
+      This then shows in particular the uniqueness of~$S$.
+  \end{enumerate}
 \end{remark}
 
 \begin{proposition}
@@ -835,7 +789,7 @@ If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \c
     (-1)^n
     v_n \dotsm v_1
   \end{align*}
-  for homogeneous~$v_i$, where~$S$ is viewed as a map~$\dgTensor(V) \to \dgTensor(V)$ and~$\Sh(p,q)$ denotes the set of~{\shuffles{$p$}{$q$}}.
+  for homogeneous~$v_i$, where~$S$ is viewed as a map~$\dgTensor(V) \to \dgTensor(V)$ and~$\Sh(p,q) \subseteq \symm_{n+m}$ denotes the set of~{\shuffles{$p$}{$q$}}.
   These maps make~$\dgTensor(V)$ is a {\dgh}.
   (See \cref{example for dgh proof} for the explicit calculations.)
 \end{example}
@@ -911,12 +865,12 @@ If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \c
         \quad
         v_1 \dotsm v_n
         &\mapsto
-        \frac{1}{n!} \sum_{\sigma \in S_n}
+        \frac{1}{n!} \sum_{\sigma \in \symm_n}
         \sigma \cdot (v_1 \tensor \dotsb \tensor v_n)
 %         \\
 %         &=
 %         \frac{1}{n!}
-%         \sum_{\sigma \in S_n}
+%         \sum_{\sigma \in \symm_n}
 %         \varepsilon_{v_1, \dotsc, v_n}(\sigma^{-1})
 %         v_{\sigma(1)} \tensor \dotsb \tensor v_{\sigma(n)}
       \end{align*}
