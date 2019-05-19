@@ -29,8 +29,9 @@ All vector spaces, algebras, tensor products, etc.\ are over~$k$, unless otherwi
 All occuring maps are linear unless otherwise stated.
 We abbreviate \enquote{differential graded} by \enquote{dg}.
 
-A \defemph{\dgv}~$V$ is the same as a chain complex, a \defemph{\dgsub} the same as a chain subcomplex.
-We write~$\hdeg{v}$ for the degree of~$v$ and assume~$v$ to be homogeneous.
+A \defemph{\dgv} is the same as a chain complex.
+of vector spaces, a \defemph{\dgsub} the same as a chain subcomplex.
+We write~$\hdeg{v}$ for the degree of an element~$v$, which is then assumed to be homogeneous.
 We always regard graded objects as {\dgos} with zero differential.
 We regard~$k$ as a~{\dgv} concentrated in degree~$0$.
 
@@ -53,14 +54,14 @@ The \defemph{twist map}~$\tau \colon V \tensor W \to W \tensor V$ given by
 \]
 is an isomorphism of {\dgvs}.%
 \footnote{The naive twist map~$v \tensor w \mapsto w \tensor v$ is not a homomorphism of {\dgvs}.}
-We use the Koszul-Quillen \defemph{sign convention}:
-Whenever~$x$,~$y$ are swapped the sign~$(-1)^{\hdeg{x} \hdeg{y}}$ is introduced.
+We use the Koszul \defemph{sign convention}:
+Whenever homogeneous~$x$,~$y$ are swapped the sign~$(-1)^{\hdeg{x} \hdeg{y}}$ is introduced.
 This results in a well-defined~{\action{$\symm_n$}} on~$V^{\tensor n}$ via homomorphisms of {\dgvs}, given by
 \begin{gather*}
   \sigma \cdot (v_1 \tensor \dotsb \tensor v_n)
   =
   \varepsilon_{v_1, \dotsc, v_n}(\sigma)
-  v_{\sigma^{-1}(1)} \tensor \dotsb \tensor v_{\sigma^{-1}(n)} \,.
+  v_{\sigma^{-1}(1)} \tensor \dotsb \tensor v_{\sigma^{-1}(n)}
 \end{gather*}
 for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \defemph{Koszul sign}.
 (See \cref{koszul sign proof}.)
@@ -174,7 +175,7 @@ for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \de
 
 \begin{remark}
   \label{dga remarks}
-  A {\dga} is the same as a graded algebra~$A$ (in particular~$\hdeg{1} = 0$) together with a differential~$d$ such that~$d(1) = 0$ and
+  A {\dga} is the same as a graded algebra~$A$ (in particular~$\hdeg{1} = 0$) together with a differential~$d$ satisfying~$d(1) = 0$ and the \defemph{graded Leibniz~rule}
   \begin{equation}
   \label{compatibility of multiplication with differential}
     d(a \cdot b)
@@ -191,7 +192,7 @@ for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \de
     \item
       Every algebra~$A$ is a {\dga} concentrated in degree~$0$, in particular~$A = k$.
     \item
-      If~$V$ is a~{\dgv} then~$\dgTensor(V) = \bigoplus_{d \geq 0} V^{\tensor d}$ is again a {\dgv} with
+      If~$V$ is a~{\dgv} then~$\dgTensor(V) = \bigoplus_{n \geq 0} V^{\tensor n}$ is again a {\dgv} with
       \begin{align*}
         \hdeg{v_1 \dotsm v_n}
         &=
@@ -452,7 +453,7 @@ for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \de
   (See \cref{example for dgc proof} for the explicit calculations.)
 \end{example}
 
-\begin{proposition}
+\begin{proposition}[Constructions with {\dgcs}]
   \label{induced dgc}
   Let~$C$,~$D$ be {\dgcs}.
   \begin{enumerate}
@@ -557,7 +558,7 @@ for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \de
 %   \qed
 % \end{lemma}
 
-\begin{proposition}
+\begin{proposition}[Constructions with {\dgbs}]
   \label{induced dgb}
   Let~$B$,~$\bialg$ be {\dgbs}.
   \begin{enumerate}
@@ -667,7 +668,7 @@ for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \de
   \end{enumerate}
 \end{remark}
 
-\begin{proposition}
+\begin{proposition}[Constructions with {\dghs}]
   \label{induced dgh}
   Let~$H$,~$\hopf$ be {\dghs}.
   \begin{enumerate}
@@ -759,7 +760,7 @@ for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \de
     (-1)^n
     v_n \dotsm v_1
   \end{align*}
-  for homogeneous~$v_i$, where~$S$ is viewed as a map~$\dgTensor(V) \to \dgTensor(V)$ and~$\Sh(p,q) \subseteq \symm_{n+m}$ denotes the set of~{\shuffles{$p$}{$q$}}.
+  for homogeneous~$v_i$, where~$S$ is viewed as a map~$\dgTensor(V) \to \dgTensor(V)$ and~$\Sh(p,q) \subseteq \symm_{p+q}$ denotes the set of~{\shuffles{$p$}{$q$}}.
   These maps make~$\dgTensor(V)$ into a {\dgh}.
   (See \cref{example for dgh proof} for the explicit calculations.)
 \end{example}
