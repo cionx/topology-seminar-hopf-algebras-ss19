@@ -2,7 +2,18 @@
 
 
 
-\subsection{Some More Notions and Notatios}
+% \subsection{More Conventios and Notations}
+
+A map~$f \colon V \to W$ is \defemph{graded} of \defemph{degree}~$d = \hdeg{f}$ if~$f(V_n) \subseteq V_{n+d}$ for all~$n$.
+The differential~$d$ is a graded map of degree~$-1$.
+If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \colon V \tensor V' \to W \tensor W'$ is the graded map of degree~$\hdeg{f \tensor g} = \hdeg{f} + \hdeg{g}$ given by
+\[
+  (f \tensor g)(v \tensor w)
+  =
+  (-1)^{\hdeg{g} \hdeg{v}}
+  f(v) \tensor g(w) \,.
+\]
+If~$f$,~$g$ are homomorphisms of {\dgvs} then so is~$f \tensor g$.
 
 If~$V$,~$W$ are {\dgvs} then~$\dgHom(V,W)$ is the {\dgv} with
 \begin{align*}
@@ -18,6 +29,20 @@ If~$V$,~$W$ are {\dgvs} then~$\dgHom(V,W)$ is the {\dgv} with
 \end{align*}
 The spaces~$\Hom(V,W)_n$ are linearly independent in~$\Hom_k(V,W)$, in the sense that the sum~$\sum_n \Hom(V,W)_n$ is direct.
 We therefore regard~$\Hom(V,W) = \bigoplus_n \Hom(V,W)_n$ as a linear subspace of~$\Hom_k(V,W)$.
+
+% It holds that~$\cycles(V \tensor W) = \cycles(V) \tensor \cycles(W)$ as graded vector spaces, and the \defemph{algebraic Künneth isomorphism} is the natural isomorphism of graded vector spaces
+% \[
+%   \homology(V \tensor W)
+%   \cong
+%   \homology(V) \tensor \homology(W) \,,
+%   \quad
+%   [v \tensor w]
+%   \mapsfrom
+%   [v] \tensor [w] \,.
+% \]
+
+
+
 
 
 \subsection{The Koszul Sign}
@@ -447,6 +472,7 @@ since~$x_\alpha, d(x_\alpha) \in I$.
 \subsection{\cref{definition of graded commutator}}
 \label{definition of graded commutator remark}
 
+We have for homogeneous~$a$,~$b$ that~$[a,b] = 0$ if and only if~$a$,~$b$ graded commute with each other.
 If~$A$ is a {\dga} and~$\hdeg{a}$ is even then~$[a,a] = 0$.
 But if~$\hdeg{a}$ is odd then~$[a,a] = 2 a^2$.
 This means in particular that the graded commutator of an element with itself does not necessarily vanish (because not every element need to graded-commute with itself).
@@ -1247,20 +1273,20 @@ Also
 \subsection{\cref{exterior hopf algebra}}
 \label{exterior hopf algebra proof}
 
-Suppose that there exists a bialgebra structure on~$\Exterior(V)$.
-Then~$\varepsilon(v)^2 = \varepsilon(v^2) = 0$ and thus~$\varepsilon(v) = 0$ for all~$v \in V$, so~$\ker \varepsilon = \bigoplus_{d \geq 1} \Exterior^n(V) \defines I$.
+Suppose that there exists a bialgebra structure on~$E \defined \Exterior(V)$.
+Then~$\varepsilon(v)^2 = \varepsilon(v^2) = 0$ and thus~$\varepsilon(v) = 0$ for all~$v \in V$, so~$\ker \varepsilon = \bigoplus_{n \geq 1} E_n \defines I$.
 Let~$v \in V$.
 Then by the counital axiom,
 \[
   \Delta(v)
   \equiv
   v \tensor 1
-  \pmod{\Lambda \tensor I}
+  \pmod{E \tensor I}
   \qquad\text{and}\qquad
   \Delta(v)
   \equiv
   1 \tensor v
-  \pmod{I \tensor \Lambda}
+  \pmod{I \tensor E}
 \]
 and thus
 \[
@@ -1281,7 +1307,7 @@ It follows that
   v^2 \tensor 1 + 2 v \tensor v + 1 \tensor v^2
   \pmod{I \tensor I^2 + I^2 \tensor I} \,.
 \end{gather*}
-Now~$v^2 = 0$, hence
+Now~$v^2 = 0$ and thus
 \[
   2 v \tensor v
   \equiv
