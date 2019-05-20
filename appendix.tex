@@ -13,8 +13,30 @@ If~$f \colon V \to V'$,~$g \colon W \to W'$ are graded maps then~$f \tensor g \c
   (-1)^{\hdeg{g} \hdeg{v}}
   f(v) \tensor g(w) \,.
 \]
+The differential of~$V \tensor W$ is given by
+\[
+  d_{V \tensor W}
+  =
+  d_V \tensor {\id} + {\id} \tensor d_W \,.
+\]
 If~$f$,~$g$ are homomorphisms of {\dgvs} then so is~$f \tensor g$.
-
+For graded maps
+\[
+  f_1 \colon V \to V',
+  \quad
+  g_1 \colon W \to W',
+  \quad
+  f_2 \colon V' \to V'',
+  \quad
+  g_2 \colon W' \to W''
+\]
+we have
+\[
+  (f_2 \tensor g_2) \circ (f_1 \tensor g_1)
+  =
+  (-1)^{\hdeg{g_2} \hdeg{f_1}} 
+  (f_1 \circ f_2) \tensor (g_1 \tensor g_2) \,.
+\]
 If~$V$,~$W$ are {\dgvs} then~$\dgHom(V,W)$ is the {\dgv} with
 \begin{align*}
   \dgHom(V,W)_n
@@ -189,7 +211,7 @@ Therefore~$\tau_i \tau_{i+1} \tau_i = \tau_{i+1} \tau_i \tau_{i+1}$.
 We now have the desired action of~$\symm_n$ on~$V^{\tensor n}$.
 The twist maps~$\tau_i$ are homomorphisms of {\dgvs} whence~$\symm_n$ acts by homomorphisms of {\dgvs}.
 
-Without sign the action of~$\symm_n$ on~$V^{\tensor n}$ would be given by
+Without the signs the action of~$\symm_n$ on~$V^{\tensor n}$ would be given by
 \[
   \sigma \cdot (v_1 \tensor \dotsb \tensor v_n)
   =
@@ -545,7 +567,8 @@ This means in particular that the graded commutator of an element with itself do
       &\longonetoone
       \left\{
         \begin{tabular}{@{}c@{}}
-          homomorphisms of {\dgas} \\
+          homomorphisms \\
+          of {\dgas} \\
           $\varphi \colon A \tensor B \to C$
         \end{tabular}
       \right\} \,,
@@ -697,7 +720,7 @@ This means in particular that the graded commutator of an element with itself do
         \omega(c_{(1)}) \tensor c_{(2)}
       + (-1)^{\hdeg{\omega} \hdeg{c_{(1)}}} c_{(1)} \tensor \omega( c_{(2)} ) \,.
     \]
-    The compability~\eqref{compatibility of comultiplication with differential} means that the differential~$d$ (which is a graded map of degree~$\hdeg{-d} = -1$) is a coderivation.
+    The compability~\eqref{compatibility of comultiplication with differential} means that the differential~$d$ (which is a graded map of degree~$\hdeg{d} = -1$) is a coderivation.
   \item
     The graded cocommutativity of~$C$ means
     \[
@@ -860,7 +883,7 @@ which shows that~$\Delta$ is a homomorphism of {\dgvs}.
     \begin{lemma}
       \label{restriction of coideals}
       Let~$C$ be a coalgebra and let~$B$ be a subcoalgebra of~$C$.
-      If~$I$ is a coideal in~$C$ with~$I \subseteq C$ then~$I$ is also a coideal in~$B$.
+      If~$I$ is a coideal in~$C$ with~$I \subseteq B$ then~$I$ is also a coideal in~$B$.
     \end{lemma}
 
     \begin{proof}
@@ -891,7 +914,7 @@ which shows that~$\Delta$ is a homomorphism of {\dgvs}.
 \subsection{\cref{definition of dgb}}
 \label{definition of dgb remark}
 
-One can also could equivalently require~$m$,~$u$ to be homomorphisms of {\dgcs}:
+One can also equivalently require~$m$,~$u$ to be homomorphisms of {\dgcs}:
 
 \begin{lemma}
   \label{characterization of bialgebras}
@@ -986,15 +1009,17 @@ Furthermore
   m \circ (f \tensor g) \circ d_{C \tensor C} \circ \Delta
   \\
   ={}&
-  m \circ (d \tensor 1 + 1 \tensor d) \circ (f \tensor g) \tensor \Delta
+  m \circ (d \tensor {\id} + {\id} \tensor d) \circ (f \tensor g) \tensor \Delta
   \\
   {}&
   -
   (-1)^{\hdeg{f} + \hdeg{g}}
-  m \circ (f \tensor g) \circ (d \tensor 1 + 1 \tensor d) \circ \Delta
+  m \circ (f \tensor g) \circ (d \tensor {\id} + {\id} \tensor d) \circ \Delta
   \\
   ={}&
     m \circ (d \tensor {\id}) \circ (f \tensor g) \tensor \Delta
+  \\
+  {}&
   + m \circ ({\id} \tensor d) \circ (f \tensor g) \tensor \Delta
   \\
   {}&
@@ -1005,10 +1030,14 @@ Furthermore
   \\
   ={}&
     m \circ ((d \circ f) \tensor g) \tensor \Delta
+  \\
+  {}&
   + (-1)^{\hdeg{f}} m \circ (f \tensor (d \circ g)) \tensor \Delta
   \\
   {}&
   - (-1)^{\hdeg{f}} m \circ ((f \circ d) \tensor g) \circ \Delta
+  \\
+  {}&
   - (-1)^{\hdeg{f} + \hdeg{g}} m \circ (f \tensor (g \circ d))\circ \Delta
   \\
   ={}&
@@ -1237,34 +1266,34 @@ We have
 as~$\varepsilon(v) = \varepsilon(w) = 0$.
 The elements~$v$ and~$w$ are primitive whence~$[v,w]$ is primitive.
 Therefore
-\[
+\begin{gather*}
   \Delta([v,w])
   =
   [v,w] \tensor 1 + 1 \tensor [v,w]
   \in
     I \tensor \dgTensor(V) + \dgTensor(V) \tensor I \,.
-\]
-Also
-\begin{align*}
-  S([v,w])
-  &=
-  S\bigl( vw - (-1)^{\hdeg{v} \hdeg{w}} wv \bigr)
-  \\
-  &=
-  S(vw) - (-1)^{\hdeg{v}\hdeg{w}} S(wv)
-  \\
-  &=
-  (-1)^{\hdeg{v}\hdeg{w}} wv - vw
-  \\
-  &=
-  - \bigl( vw - (-1)^{\hdeg{v}\hdeg{w}} wv \bigr)
-  \\
-  &=
-  - [v,w]
-  \\
-  &\in
-  I \,.
-\end{align*}
+\shortintertext{Also}
+  \begin{aligned}
+    S([v,w])
+    &=
+    S\bigl( vw - (-1)^{\hdeg{v} \hdeg{w}} wv \bigr)
+    \\
+    &=
+    S(vw) - (-1)^{\hdeg{v}\hdeg{w}} S(wv)
+    \\
+    &=
+    (-1)^{\hdeg{v}\hdeg{w}} wv - vw
+    \\
+    &=
+    - \bigl( vw - (-1)^{\hdeg{v}\hdeg{w}} wv \bigr)
+    \\
+    &=
+    - [v,w]
+    \\
+    &\in
+    I \,.
+  \end{aligned}
+\end{gather*}
 
 
 
