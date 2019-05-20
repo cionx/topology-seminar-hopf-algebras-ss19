@@ -515,7 +515,7 @@ for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \de
 
 \begin{warning}
   A {\dgb} does in general \emph{not} have an underlying bialgebra structure:
-  The comultiplication~$\Delta \colon B \to B \tensor B$ is a homomorphism of {\dgas} into~$B \tensor B'$ but not necessarily an algebra homomorphism into the sign-less tensor product~$B \tensor_k B$.
+  The comultiplication~$\Delta \colon B \to B \tensor B$ is a homomorphism of {\dgas} into~$B \tensor B$ but not necessarily an algebra homomorphism into the sign-less tensor product~$B \tensor_k B$.
 %   \[
 %     \begin{tikzcd}[column sep = small]
 %       \text{algebras}
@@ -776,7 +776,7 @@ for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \de
   Let~$V$ be a vector space.
   We regard~$V$ as a {\dgv} concentrated in degree~$1$.
   Then~$\dgSymm(V) = \Exterior(V)$ as graded algebras whence~$\Exterior(V)$ is a graded Hopf algebra.
-  But for~$\ringchar k \neq 2$ there exists no bialgebra structure on~$\Exterior(V)$ (see \cref{exterior hopf algebra proof}).
+  But for~$\ringchar k \neq 2$ and~$V \neq 0$ there exists no bialgebra structure on~$\Exterior(V)$ (see \cref{exterior hopf algebra proof}).
 \end{example}
 
 \pagebreak
@@ -815,7 +815,7 @@ for homogeneous~$v_i$, where~$\varepsilon_{v_1, \dotsc, v_n}(\sigma)$ is the \de
       which shows that~$\alpha$ is an isomorphism.
     \item
       If~$\ringchar(k) = 0$ then also~$\homology(\dgSymm(V)) \cong \dgSymm(\homology(V))$:
-      We get again a canonical homomorphism of graded algebras
+      We get again a canonical homomorphism of graded Hopf algebras
       \[
         \beta
         \colon
@@ -1278,7 +1278,7 @@ We will also blackbox the following consequences of the PBW~theorem.
 \end{corollary}
 
 \begin{example}[Homology of~{$\Univ(\glie)$}]
-  The inclusion~$\glie \to \Univ(\glie)$ is a homomorphism of {\dgl} and so induces a homomorphism of graded Lie~algebras~$\homology(\glie) \to \homology(\Univ(\glie))$, which is turn induces a homomorphism of graded algebras
+  The inclusion~$\glie \to \Univ(\glie)$ is a homomorphism of {\dgl} and so induces a homomorphism of graded Lie~algebras~$\homology(\glie) \to \homology(\Univ(\glie))$, which in turn induces a homomorphism of graded algebras
   \[
     \gamma
     \colon
@@ -1335,7 +1335,7 @@ We will also blackbox the following consequences of the PBW~theorem.
       If~$H$ is a graded cocommutative connected%
       \footnote{The connectedness is defined in terms of the underlying {\dgc}, not that of the {\dga}.}
       {\dgh} then a version of the Cartier--Milnor--Moore theorem asserts that~$H \cong \Univ(\prim(H))$.
-      Together with \cref{consequences of pbw} this results in an equivalence between the categories of~{\dgls} and cocommutative connected {\dghs}, see \cite[Appendix~B,Theorem~4.5]{quillen}.
+      Together with \cref{consequences of pbw} this results in an equivalence between the categories of~{\dgls} and graded cocommutative connected {\dghs}, see \cite[Appendix~B,Theorem~4.5]{quillen}.
 %     \item
 %       The product~$\glie \times \hlie$ is again a {\dgl} with
 %       \[
